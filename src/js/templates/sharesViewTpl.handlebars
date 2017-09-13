@@ -1,0 +1,48 @@
+<!-- <div id="social-share">
+        <a class="social-share-element" id="social-twitter" href="https://twitter.com/intent/tweet?text={{ page.title }}&url={{ url }}&via=OviliaZhang&hashtags={{ tagStr }}" target="_blank" title="Share this post on Twitter"></a>
+        <a class="social-share-element" id="social-facebook" href="https://www.facebook.com/sharer/sharer.php?t={{ page.title }}&u={{ url }}" target="_blank" title="Share this post on Facebook"></a>
+        <a class="social-share-element" id="social-google" href="https://plus.google.com/share?url={{ site.url }}{{ page.url }}" target="_blank" title="Share this post on Google Plus"></a>
+        <a class="social-share-element" id="social-linkedin" href="http://www.linkedin.com/shareArticle?mini=true&title={{ page.title }}&url={{ url }}&source=http%3a%2f%2fzhangwenli.com" target="_blank" title="Share this post on LinkedIn"></a>
+        <a class="social-share-element" id="social-weibo" href="http://v.t.sina.com.cn/share/share.php?title=来看看+%40Ovilia允执厥中+的博文吧：{{ page.title }}&url={{ url }}" target="_blank" title="Share this post on Sina Weibo"></a>
+</div> 
+<div>
+Your current query is: <div class="social-share-value">
+{{#if query}}
+{{query}}
+{{else}}
+(no query)
+{{/if}}
+</div>
+    </div>
+-->
+    
+
+<div>The shortened url is:
+<div class="social-share-value"><a href="{{purl}}">{{purl}}</a>
+    </div>
+    </div>
+
+<div>
+If you don't change it (on the next screen), the text of your tweet will be: <div class="social-share-value">
+{{copy}} {{purl}}
+</div>
+    </div>
+
+<div>...with these hashtag(s): <div class="social-share-value">{{tags}}</div></div>
+
+<ul class="list-inline" style="margin-top:25px;">
+    {{#each shares}}
+    <!-- <li data-id="{{this._id}}" class="col-sm-2 pull-left gnpanel-r"> -->
+    <li >
+        {{#if this.id}}
+        <a class="social-share-element" id="{{this.id}}" href="{{this.href}}?text={{../../copy}}&url={{ ../../purl }}&via=ZapStraightToIt&hashtags={{../../tags}}" target="_blank" title="{{this.tip}}">
+        <span class="icom-{{this.id}}"></span>
+        </a>
+        {{/if}}
+    </li>
+    {{/each}}
+</ul>
+<div class="row">
+    <div class="pull-right" style="color:black; padding-right:22px;">
+        this project on Twitter: <a target="blank" style="color:black;" class="" id="" href="http://twitter.com/ZapStraightToIt" target="_blank" title="this thing's Twitter account"><span style="font-size:2em;" class="icom-social-twitter"></span></a>
+    </div></div>

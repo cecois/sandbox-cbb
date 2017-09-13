@@ -1,0 +1,20 @@
+<div class="slide"><div id="" class="slide4 gnpanel col-lg-12">
+    <div class="block" style="">
+        <h1 style="text-align:center;">Most Recent 6:
+        <span class="icom-bang" style="font-size:2em;"></span>
+        </h1><ul style="text-align:center;">
+                {{#each recents}}
+                <!-- <li data-id="{{this._id}}" class="col-sm-2 pull-left gnpanel-r"> -->
+                <li data-id="{{this._id}}" class="">
+                    {{#if this.instance}}
+                    <span class="copy-trigger" data-toggle="tooltip" data-string='_id:"{{this._id}}"'><span class="loc-string">{{this.instance}}</span></span>
+                    <!-- <span class="cbbanno">({{#timeize}}{{this.updated_at}}{{/timeize}})</span> -->
+                    <small>({{#timeize}}{{this.updated_at}}{{/timeize}})</small>
+                    {{#if this.bit}}
+                            &nbsp;<span style="font-size:.8em;" class="copy-trigger" data-toggle="tooltip" data-string='bit:"{{this.bit}}"'><span class="loc-string">({{this.bit}})</span></span>
+                     {{/if}} 
+                    {{/if}}
+                </li>
+                {{/each}}</ul>
+    </div>
+</div></div>

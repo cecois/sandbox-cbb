@@ -1,0 +1,97 @@
+<div class="mobile-slide-nav row">
+<!-- <ul class="">
+<li class=" active">Talky Help</li>
+<li class="">Disqus Forum Help</li>
+  </ul> -->
+  </div> <!-- mobile-slide-nav -->
+
+<div class="gnpanel gnpanel-r pull-left col-lg-8 mobile-wrapper mobile-wrapper-1">
+<div class="block"><h1>Help<span class="icom-bang" style="font-size:1.5em;"></span></h1>
+You need help? With this dumb, free thing? Fine, here:
+
+
+
+<p><ul>
+<li>First of all, if you wanna chat about this thing, do it at <a class="" id="" href="http://twitter.com/ZapStraightToIt" target="_blank" title="this thing's Twitter account"><span style="font-size:2em;" class="icom-social-twitter"></span></a> or <a href="https://disqus.com/home/forums/cbbmap/"><span style="font-size:3em;vertical-align:bottom;" title="this thing's Disqus thread" class="icom-social-disqus"></span></a></li>
+<li>
+As of this writing there are 1884 bits records and 880 location records in our db. Doing a query for everything (e.g. <span class="copy-trigger" data-toggle="tooltip" data-string='*:*'><span class="loc-string">"*"</span></span>) will lag a little, almost entirely because it takes a while to actually render the locations on the map (e.g. the search is fast, the blue dots and lines and stuff takes a while).
+</li>
+
+<li>Oh, that reminds me: you can search by word, phrase, etc., but to just show everything you can hit the Search button with nothing in the form or type "*" or type "*:*".
+	</li>
+
+<li>
+	If ur fancy, use <a href="https://cwiki.apache.org/confluence/display/solr/The+Standard+Query+Parser">Lucene query syntax</a> (this thing runs at least in part on <a href="http://lucene.apache.org/solr/">Apache Solr</a>). If ur a tl;dr type, just know you can do Googley stuff, like <span class="copy-trigger" data-toggle="tooltip" data-string='dimello +wompler'><span class="loc-string">"dimello +wompler"</span></span> or <span class="copy-trigger" data-toggle="tooltip" data-string='ducca -list'><span class="loc-string">"ducca -list"</span></span> or whatev.
+</li>
+
+<li>Every query is run against the bits index first and <em>from that result set</em> we extract the locations (and also <em>from that result set</em> the facets are extracted). The implication is that if you wanted to search for, say, "Boston" to see if any references exist in or around that fine city, you'll only get results if the name or description of the bit has the word "Boston" in it. We didn't expect anybody would want to initiate spatial processing just to find out if we have bits mapped to Oklahoma or Chilé or wherever (you can just run an empty query and check the map, after all). If you do want spatial query, though, tell Disqus about it <span class="glyphicon glyphicon-arrow-right"></span></li>
+
+<li>
+	Oh, right: if you have a legit question or comment, there is a Disqus instance for this project. Over there <span class="glyphicon glyphicon-arrow-right"></span>
+</li>
+
+<li>
+	Finally, a little about the organization of these data may or may not help make sense of all of this garbage. If you are into this sort of thing:
+	<p>
+		We technically have two databases, bits and locations. The bits are stored in MongoDB and look something like this:
+		<pre>
+			{
+  "_id": ObjectId("55930ad5ab4a6112ecad33bb"),
+  "show": "cbb",
+  "episode": 304,
+  "episode_title": "Marissa Wompler's Six Flags Birthday Womptacular",
+  "guests": "Jessica St. Clair,Lennon Parham,Lauren Lapkus,Jason Mantzoukas,Brian Huskey,Melissa Rauch,Andy Daly",
+  "slug_earwolf": "marissa-womplers-six-flags-birthday-womptacular",
+  "id_wikia": 4811,
+  "url_soundcloud": "304-jessica-st-clairlennon-parhamlauren-lapkusjason-mantzoukasbrian-huskeyandy-dalymelissa-r",
+  "created_at": "2015-04-03T10:51:29Z",
+  "updated_at": "2015-06-03T10:51:29Z",
+  "soclo_link": "http://soundcloud.com/comedybangbang/304-jessica-st-clairlennon-parhamlauren-lapkusjason-mantzoukasbrian-huskeyandy-dalymelissa-r/#t=45:37",
+  "bit": "where are you from?",
+  "instance": "Nobody can place Dabney's accent",
+  "elucidation": "a character detail is challenged or prompted",
+  "tags": "Marissa Wompler,Miss Listler, Eric Gutterman, Danielle Bartiromo, Dr. Seth Wompler, Dabney Coleperson, Traci Reardon, Katie Wong",
+  "tstart": "45:37",
+  "tend": "46:07",
+  "holding": "false",
+  "scope": "",
+  "location_type": "",
+  "location_id": ""
+}
+		</pre>
+    But some of them look like this:
+    <pre>
+{
+  "_id": ObjectId("55930ad5ab4a6112ecad38cc"),
+  "show": "cbb",
+  "episode": 12,
+  "slug_earwolf": "the-babys-sunglasses",
+  "id_wikia": 2426,
+  "url_soundcloud": "the-babys-sunglasses",
+  "created_at": "2015-04-03T10:51:29Z",
+  "updated_at": "2015-06-03T10:51:29Z",
+  "soclo_link": "http://soundcloud.com/comedybangbang/the-babys-sunglasses/#t=19:30",
+  "bit": "Location",
+  "instance": "Scott met Bobby at the Ed Hardy store on Melrose, which is where Bobby buys t-shirts of dragons raping lions on skateboards.",
+  "elucidation": "Identifiable earth location.",
+  "tags": "Bobby Bottleservice",
+  "tstart": "19:30",
+  "tend": "19:46",
+  "holding": "false",
+  "scope": "",
+  "location_type": "point",
+  "location_id": 429
+}
+    </pre>
+    These are the things you're searching against when you query and these are the things to which all the facets apply. But did you see the difference between those two examples? The one with <code>"bit":"Location"</code> has a (populated) field (<code>location_id</code>) that links out to the other database we are keeping -- it's a <a href="http://cartodb.com">CartoDB</a> instance in which we are storing all of the spatial objects referred <em>to</em> by those Location bits (in this case <span class="copy-trigger" data-toggle="tooltip" data-string="location_id:429 AND location_type:point" data-original-title="" title=""><span class="loc-string">the Ed Hardy store on Melrose</span><i class="glyphicon glyphicon-map-marker cbb-trigger-inline"></i></span>). So when you query, we first look into all of the bits we have and then if there are any with <code>"bit":"Location"</code> we grab those <code>location_id</code> values and shop those against a separate index of our <a href="http://cartodb.com">CartoDB</a> content. It's faster than it sounds but not instantaneous.
+	</p>
+
+	<p>But another thing about that raw data you see up there: notice that each bit has, among other fields that might be more self-explanatory, a <code>name</code>, a <code>desc</code>, and an <code>elucidation</code>. That's confusing, why do it? Well, the name is the consistent, recurring, unique thing we call that bit. "My Wife!" for example. Identifiable - an id or tag, basically, for all of the different situations and scenarios in which Scott (or anybody, really), does that Borat thing. So the <em>name</em> of the bit is "My Wife!" Done. Likewise, the elucidation never changes, either -- it's the master description of that bit. A better example is the bit we're calling "where are you from?" That one is less self-explanatory, so the elucidation is there in every instance to help explain and contextualize that bit. Now, the <code>desc</code> field is specific to the individual instance of that bit. So "My Wife!" or "Cake Boss!" or "Ho ho!" occur countless times, but every time they happen there's some "description" for the occurence. That goes into the <code>desc</code> field. Just fyi.</p>
+
+</li>
+
+	</ul></p>
+
+ </div>
+ </div>
+

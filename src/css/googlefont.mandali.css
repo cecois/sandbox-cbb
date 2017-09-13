@@ -1,0 +1,6 @@
+@font-face {
+  font-family: 'Mandali';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Mandali'), url(fonts/Mandali-Regular.ttf) format('truetype');
+}

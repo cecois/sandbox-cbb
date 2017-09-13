@@ -1,0 +1,21 @@
+<!-- <h1 class="stroke" style="margin-bottom:43px;">Unmappable Bits<span class="cbbanno">({{count}})</span> </h1> -->
+<!-- <span class="episodes hidden" style="margin-left:12px;">\-\-\-\-\-\-\-\-></span>  -->
+<!-- <div class="cbbanno">(Bits in the Tracker but without Locations)</div> -->
+
+{{#each rows}}
+<li data-id="{{this._id}}" class="pick">
+
+<div class="">
+{{#if this.instance}}
+<span class="instance">{{this.instance}}</span>
+{{else}}
+(no description provided)
+{{/if}}
+<span data-id="{{this._id}}" data-type="{{this.geom_type}}" class="glyphicon glyphicon-headphones bt-cartoobj bt-cartoobj-episodes" title="pull a list of associated episodes"></span>
+{{#if this.elucidation}}
+	<div class="cbbanno"><span class="copy-trigger" data-toggle="tooltip" data-string='bit:"{{this.bit}}"'><span class="loc-string">bit: {{this.bit}}</span></span> ({{this.elucidation}})</div>
+<!-- <div class="cbbanno">{{this.bit}} ({{this.elucidation}})</div> -->
+{{/if}}
+</div>
+</li>
+{{/each}}

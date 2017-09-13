@@ -1,0 +1,209 @@
+/*
+--------------  MOBILE
+*/
+
+
+
+// @mobile: ~"only screen and (min-device-pixel-ratio: 1.1)";
+@mobile: ~"only screen and (max-width: 1400px)";
+@desktop: ~"only screen and (min-width: 1401px)";
+
+/*
+--------------  VARS
+*/
+
+/*blue*/
+@primarycolor: rgba(126, 223, 216, 100);
+@primarycolor-alt: rgba(96,163,160,1);
+@primarycolor-trans: rgba(126, 223, 216, .4);
+
+/*brn*/
+@linkcolor: rgba(92, 111, 104, 100);
+@linkcolor-trans: rgba(92, 111, 104, 40);
+
+/*gold*/
+@secondarycolor: rgba(240, 198, 12, 100);
+@secondarycolor-trans:rgba(240, 198, 12, 100);
+
+/*lt. blue*/
+@tertiarycolor: rgba(250, 250, 250, 1.0000);
+@tertiarycolor-trans: rgba(250, 250, 250, .4000);
+
+@badge-color: rgba(217, 112, 44, 100);
+
+@menutext: @primarycolor;
+
+@quaternarycolor: rgba(44,175,245,1);
+@quaternarycolor-trans: rgba(44,175,245,.4);
+
+@cinqernarycolor: #ff8000; // orange
+
+body{
+  margin:0;
+  padding:0;
+  height:100%;
+}
+
+#cbb-header{
+  height:10vh;
+  text-align:center;
+  background-color:yellow;
+  position:relative;
+  padding:0;
+  margin:0;
+}
+
+#cbb-menus{
+  height:10vh;
+  background-color:blue;
+  position:relative;
+  padding:0;
+  margin:0;
+}
+
+#cbb-main{
+  
+  background-color:orange;
+  position:relative;
+  padding:0;
+  margin:0;
+  height:75vh;
+}
+
+#cbb-footer{
+  height:5vh;
+  text-align:center;
+  background-color:pink;
+  position:relative;
+  padding:0;
+  margin:0;
+}
+
+.cbb-badge{
+  // font-size:22em;
+  position:absolute;
+  z-index:2;
+  color:white;
+  // top:-17vh;
+  // right:-6%;
+}
+
+  .cbb-badge-copy{
+    color: white;
+    font-family: "KiloGram";
+    font-size:.1em;
+    position:relative;
+    // top:-42vh;
+    letter-spacing: -1px;
+    line-height: 32px;
+    text-align: center;
+    text-shadow: 2px 2px 0 @secondarycolor, 5px 5px 0 @linkcolor, 7px 7px 0 @linkcolor, 9px 9px 0 @linkcolor, 11px 11px 0 @linkcolor, 13px 13px 0 @secondarycolor-trans;
+    transform: rotate(40deg);
+    -webkit-transform: rotate(40deg);
+  }
+
+#cbb-graphic-burst{
+  font-size:22em;
+  top:-17vh;
+  right:-6%;
+  .cbb-badge;
+    // top:-42vh;
+}
+#cbb-graphic-copy{
+  .cbb-badge-copy;
+    top:-38vh;
+}
+
+
+#cbb-map-toggle{
+  font-size:9em;
+  // top:-13vh;
+  // left:-3%;
+  .cbb-badge;
+    // top:-42vh;
+}
+#cbb-map-toggle-copy{
+  .cbb-badge-copy;
+    // top:-19vh;
+    font-size:.09em;
+        transform: rotate(-40deg);
+    -webkit-transform: rotate(-40deg);
+}
+
+#cbb-share{
+  font-size:10em;
+  bottom:-13vh;
+  right:-3%;
+  .cbb-badge;
+    // top:-42vh;
+}
+#cbb-share-copy{
+  font-size:.09em;
+  .cbb-badge-copy;
+    bottom:12vh;
+        transform: rotate(-40deg);
+    -webkit-transform: rotate(-40deg);
+}
+
+#cbb-menu-share{
+  text-align:right;
+}
+
+// ------------------------------------- LEAFLET/PLUGIN OVERRIDES
+
+.leaflet-control-container {
+  @media @mobile {display:none;}
+    right:27%;
+    position: fixed;
+    top: 95px;
+        background-color: transparent;
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    a {
+        background-color: transparent;
+        margin-top: 6px;
+        padding-left: 2.5px;
+        padding-top: 2px;
+        text-decoration: none;
+        color: black;
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+        &:hover {
+            text-decoration: none;
+            background-color:transparent;
+       }
+  }
+.leaflet-control {
+  .leaflet-disabled{background-color:transparent;}
+    box-shadow:0 0 2px 2px @secondarycolor;
+    background-color: transparent;
+  a {
+    .leaflet-disabled{background-color:transparent;}
+    color:white;
+  padding:0px 9px 0px 0px;
+    background-color: transparent;
+    border-bottom: none;
+&:hover {
+            background-color:transparent;
+text-shadow:
+    -1px -1px 0 white,
+    1px -1px 0 white,
+    -1px 1px 0 white,
+    1px 1px 0 white;
+       }
+  }
+}
+
+}
+
+/* --------------------------------------- MAP -------------- */
+#map {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+}

@@ -1,0 +1,42 @@
+<div class=" pu-copy pu-copy-marker col-sm-12">
+    {{#if name}}
+    <h5>{{name}}</h5>
+    {{else}}
+    <h5>(no name string)</h5>
+    {{/if}}
+    {{#if anno}}<p class="text-muted">{{anno}}</p>{{/if}}
+</div> <!-- marker -->
+
+<div class=" content-wrap col-sm-12 hidden pu-copy pu-copy-episodes">
+        <p class="text-muted">HEYOOOOOO eps</p>
+</div> <!-- episodes -->
+
+<div class="hidden pu-copy pu-copy-feedback content-wrap col-sm-12">
+            <p class="text-muted">
+            Until we have a full-on crowd-source component to this, it will have to suffice to anonymously create an issue at <a href="https://github.com/cecois/bitmap/issues">this project's GitHub repo</a>. Go ahead! Try to be specific, but anything that comes in I'll check out.
+            </p>
+            <p class="text-muted">
+            If you really gotta know what becomes of your submission, enter some handle of yours in the handle field (use Twitter, email, GitHub username, InstaGram handle I suppose -- don't get too crazy). I'll let you know what becomes of it. Seriously! I have 0% interest in doing anything else w/ this datum, but be aware it will be part of the public GitHub issue.
+            </p>
+        <div class="pu-copy pu-copy-feedback pu-copy-feedback-form">
+                <label for="">Feature in Question (this)</label>
+            <input data-class="pu-issue-title" class="form-control input-sm" type="text" placeholder="{{bit}} ({{geom_type}}:{{cartodb_id}})" disabled>
+            <label for="">Issue Body</label>
+            <textarea data-class="pu-issue-body" placeholder="What's wrong with this one? (All suggestions will be investigated.)" class="form-control" rows="3"></textarea>
+            <label for="">Contact Handle (totally optional)</label>
+            <input data-class="pu-issue-contact" class="form-control input-sm" type="text" placeholder="e.g. @toddglass or just github.com/huellhowser or something">
+        </div> <!-- form -->
+
+            <div style="margin-top:5px;"><button class="btn btn-default btn-xs btn-block" type="submit">Submit</button></div>
+</div> <!-- feedback -->
+
+
+<div class="btn-group btn-group-xs pull-right" style="margin-bottom:8px;" role="group">
+
+<button data-toggle="tooltip" data-target="marker" type="button" title="marker info" class="btn btn-default btn-pu-nav active"><span class="bt-cartoobj bt-cartoobj-feedback carto-plain-geomtype icom-{{this.geom_type}}"></span></button>
+
+ <!--  <button data-toggle="tooltip" data-target="episodes" data-id="episodes" type="button" class="btn btn-default btn-pu-nav"><span data-id="{{cartodb_id}}" data-type="{{geom_type}}" class="glyphicon glyphicon-headphones bt-cartoobj bt-cartoobj-episodes" title="pull a list of referencing episodes"></span></button> -->
+
+  <button data-toggle="tooltip" data-target="feedback" data-id="feedback" type="button" class="btn btn-default btn-pu-nav"><span data-id="{{cartodb_id}}" data-type="{{geom_type}}" class="glyphicon glyphicon-flag bt-cartoobj bt-cartoobj-feedback" title="something wrong? anonymously flag this one"></span></button>
+
+</div>

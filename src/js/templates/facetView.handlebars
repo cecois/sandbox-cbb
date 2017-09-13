@@ -1,0 +1,6 @@
+<h4>Facets: {{this.group}}</h4>
+<ul class="col-md-12 facets">
+{{#each facets}}
+  <li class="pull-left"><span class="bt-facet {{this.active}}" data-id="{{this.[0]}}">{{this.[0]}}</span> <span class="bitsanno">({{this.[1]}})</span></li>
+{{/each}}
+</ul>

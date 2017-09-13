@@ -1,0 +1,41 @@
+<div class="block"><h4>How was it Built?</h4>
+    <p>I doubt you care, but you're sweet to ask. Imma list pretty much the entire workflow just cuzzi like it when people get specific about this kind of thing:</p>
+    <p>
+    <ul class="ul-expando">
+        <li>listened to CBB episodes in the default podcast app in iOS 6-7-8, in the Earwolf SoundCloud embedded player, in the SoundCloud player itself, and in VLC.app
+            <div class='anno'>this is actually significant because the timestamps can differ a little between various sources</div>
+        </li>
+        <li>started logging bits/locations directly into a <a href="http://mongolab.com">MongoLab</a> account, but eventually went offline into Notes.app on iOS <em>then</em> into a Markdown+DropBox solution -- but always eventually into MongoHub
+            <div class="anno">Hey, you're right - that does sound like a ridiculous amount of pointless labor. And yet here we are.</div>
+        </li>
+        <li>for each master location, I manually researched it and placed a marker in a <a href="http://cartodb.com">CartoDB</a> account
+            <div class="anno">..."Master" location because I'm not going to store a <em>seperate</em> geometry for every mention of The <span class="copy-trigger" data-string="cartodb_id:96"><span class="loc-string">Pantages Theatre</span><i class="glyphicon glyphicon-map-marker cbb-trigger-inline"></i></span> or Huell Howser's favorite Taco Bell<span class="copy-trigger" data-string="cartodb_id:45"><span class="loc-string" > (the one on Rosemead) </span><i class="glyphicon glyphicon-map-marker cbb-trigger-inline"></i></span>. <span class="copy-trigger" data-string="cartodb_id:13"><span class="loc-string">The Grove</span><i class="glyphicon glyphicon-map-marker"></i></span> gets one marker and the BitTracker will log any individual references to it. Standard database stuff. This is especially important in the case of, say, <span class="copy-trigger" data-string="cartodb_id:26"><span class="loc-string">The Arclight cinema</span><i class="glyphicon glyphicon-map-marker cbb-trigger-inline"></i></span>, which is frequented by an almost surprising number of Hollywood's least palatable characters.</div>
+        </li>
+        <li>
+            Built up this web app, whose chief components are BackboneJS (+jQuery, +UnderscoreJS, +HandlebarsJS), Bootstrap, LessJS, etc. The usual. And for the mapping framework, the great Leaflet. Technically there's an API behind it (built w/ Kohana) but it's largely unused because...
+        </li>
+        <li>I started by pulling content directly out of CartoDB and (associated episodes/bits) from MongoLab. Possible because every bit in Mongo with a spatial reference stored a foreign key to the CartoDB record. The problem with that is CartoDB is only queryable with SQL, which I'm not willing to A) foist upon users and/or B) abstract at the client level. The solution was to stand up a Solr instance and index both the CartoDB content <em>and</em> the Mongo content with it. Right now, when you <a href="#query">query</a> here, you're querying against the CartoDB records <em>only</em>. So you won't get full BitTracker results. Meaning you can't query for "titular" and expect to get back all of Scott's "titular" uses (like you'll get in the BitTracker). You can only search against the text that has been written into either the "name" or "anno" fields of the CartoDB records (lemme note here that if you don't specify a field and just type in keywords you're actually querying the name AND anno fields).
+        </li>
+        <li>
+            Sidebar? Pulling stuff into Solr from CartoDB (and MongoLab, for that matter) is pretty simple, really. Here are the three lines (that you could prolly pipe together if you were so inclined):
+
+
+            <pre>
+            # pull (select) cartodb fields down as json
+            curl "https://<YOUR CARTODB USERNAME>.cartodb.com/api/v1/sql?q=select%20cartodb_id,name,anno,created_at,updated_at,concat%28ST_Y%28the_geom%29||%27,%27||ST_X%28the_geom%29%29%20as%20loc%20from%20cbb_point" -o /tmp/pcdbraw.json;
+            
+
+            # query out just the rows array for a clean send to Solr
+            # prolly there are things you can do at the Solr schema end to preclude this step, but it's easy enough
+            jq .rows /tmp/pcdbraw.json > /tmp/pcdb.json
+
+            # send up to yr solr instance - don't forget the commit=true param
+            curl 'http://localhost/solr/cbb_carto/update/json?commit=true' --data-binary @/tmp/pcdb.json -H 'Content-type:application/json'
+            </pre>
+        </li>
+        <li>
+            Once the data are indexed in Solr, the rest is just all this dumb app logic/navigation/styling. Which isn't trivial -- it represents the bulk of the work -- but it's even more boring to write about than piping CartoDB into Solr.
+        </li>
+    </ul>
+    </p>
+</div>
