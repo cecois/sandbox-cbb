@@ -31,10 +31,10 @@ RP=require('request-promise')
 
 var paths = {
   staging:"staging"
-  ,interm:"interm"
+  ,interm:"../interm"
   ,site:{
-    src:"src"
-    ,dist:"dist"
+    src:"./"
+    ,dist:"../dist"
   }
 };
 
@@ -44,9 +44,9 @@ var browsersync =()=>{
     // paths.site.src+"/js/*.js"
     // ,paths.site.src+"/*.html"
     // ]
-    files: ['interm/*']
+    files: [paths.interm+'/*']
     // ,
-    ,server: ['interm/']
+    ,server: [paths.interm+'/']
   });
 };
 
@@ -57,7 +57,7 @@ var img = ()=>{
   .pipe(PLUMBER())
   .pipe(IMAGEMIN({ optimizationLevel: 3, progressive: true, interlaced: true }))
   .pipe(DEBUG())
-  .pipe(GULP.dest("interm/images/"));
+  .pipe(GULP.dest(paths.interm+"/images/"));
  }//img
 
 
@@ -72,7 +72,7 @@ var img = ()=>{
     ]
     )
   .pipe(DEBUG())
-  .pipe(GULP.dest("interm/fonts/"))
+  .pipe(GULP.dest(paths.interm+"/fonts/"))
 };
 
 /* ------------------------- JS ------------- */
@@ -102,7 +102,7 @@ var copyjs=  ()=>{
    ,paths.site.src+"/js/Routes.js"
     // ,paths.site.src+"/js/globals.js"
     ])
-  .pipe(GULP.dest("interm/js/"));
+  .pipe(GULP.dest(paths.interm+"/js/"));
 };
 
 var views_y_models = ()=>{
@@ -146,7 +146,7 @@ var views_y_models = ()=>{
   .pipe(PLUMBER())
   .pipe(UGLIFY())
   .pipe(CONCAT('vm.min.js'))
-  .pipe(GULP.dest("interm/js/"))
+  .pipe(GULP.dest(paths.interm+"/js/"))
 }
 
 /* ------------------------- STYLE ------------- */
@@ -160,7 +160,7 @@ var lessen = ()=>{
   // .pipe(RENAME({
   //   basename: 'zzzz'
   // }))
-  .pipe(GULP.dest("interm/css/"))
+  .pipe(GULP.dest(paths.interm+"/css/"))
 }
 
 var copycss=  ()=>{
@@ -183,7 +183,7 @@ var copycss=  ()=>{
       ,paths.site.src+"/lib/icomoon/style.css"
       ]
       )
-  .pipe(GULP.dest("interm/css/"));
+  .pipe(GULP.dest(paths.interm+"/css/"));
 };
 
 /* ------------------------- HTML ------------- */
@@ -193,11 +193,11 @@ var htmlmin = ()=>{
   .pipe(RENAME({
     basename: 'index'
   }))
-  .pipe(GULP.dest("interm/"))
+  .pipe(GULP.dest(paths.interm+"/"))
 }
 
 var clean = ()=>{
-  return DEL("interm/*")
+  return DEL(paths.interm+"/*",{force:true})
 }
 
 
@@ -212,7 +212,7 @@ var handlez = ()=>{
       noRedeclare: true, // Avoid duplicate declarations
     }))
   .pipe(CONCAT('H-templates-compiled.js'))
-  .pipe(GULP.dest("interm/js/"));
+  .pipe(GULP.dest(paths.interm+"/js/"));
 }
 
 

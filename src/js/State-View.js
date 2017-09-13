@@ -1,15 +1,33 @@
 var StateView = Backbone.View.extend({
     el: $("#btn-statie"),
     template: CBB['templates']['statesViewTpl']
-    ,render: function(){
+    ,initialize: function() {
+
+
+        this.model.bind("change", this.render, this);
         return this
-    },
-    
+        .render();
+    },renderOG: function(){
+        return this
+    }
+    ,render: function(){
 
+        console.log("in render of SV, attr",this.model.get("downout"))
 
+        if(this.model.get("downout")=="down"){
+            $("#cbb-main").addClass("down")
+        } else {
+            $("#cbb-main").removeClass("down")
 
+        }
 
-    swap: function(){
+        return this
+        // .set()
+    }
+    ,set: function(){
+        return this
+    }
+    ,swap: function(){
         $(this.el).find('[data-toggle="tooltip"]').tooltip('destroy')
         return this.render()
     },

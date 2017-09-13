@@ -40,9 +40,9 @@ var Route = Backbone.Router.extend({
         vz.push(uacti)
         vz.push(ubbox)
 
-        var state = "#"+vz.join("/")
+        var url = "#"+vz.join("/")
 
-        return state
+        return url
     }
     ,default: function(s,p,q,b,d,a,x) {
 
@@ -73,16 +73,9 @@ var Route = Backbone.Router.extend({
             ,active:active
             ,slug:slug
         })
-// does s differ?
-// if(appState.get("slug")!==s && s!==null)
-// does q differ?
-// does p differ?
-// does a differ?
-// does b differ?
-// does x differ?
 
 
-return this
+        return this
         } // default
     });
 var appRoute = new Route();
