@@ -1,6 +1,7 @@
 var StateView = Backbone.View.extend({
-    el: $("#btn-statie"),
-    template: CBB['templates']['statesViewTpl']
+    el: $("#cbb-map-toggle"),
+    template_default: CBB['templates']['statesViewTpl_default']
+    ,template_down: CBB['templates']['statesViewTpl_down']
     ,initialize: function() {
 
 
@@ -12,12 +13,16 @@ var StateView = Backbone.View.extend({
     }
     ,render: function(){
 
-        console.log("in render of SV, attr",this.model.get("downout"))
-
         if(this.model.get("downout")=="down"){
             $("#cbb-main").addClass("down")
+            // $(this.el).addClass("down")
+            // $(this.el).html("hide map")
+            $(this.el).html(this.template_down())
         } else {
             $("#cbb-main").removeClass("down")
+            $(this.el).html(this.template_default())
+            // $(this.el).html("reveal map")
+            // $(this.el).remveClass("down")
 
         }
 
