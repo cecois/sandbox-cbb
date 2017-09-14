@@ -4,8 +4,9 @@ var Route = Backbone.Router.extend({
     },
     initialize: function(options) {
         options || (options={});
-        this.listenTo(map,'moveend',this.up)
+        // this.listenTo(map,'moveend',this.up)
         this.listenTo(appBaseLayers,'change:active',this.up)
+        this.listenTo(appState,'change:downout',this.up)
         return this
     },
     up: function(){
@@ -24,13 +25,13 @@ var Route = Backbone.Router.extend({
         ,uacti=(typeof appState.get("active") == 'undefined')?'nil':appState.get("active")
         ,ubbox=map.getBounds().toBBoxString()
 
-        console.log("in url, uslug",uslug)
-        console.log("in url, upage",upage)
-        console.log("in url, uquer",uquer)
-        console.log("in url, ublay",ublay)
-        console.log("in url, udown",udown)
-        console.log("in url, uacti",uacti)
-        console.log("in url, ubbox",ubbox)
+        // console.log("in url, uslug",uslug)
+        // console.log("in url, upage",upage)
+        // console.log("in url, uquer",uquer)
+        // console.log("in url, ublay",ublay)
+        // console.log("in url, udown",udown)
+        // console.log("in url, uacti",uacti)
+        // console.log("in url, ubbox",ubbox)
 
         vz.push(uslug)
         vz.push(upage)
