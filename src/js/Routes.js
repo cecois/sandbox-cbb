@@ -46,7 +46,6 @@ var Route = Backbone.Router.extend({
     }
     ,default: function(s,p,q,b,d,a,x) {
 
-        console.log("in default:");
         var slug = (typeof s == 'undefined' || s==null)?"home":s
         ,query = (typeof q == 'undefined' || q==null)?"*:*":q
         ,page = (typeof p == 'undefined' || p==null)?1:p

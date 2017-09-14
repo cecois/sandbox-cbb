@@ -2,32 +2,34 @@ var StateView = Backbone.View.extend({
     el: $("#cbb-map-toggle"),
     template_default: CBB['templates']['statesViewTpl_default']
     ,template_down: CBB['templates']['statesViewTpl_down']
+    ,events: {
+        "click #cbb-map-toggle-copy": "setn",
+    }
     ,initialize: function() {
 
 
         this.model.bind("change", this.render, this);
         return this
         .render();
-    },renderOG: function(){
+    },setn: function(){
+
+        var news = (this.model.get("downout")=="out")?"down":"out";
+        this.model.set({downout:news})
+
         return this
     }
     ,render: function(){
 
         if(this.model.get("downout")=="down"){
             $("#cbb-main").addClass("down")
-            // $(this.el).addClass("down")
-            // $(this.el).html("hide map")
             $(this.el).html(this.template_down())
         } else {
             $("#cbb-main").removeClass("down")
             $(this.el).html(this.template_default())
-            // $(this.el).html("reveal map")
-            // $(this.el).remveClass("down")
 
         }
 
         return this
-        // .set()
     }
     ,set: function(){
         return this
