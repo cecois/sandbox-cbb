@@ -2,13 +2,13 @@ var BaseLayersView = Backbone.View.extend({
     id: "map",
     initialize: function() {
 
-        window.map = new L.Map('map',
-        {
-            zoomControl:true,
-            center: [51.505, -0.09],
-            zoom:7
-            ,attributionControl:false
-        });
+        // window.map = new L.Map('map',
+        // {
+        //     zoomControl:true,
+        //     center: [51.505, -0.09],
+        //     zoom:7
+        //     ,attributionControl:false
+        // });
         this.listenTo(this.collection,'change:active',this.render)
         return this
         .render()

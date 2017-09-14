@@ -6,6 +6,20 @@ var CONFIG = {
     ,query:"*:*"
     ,basemap:"pencil"
 }
+
+window.map = new L.Map('map',
+{
+    zoomControl:true,
+    center: [51.505, -0.09],
+    zoom:7
+    ,attributionControl:false
+}).on('moveend',function(e){
+    // hey not great but Route's .listenTo method wz causing a deep undefined in leafletjs
+    if(typeof appRoute !== 'undefined'){
+        appRoute.up()
+    }
+})
+
 // if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 //     window.agent = "mobile";
 // } else {
@@ -15,7 +29,7 @@ var CONFIG = {
 // window.thedomain="bitmap-lbones.rhcloud.com"
 
 NProgress.configure({
-    parent: '#main'
+    parent: '#cbb-main'
 });
 
 /* -------------------------------------------------- HANDLEBARS START 
@@ -294,7 +308,7 @@ var appActivityView = new ActivityView({
     //     if(agent=='mobile'){
     //     }else{baselayers=baselayersdesk}}
 
-    baselayers=baselayersdesk
+    baselayers=baselayersdummified
     var appBaseLayers = new BaseLayersCollection(baselayers.layers);
     var appBaseLayersMenuView = new BaseLayersMenuView({
         collection: appBaseLayers
@@ -303,6 +317,7 @@ var appActivityView = new ActivityView({
     var appBaseMapView = new BaseLayersView({
         collection: appBaseLayers
     });
+
 // var appShares = new Shares(
 //     shares
 //     );

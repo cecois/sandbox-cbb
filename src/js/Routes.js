@@ -4,12 +4,18 @@ var Route = Backbone.Router.extend({
     },
     initialize: function(options) {
         options || (options={});
-        // this.listenTo(map,'moveend',this.up)
+        // this.listenTo(map,'moveend',this.upm)
         this.listenTo(appBaseLayers,'change:active',this.up)
         this.listenTo(appState,'change:downout',this.up)
         return this
     },
-    up: function(){
+    upm: function(){
+
+        console.log("in upm")
+
+        return this
+    }
+    ,up: function(){
         console.log("upping to ",this.url());
         return this
         .navigate(this.url(),{trigger:true,replace:false})
