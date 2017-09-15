@@ -97,7 +97,9 @@ var copyjs=  ()=>{
    ,paths.site.src+"/js/Activity-Model.js"
    ,paths.site.src+"/js/Activity-View.js"
    ,paths.site.src+"/js/State-Model.js"
-   ,paths.site.src+"/js/State-View.js"
+   ,paths.site.src+"/js/State-View-Down-Menu.js"
+   ,paths.site.src+"/js/State-View-Panes.js"
+   ,paths.site.src+"/js/State-View-Panes-Menu.js"
    ,paths.site.src+"/js/App.js"
    ,paths.site.src+"/js/Routes.js"
     // ,paths.site.src+"/js/globals.js"
@@ -221,10 +223,10 @@ var handlez = ()=>{
 var watch = ()=>{
   return GULP
   .watch([
-    paths.site.src+"/js/*.js"
-    ,paths.site.src+"/js/templates/*.handlebars"
-    ,paths.site.src+"/*.html"
-    ,paths.site.src+"/css/*.less"
+    paths.site.src+"js/*.js"
+    ,paths.site.src+"js/templates/*.handlebars"
+    ,paths.site.src+"*.html"
+    // ,paths.site.src+"/css/*.less"
     ], GULP.series(
       handlez
       ,htmlmin

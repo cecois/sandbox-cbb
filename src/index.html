@@ -60,12 +60,12 @@
             <div class="column is-half">
 <div class="tabs is-centered">
   <ul id="cbb-pane-menu">
-    <li class="is-active"><a>Static.Home</a></li>
+<!--     <li class="is-active"><a>Static.Home</a></li>
     <li><a>Static.Huh?</a></li>
     <li><a>Static.Search</a></li>
     <li><a>Static.Browse</a></li>
     <li><a>Static.Updates</a></li>
-    <li><a>Static.Help</a></li>
+    <li><a>Static.Help</a></li> -->
   </ul>
 </div>
             </div>
@@ -76,9 +76,18 @@
 <!-- #cbb-main -->
 
         <section id="cbb-main" class="columns">
-            <div class="column is-one-third">1</div>
+<ul id="cbb-main-panes">
+<li id="home" class="cbb-main-pane">
+    <div class="column is-one-third"><h2>home</h2></div>
             <div class="column is-one-third">2</div>
             <div class="column is-one-third">3</div>
+        </li>
+        <li id="huh" class="cbb-main-pane">
+    <div class="column is-one-third"><h2>huh</h2></div>
+            <div class="column is-one-third">2</div>
+            <div class="column is-one-third">3</div>
+        </li>
+        </ul>
 </section>
 
         <section id="cbb-footer" class="columns">
@@ -153,7 +162,9 @@
 <script src="/js/Activity-Model.js" type="text/javascript" language="Javascript"></script>
 <script src="/js/Activity-View.js" type="text/javascript" language="Javascript"></script>
 <script src="/js/State-Model.js" type="text/javascript" language="Javascript"></script>
-<script src="/js/State-View.js" type="text/javascript" language="Javascript"></script>
+<script src="/js/State-View-Down-Menu.js" type="text/javascript" language="Javascript"></script>
+<script src="/js/State-View-Panes.js" type="text/javascript" language="Javascript"></script>
+<script src="/js/State-View-Panes-Menu.js" type="text/javascript" language="Javascript"></script>
 <script src="/js/App.js" type="text/javascript" language="Javascript"></script>
 <script src="/js/Routes.js" type="text/javascript" language="Javascript"></script>
 <!-- <script src="/js/App.js" type="text/javascript" language="Javascript"></script>

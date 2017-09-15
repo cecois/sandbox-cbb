@@ -297,7 +297,13 @@ var appActivityView = new ActivityView({
     );
     */
     var appState = new State();
-    var appStateView = new StateView({
+    var appStateViewDownMenu = new StateViewDownMenu({
+        model: appState
+    });
+    var appStateViewPanes = new StateViewPanes({
+        model: appState
+    });
+    var appStateViewPanesMenu = new StateViewPanesMenu({
         model: appState
     });
 

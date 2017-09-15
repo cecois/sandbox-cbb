@@ -6,7 +6,7 @@ var Route = Backbone.Router.extend({
         options || (options={});
         // this.listenTo(map,'moveend',this.upm)
         this.listenTo(appBaseLayers,'change:active',this.up)
-        this.listenTo(appState,'change:downout',this.up)
+        this.listenTo(appState,'change',this.up)
         return this
     },
     upm: function(){
@@ -23,7 +23,6 @@ var Route = Backbone.Router.extend({
     ,url:function(){
 
         vz=[]
-        // var uslug=appState.get("slug")
         var uslug=_.findWhere(appState.get("slugs"),{active:'is-active'}).slug
         ,upage=(typeof appQuery.get("page")=='undefined')?1:appQuery.get("page")
         ,uquer=(typeof appQuery.get("querystring") == 'undefined')?'nil':appQuery.get("querystring")
@@ -32,13 +31,6 @@ var Route = Backbone.Router.extend({
         ,uacti=(typeof appState.get("active") == 'undefined')?'nil':appState.get("active")
         ,ubbox=map.getBounds().toBBoxString()
 
-        // console.log("in url, uslug",uslug)
-        // console.log("in url, upage",upage)
-        // console.log("in url, uquer",uquer)
-        // console.log("in url, ublay",ublay)
-        // console.log("in url, udown",udown)
-        // console.log("in url, uacti",uacti)
-        // console.log("in url, ubbox",ubbox)
 
         vz.push(uslug)
         vz.push(upage)
@@ -82,9 +74,9 @@ var Route = Backbone.Router.extend({
 
             console.log("s as slug",(typeof s));
 
-                if(typeof s !== 'undefined'){
-                    var active = (s.slug == slug)?'is-active':null;
-                    return {name:s.name,slug:s.slug,active:active}
+            if(typeof s !== 'undefined'){
+                var active = (s.slug == slug)?'is-active':null;
+                return {name:s.name,slug:s.slug,active:active}
         }//if.undefined
 
     })
