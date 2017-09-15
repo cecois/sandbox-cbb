@@ -23,7 +23,8 @@ var Route = Backbone.Router.extend({
     ,url:function(){
 
         vz=[]
-        var uslug=appState.get("slug")
+        // var uslug=appState.get("slug")
+        var uslug=_.findWhere(appState.get("slugs"),{active:'is-active'}).slug
         ,upage=(typeof appQuery.get("page")=='undefined')?1:appQuery.get("page")
         ,uquer=(typeof appQuery.get("querystring") == 'undefined')?'nil':appQuery.get("querystring")
         ,ublay=appBaseLayers.findWhere({active:true}).get("name")
@@ -53,7 +54,7 @@ var Route = Backbone.Router.extend({
     }
     ,default: function(s,p,q,b,d,a,x) {
 
-        var slug = (typeof s == 'undefined' || s==null)?"home":s
+        var slug = (typeof s == 'undefined' || s==null)?_.findWhere(appState.get("slugs"),{active:'is-active'}).slug:s
         ,query = (typeof q == 'undefined' || q==null)?"*:*":q
         ,page = (typeof p == 'undefined' || p==null)?1:p
         ,active = (typeof a == 'undefined' || a==null)?"nil":a
@@ -62,6 +63,7 @@ var Route = Backbone.Router.extend({
         ,bbox = (typeof x == 'undefined' || x==null)?"-112.8515625,22.105998799750566,37.44140625,57.61010702068388":x
         ;
 
+        console.log("default 57",slug)
         if(x!==null && (typeof x!=='undfined')){
             console.log("fitting incoming bounds, x",x);
             map.fitBounds(UTIL.bounds_ob_from_bbox_string(x))
@@ -74,14 +76,32 @@ var Route = Backbone.Router.extend({
                 ,page:page
             })
 
-        appState.set({
-            downout:downout
-            ,active:active
-            ,slug:slug
+        console.log("appstate.slugs before",appState.get("slugs"))
+
+        var newslugs = _.filter(_.map(appState.get("slugs"),function(s){
+
+            console.log("s as slug",(typeof s));
+
+                if(typeof s !== 'undefined'){
+                    var active = (s.slug == slug)?'is-active':null;
+                    return {name:s.name,slug:s.slug,active:active}
+        }//if.undefined
+
+    })
+        ,function(s){return (typeof s) !== 'undefined'})//filter;
+//newslugs
+console.log("newslugs",newslugs)
+
+appState.set({
+    downout:downout
+    ,active:active
+            // ,slug:slug
+            ,slugs:newslugs
         })
 
+console.log("appstate.slugs after",appState.get("slugs"))
 
-        return this
+return this
         } // default
     });
 var appRoute = new Route();

@@ -15,6 +15,8 @@ var StateView = Backbone.View.extend({
     }
     ,setp: function(e){
 
+        console.log(e)
+
         return this
     },setm: function(){
 
@@ -24,6 +26,8 @@ var StateView = Backbone.View.extend({
         return this
     }
     ,render: function(){
+
+        $("#cbb-pane-menu").html(this.template_menu(this.model.toJSON()));
 
         if(this.model.get("downout")=="down"){
             $("#cbb-main").addClass("down")
