@@ -11,12 +11,10 @@ var Route = Backbone.Router.extend({
     },
     upm: function(){
 
-        console.log("in upm")
 
         return this
     }
     ,up: function(){
-        console.log("upping to ",this.url());
         return this
         .navigate(this.url(),{trigger:true,replace:false})
     }
@@ -55,9 +53,7 @@ var Route = Backbone.Router.extend({
         ,bbox = (typeof x == 'undefined' || x==null)?"-112.8515625,22.105998799750566,37.44140625,57.61010702068388":x
         ;
 
-        console.log("default 57",slug)
         if(x!==null && (typeof x!=='undfined')){
-            console.log("fitting incoming bounds, x",x);
             map.fitBounds(UTIL.bounds_ob_from_bbox_string(x))
         }
 
@@ -68,11 +64,9 @@ var Route = Backbone.Router.extend({
                 ,page:page
             })
 
-        console.log("appstate.slugs before",appState.get("slugs"))
 
         var newslugs = _.filter(_.map(appState.get("slugs"),function(s){
 
-            console.log("s as slug",(typeof s));
 
             if(typeof s !== 'undefined'){
                 var active = (s.slug == slug)?'is-active':null;
@@ -82,7 +76,6 @@ var Route = Backbone.Router.extend({
     })
         ,function(s){return (typeof s) !== 'undefined'})//filter;
 //newslugs
-console.log("newslugs",newslugs)
 
 appState.set({
     downout:downout
@@ -91,7 +84,6 @@ appState.set({
             ,slugs:newslugs
         })
 
-console.log("appstate.slugs after",appState.get("slugs"))
 
 return this
         } // default

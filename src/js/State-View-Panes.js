@@ -1,6 +1,6 @@
 var StateViewPanes = Backbone.View.extend({
     el: $("#cbb-main-panes")
-    // template: CBB['templates']['statesViewTpl_menu']
+    ,template_home: CBB['templates']['0-home']
     ,initialize: function() {
 
 
@@ -19,17 +19,39 @@ var StateViewPanes = Backbone.View.extend({
     ,render: function(){
 
         // $(this.el).html(this.template(this.model.toJSON()));
+        // 
         var s = _.findWhere(this.model.get("slugs"),{active:"is-active"}).slug
 
-        $(this.el).find("li").each(function(l){
-            l.addClass("hidden")
-        });
+        var tpl = null;
+        tpl=this.template_home
 
-        $(this.el).find("li").each(function(l){
-            if(l.attr("id")==s){
-                l.removeClass("hidden")
-            }
-        });
+    //     switch (s) {
+    //         case "home":
+    //         tpl=this.template_home
+    //         break;
+    //         default:
+    //     // statements_def
+    //     break;
+    // }
+
+// if(s=="home"){
+//     // $(this.el).html(this.template_home())
+//     $(this.el).html(this.template(this.model.toJSON()))
+
+// }
+
+$(this.el).html(tpl(this.model.toJSON()))
+
+
+        // $(".cbb-main-pane").each(function(l){
+        //     $(l).addClass("hidden")
+        // });
+
+        // $(".cbb-main-pane").each(function(l){
+        //     if($(l).attr("id")==s){
+        //         $(l).removeClass("hidden")
+        //     }
+        // });
         
 
         return this
