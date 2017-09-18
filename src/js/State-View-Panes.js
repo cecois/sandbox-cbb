@@ -18,40 +18,12 @@ var StateViewPanes = Backbone.View.extend({
     }
     ,render: function(){
 
-        // $(this.el).html(this.template(this.model.toJSON()));
-        // 
         var s = _.findWhere(this.model.get("slugs"),{active:"is-active"}).slug
 
         var tpl = null;
-        tpl=this.template_home
+        tpl=CBB['templates']['0-'+s]
 
-    //     switch (s) {
-    //         case "home":
-    //         tpl=this.template_home
-    //         break;
-    //         default:
-    //     // statements_def
-    //     break;
-    // }
-
-// if(s=="home"){
-//     // $(this.el).html(this.template_home())
-//     $(this.el).html(this.template(this.model.toJSON()))
-
-// }
-
-$(this.el).html(tpl(this.model.toJSON()))
-
-
-        // $(".cbb-main-pane").each(function(l){
-        //     $(l).addClass("hidden")
-        // });
-
-        // $(".cbb-main-pane").each(function(l){
-        //     if($(l).attr("id")==s){
-        //         $(l).removeClass("hidden")
-        //     }
-        // });
+        $(this.el).html(tpl(this.model.toJSON()))
         
 
         return this
