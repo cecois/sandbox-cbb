@@ -5,6 +5,7 @@ var CONFIG = {
     ,proxy:null
     ,query:"*:*"
     ,basemap:"pencil"
+    ,index_root:"http://solr-lbones.rhcloud.com/cbb_bits/select?json.wrf=cwmccallback&wt=json&q="
 }
 
 window.map = new L.Map('map',
@@ -238,9 +239,9 @@ var baselayersmobile = {
 // 
 // 
 var appQuery = new Query();
-// var appQueryView = new QueryView({
-//     model: appQuery
-// });
+var appQueryView = new QueryView({
+    model: appQuery
+});
 
 
 // var appConsole = new Console().set({

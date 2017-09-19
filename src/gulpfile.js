@@ -87,6 +87,7 @@ var copyjs=  ()=>{
     ,paths.site.src+"/node_modules/backbone/backbone-min.js"
 //   
 ,paths.site.src+"/js/Query-Model.js"
+,paths.site.src+"/js/Query-View.js"
 ,paths.site.src+"/js/Util-Model.js"
 ,paths.site.src+"/js/BaseLayer-Model.js"
 ,paths.site.src+"/js/BaseLayers-Collection.js"
