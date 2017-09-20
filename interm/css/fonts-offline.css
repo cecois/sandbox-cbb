@@ -1,0 +1,41 @@
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), local('OpenSans'), url('/fonts/OpenSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Offside';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Offside-Regular'), local('Offside-Regular'), url('/fonts/Offside-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'KiloGram';
+  font-style: normal;
+  font-weight: 400;
+  src: local('KiloGram_KG'), local('KiloGram_KG'), url('/fonts/KiloGram_KG.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Sabo';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Sabo-Regular'), local('Sabo-Regular'), url('/fonts/Sabo-Regular.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Mari';
+  font-style: normal;
+  font-weight: 400;
+  src: local('marifont'), local('marifont'), url('/fonts/marifont.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Oswald-Regular'), local('Oswald-Regular'), url('/fonts/Oswald-Regular.ttf') format('truetype');
+}

@@ -1,0 +1,176 @@
+/*
+--------------  MOBILE
+*/
+/*
+--------------  VARS
+*/
+/*blue*/
+/*brn*/
+/*gold*/
+/*lt. blue*/
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+#cbb-header {
+  height: 10vh;
+  text-align: center;
+  background-color: yellow;
+  position: relative;
+  padding: 0;
+  margin: 0;
+}
+#cbb-menus {
+  height: 10vh;
+  background-color: blue;
+  position: relative;
+  padding: 0;
+  margin: 0;
+}
+#cbb-main {
+  background-color: orange;
+  position: relative;
+  padding: 0;
+  margin: 0;
+  height: 75vh;
+}
+#cbb-main.down {
+  left: 95%;
+}
+#cbb-main .cbb-main-pane.hidden {
+  display: none;
+}
+#cbb-map-toggle {
+  color: white;
+  cursor: pointer;
+}
+#cbb-map-toggle #cbb-map-toggle-copy.down {
+  color: green;
+}
+/*#cbb-map-toggle.down{color:green;}*/
+#cbb-footer {
+  height: 5vh;
+  text-align: center;
+  background-color: pink;
+  position: relative;
+  padding: 0;
+  margin: 0;
+}
+.cbb-badge {
+  position: absolute;
+  z-index: 2;
+  color: white;
+}
+.cbb-badge-copy {
+  color: white;
+  font-family: "KiloGram";
+  font-size: .1em;
+  position: relative;
+  letter-spacing: -1px;
+  line-height: 32px;
+  text-align: center;
+  text-shadow: 2px 2px 0 #f0c60c, 5px 5px 0 #5c6f68, 7px 7px 0 #5c6f68, 9px 9px 0 #5c6f68, 11px 11px 0 #5c6f68, 13px 13px 0 #f0c60c;
+  transform: rotate(40deg);
+  -webkit-transform: rotate(40deg);
+}
+/*
+#cbb-graphic-burst{
+  font-size:22em;
+  top:-17vh;
+  right:-6%;
+  .cbb-badge;
+    // top:-42vh;
+}
+#cbb-graphic-copy{
+  .cbb-badge-copy;
+    top:-38vh;
+}
+
+
+
+#cbb-map-toggle-copy{
+  .cbb-badge-copy;
+    // top:-19vh;
+    font-size:.09em;
+        transform: rotate(-40deg);
+    -webkit-transform: rotate(-40deg);
+}
+
+#cbb-share{
+  font-size:10em;
+  bottom:-13vh;
+  right:-3%;
+  .cbb-badge;
+    // top:-42vh;
+}
+#cbb-share-copy{
+  font-size:.09em;
+  .cbb-badge-copy;
+    bottom:12vh;
+        transform: rotate(-40deg);
+    -webkit-transform: rotate(-40deg);
+}
+
+#cbb-menu-share{
+  text-align:right;
+}
+*/
+.leaflet-control-container {
+  right: 27%;
+  position: fixed;
+  top: 95px;
+  background-color: transparent;
+  transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+}
+@media only screen and (max-width: 1400px) {
+  .leaflet-control-container {
+    display: none;
+  }
+}
+.leaflet-control-container a {
+  background-color: transparent;
+  margin-top: 6px;
+  padding-left: 2.5px;
+  padding-top: 2px;
+  text-decoration: none;
+  color: black;
+  transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+}
+.leaflet-control-container a:hover {
+  text-decoration: none;
+  background-color: transparent;
+}
+.leaflet-control-container .leaflet-control {
+  box-shadow: 0 0 2px 2px #f0c60c;
+  background-color: transparent;
+}
+.leaflet-control-container .leaflet-control .leaflet-disabled {
+  background-color: transparent;
+}
+.leaflet-control-container .leaflet-control a {
+  color: white;
+  padding: 0px 9px 0px 0px;
+  background-color: transparent;
+  border-bottom: none;
+}
+.leaflet-control-container .leaflet-control a .leaflet-disabled {
+  background-color: transparent;
+}
+.leaflet-control-container .leaflet-control a:hover {
+  background-color: transparent;
+  text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;
+}
+/* --------------------------------------- MAP -------------- */
+#map {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+}
