@@ -92,6 +92,8 @@ var copyjs=  ()=>{
 ,paths.site.src+"/js/Util-Model.js"
 ,paths.site.src+"/js/Bit-Model.js"
 ,paths.site.src+"/js/Bits-Collection.js"
+,paths.site.src+"/js/Bit-View.js"
+,paths.site.src+"/js/Bits-View.js"
 ,paths.site.src+"/js/BaseLayer-Model.js"
 ,paths.site.src+"/js/BaseLayers-Collection.js"
 ,paths.site.src+"/js/BaseLayers-View.js"

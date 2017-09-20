@@ -2,7 +2,7 @@
 var CONFIG = {
 	verbose:true
     ,dev:true
-    ,mode:"lanc"
+    ,mode:"T"
     ,proxy:null
     ,query:"*:*"
     ,basemap:"pencil"
@@ -245,6 +245,7 @@ var appQueryView = new QueryView({
 });
 
 var appBits = new Bits();
+var appBitsView = new BitsView({collection:appBits});
 
 
 // var appConsole = new Console().set({
