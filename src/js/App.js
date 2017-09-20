@@ -2,11 +2,11 @@
 var CONFIG = {
 	verbose:true
     ,dev:true
-    ,mode:"T"
+    ,mode:"lanc"
     ,proxy:null
     ,query:"*:*"
     ,basemap:"pencil"
-    ,index_root:"http://solr-lbones.rhcloud.com/cbb_bits/select?json.wrf=cwmccallback&wt=json&q="
+    ,index_root:"http://solr-lbones.rhcloud.com/cbb_bits/select?wt=json&q="
 }
 
 window.map = new L.Map('map',
