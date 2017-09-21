@@ -35,7 +35,7 @@ u = 'http://localhost:8983/solr/cbb_bits/select?indent=off&rows='+appQuery.get("
 		// console.log(data.facet_counts)
 		var locations = _.filter(data.response.docs,function(d){console.log(d);return d.bit=="Location"})
 		console.log("locations",locations)
-		appFacets.set({models:data.facet_counts.facet_fields.fat_name})
+		appFacets.set({bits:data.facet_counts.facet_fields.fat_name.fat_name,tags:data.facet_counts.facet_fields.fat_name.tags})
 
 		return data.response.docs
 	}

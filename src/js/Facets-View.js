@@ -10,7 +10,7 @@ var FacetsView = Backbone.View.extend({
     }
     ,render: function(){
 
-      $(this.el).html(this.template({rows:this.collection.toJSON()}));
+      $(this.el).html(this.template({facets:this.collection.toJSON()}));
 
       return this
     }
