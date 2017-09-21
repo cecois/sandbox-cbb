@@ -35,11 +35,30 @@ NProgress.configure({
 });
 
 /* -------------------------------------------------- HANDLEBARS START 
-Handlebars.registerHelper('debug', function(options) {
+
+Handlebars.registerHelper("debug", function(optionalValue) {
+  console.log("Current Context");
+  console.log("====================");
+  console.log(this);
+
+  if (optionalValue) {
+    console.log("Value");
+    console.log("====================");
+    console.log(optionalValue);
+}
+});
+
+*/
+
+
+Handlebars.registerHelper('debug', function(thing) {
+
+    console.log(thing);
 
     return new Handlebars.SafeString("check console");
 });
 
+/*
 Handlebars.registerHelper('timeize', function(options) {
     return new Handlebars.SafeString(moment(options.fn(this)).format('YYYY.MMM.D'));
 });
