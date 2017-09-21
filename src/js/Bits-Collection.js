@@ -6,8 +6,10 @@ var Bits = Backbone.Collection.extend({
 
 		switch(CONFIG.mode) {
 			case 'T':
-			// &json.wrf=parse
-			u = 'http://localhost:8983/solr/cbb_bits/select?indent=off&rows=50&json.wrf=cwmccallback&wt=json&q='+encodeURI(appQuery.get("querystring"))
+
+//http://localhost:8983/solr/cbb_bits/select?q=titular&wt=json&indent=true&facet=true&facet.query=titular&facet.field=fat_name	
+u = 'http://localhost:8983/solr/cbb_bits/select?indent=off&rows='+appQuery.get("numRows")+'&json.wrf=cwmccallback&wt=json&fl=_id,episode,slug_earwolf,bit,instance,created_at,updated_at,elucidation,tags&q=(holding:false) AND '+encodeURI(appQuery.get("querystring"))
++'&'+appQuery.get("facetstring")+'&facet.query='+encodeURI(appQuery.get("querystring"))
 
 					// return Config.SOLRROOT+"select/?version=2.2&rows=50&indent=off&wt=json&json.wrf=cwmccallback&q=" + quQuery.get_query()
 
@@ -30,6 +32,10 @@ var Bits = Backbone.Collection.extend({
 		return Backbone.sync(method, collection, options)
 	}
 	,parse: function(data) {
+		// console.log(data.facet_counts)
+		var locations = _.filter(data.response.docs,function(d){console.log(d);return d.bit=="Location"})
+		console.log("locations",locations)
+		appFacets.set({models:data.facet_counts.facet_fields.fat_name})
 
 		return data.response.docs
 	}

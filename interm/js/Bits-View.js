@@ -6,7 +6,8 @@ var BitsView = Backbone.View.extend({
     },
     // className : "mnuThumbnails",
     initialize: function() {
-      this.listenTo(this,"sync","render")
+      // this.listenTo(this.collection,"change","render")
+      this.collection.bind("sync", this.render, this);
       return this
     }
   //   ,render: function() {
@@ -46,7 +47,7 @@ var BitsView = Backbone.View.extend({
         //   $(this.el).html.append('<div>divvvv</div>')
         // })
 
-        $(this.el).html(this.template({rows:this.collection.models}));
+        $(this.el).html(this.template({rows:this.collection.toJSON()}));
         // $(this.el).html(this.template({baselayers:this.collection.models}));
         // $(this.el).html("loolaknlkan");
 

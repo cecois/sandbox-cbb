@@ -55,7 +55,7 @@ Handlebars.registerHelper('debug', function(thing) {
 
     console.log(thing);
 
-    return new Handlebars.SafeString("check console");
+    return new Handlebars.SafeString(this.instance);
 });
 
 /*
@@ -264,7 +264,9 @@ var appQueryView = new QueryView({
 });
 
 var appBits = new Bits();
+var appFacets = new Facets();
 var appBitsView = new BitsView({collection:appBits});
+var appFacetsView = new FacetsView({collection:appFacets});
 
 
 // var appConsole = new Console().set({
