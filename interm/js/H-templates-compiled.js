@@ -109,46 +109,17 @@ this["CBB"]["templates"]["bitsView-Mobile"] = Handlebars.template({"1":function(
     + ((stack1 = helpers.each.call(depth0,(depth0 != null ? depth0.rows : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
 },"useData":true});
 this["CBB"]["templates"]["bitsView"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=container.lambda, alias2=container.escapeExpression;
+    var helper, alias1=helpers.helperMissing, alias2="function", alias3=container.escapeExpression;
 
-  return "<li data-id=\""
-    + alias2(alias1((depth0 != null ? depth0._id : depth0), depth0))
-    + "\" class=\"pick\">\n\n<div class=\"\">\n"
-    + ((stack1 = helpers["if"].call(depth0,(depth0 != null ? depth0.instance : depth0),{"name":"if","hash":{},"fn":container.program(2, data, 0),"inverse":container.program(4, data, 0),"data":data})) != null ? stack1 : "")
-    + "<span data-id=\""
-    + alias2(alias1((depth0 != null ? depth0._id : depth0), depth0))
-    + "\" data-type=\""
-    + alias2(alias1((depth0 != null ? depth0.geom_type : depth0), depth0))
-    + "\" class=\"glyphicon glyphicon-headphones bt-cartoobj bt-cartoobj-episodes\" title=\"pull a list of associated episodes\"></span>\n"
-    + ((stack1 = helpers["if"].call(depth0,(depth0 != null ? depth0.elucidation : depth0),{"name":"if","hash":{},"fn":container.program(6, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "</div>\n</li>\n";
-},"2":function(container,depth0,helpers,partials,data) {
-    return "<span class=\"instance\">"
-    + container.escapeExpression(container.lambda((depth0 != null ? depth0.instance : depth0), depth0))
-    + "</span>\n";
-},"4":function(container,depth0,helpers,partials,data) {
-    return "(no description provided)\n";
-},"6":function(container,depth0,helpers,partials,data) {
-    var alias1=container.lambda, alias2=container.escapeExpression;
-
-  return "	<div class=\"cbbanno\"><span class=\"copy-trigger\" data-toggle=\"tooltip\" data-string='bit:\""
-    + alias2(alias1((depth0 != null ? depth0.bit : depth0), depth0))
-    + "\"'><span class=\"loc-string\">bit: "
-    + alias2(alias1((depth0 != null ? depth0.bit : depth0), depth0))
-    + "</span></span> ("
-    + alias2(alias1((depth0 != null ? depth0.elucidation : depth0), depth0))
-    + ")</div>\n<!-- <div class=\"cbbanno\">"
-    + alias2(alias1((depth0 != null ? depth0.bit : depth0), depth0))
-    + " ("
-    + alias2(alias1((depth0 != null ? depth0.elucidation : depth0), depth0))
-    + ")</div> -->\n";
+  return "<li class=\"pick\">\n<span class=\"instance\">instance: "
+    + alias3(((helper = (helper = helpers.index || (data && data.index)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"index","hash":{},"data":data}) : helper)))
+    + ": "
+    + alias3(((helper = (helper = helpers._id || (depth0 != null ? depth0._id : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"_id","hash":{},"data":data}) : helper)))
+    + "</span>\n</li>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, helper;
+    var stack1;
 
-  return "<!-- <h1 class=\"stroke\" style=\"margin-bottom:43px;\">Unmappable Bits<span class=\"cbbanno\">("
-    + container.escapeExpression(((helper = (helper = helpers.count || (depth0 != null ? depth0.count : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"count","hash":{},"data":data}) : helper)))
-    + ")</span> </h1> -->\n<!-- <span class=\"episodes hidden\" style=\"margin-left:12px;\">\\-\\-\\-\\-\\-\\-\\-\\-></span>  -->\n<!-- <div class=\"cbbanno\">(Bits in the Tracker but without Locations)</div> -->\n\n"
-    + ((stack1 = helpers.each.call(depth0,(depth0 != null ? depth0.rows : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+  return ((stack1 = helpers.each.call(depth0,(depth0 != null ? depth0.rows : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
 },"useData":true});
 this["CBB"]["templates"]["cartoListView-Mobile"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression;
