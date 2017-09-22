@@ -2,11 +2,11 @@
 var CONFIG = {
 	verbose:true
     ,dev:true
-    ,mode:"T"
+    ,mode:"33"
     ,proxy:null
     ,query:"*:*"
     ,basemap:"pencil"
-    ,index_root:"http://solr-lbones.rhcloud.com/cbb_bits/select?wt=json&q="
+    ,index_root:"http://solr-lbones.rhcloud.com/cbb_bits/select?"
 }
 
 window.map = new L.Map('map',
@@ -52,8 +52,6 @@ Handlebars.registerHelper("debug", function(optionalValue) {
 
 
 Handlebars.registerHelper('debug', function(thing) {
-
-    console.log(thing);
 
     return new Handlebars.SafeString(this.instance);
 });
@@ -263,10 +261,15 @@ var appQueryView = new QueryView({
     model: appQuery
 });
 
+var appFacetsBits = new Facets();
+var appFacetsTags = new Facets();
+
 var appBits = new Bits();
-var appFacets = new Facets();
 var appBitsView = new BitsView({collection:appBits});
-var appFacetsView = new FacetsView({collection:appFacets});
+
+// new View( { el : some_el } );
+var appFacetsBitsView = new FacetsView({el:"#search-facets-bits",collection:appFacetsBits});
+var appFacetsTagsView = new FacetsView({el:"#search-facets-tags",collection:appFacetsTags});
 
 
 // var appConsole = new Console().set({

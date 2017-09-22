@@ -1,6 +1,6 @@
 var FacetsView = Backbone.View.extend({
     // tagName: "ul",
-    el: "#search-facets",
+    // el: "#search-facets",
     template: CBB['templates']['facetsView'],
     events: {
     },

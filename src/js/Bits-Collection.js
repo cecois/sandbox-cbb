@@ -16,7 +16,8 @@ u = 'http://localhost:8983/solr/cbb_bits/select?indent=off&rows='+appQuery.get("
 
 					break;
 					default:
-					u = CONFIG.index_root+encodeURI(appQuery.get("querystring"))
+					u = CONFIG.index_root+'indent=off&rows='+appQuery.get("numRows")+'&json.wrf=cwmccallback&wt=json&fl=_id,episode,slug_earwolf,bit,instance,created_at,updated_at,elucidation,tags&q=(holding:false) AND '+encodeURI(appQuery.get("querystring"))
+					+'&'+appQuery.get("facetstring")+'&facet.query='+encodeURI(appQuery.get("querystring"))
 				}
 
 				return u
@@ -33,9 +34,13 @@ u = 'http://localhost:8983/solr/cbb_bits/select?indent=off&rows='+appQuery.get("
 	}
 	,parse: function(data) {
 		// console.log(data.facet_counts)
-		var locations = _.filter(data.response.docs,function(d){console.log(d);return d.bit=="Location"})
-		console.log("locations",locations)
-		appFacets.set({bits:data.facet_counts.facet_fields.fat_name.fat_name,tags:data.facet_counts.facet_fields.fat_name.tags})
+		var locations = _.filter(data.response.docs,function(d){return d.bit=="Location"})
+		// var fat_bits = _.map(data.facet_counts.facet_fields.fat_name,function(v,k){return {type:'bit',facet:k,count:v}})
+		// var fat_tags = _.map(data.facet_counts.facet_fields.tags,function(v,k){return {type:'tag',facet:k,count:v}})
+		console.log("fat_name",data.facet_counts.facet_fields.fat_name);
+		appFacetsBits.reset(data.facet_counts.facet_fields.fat_name)
+		appFacetsTags.reset(data.facet_counts.facet_fields.tags)
+		// appFacets.set({bits:data.facet_counts.facet_fields.fat_name,tags:data.facet_counts.facet_fields.tags})
 
 		return data.response.docs
 	}
