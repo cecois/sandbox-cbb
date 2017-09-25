@@ -34,7 +34,7 @@ NProgress.configure({
     parent: '#cbb-main'
 });
 
-/* -------------------------------------------------- HANDLEBARS START 
+/* -------------------------------------------------- HANDLEBARS START
 
 Handlebars.registerHelper("debug", function(optionalValue) {
   console.log("Current Context");
@@ -52,7 +52,7 @@ Handlebars.registerHelper("debug", function(optionalValue) {
 
 
 Handlebars.registerHelper('debug', function(thing) {
-
+console.log(thing)
     return new Handlebars.SafeString(this.instance);
 });
 
@@ -254,13 +254,14 @@ var baselayersmobile = {
 // var appCartoQueryView = new QueryView({
 //     model: appCartoQuery
 // });
-// 
-// 
+//
+//
 var appQuery = new Query();
 var appQueryView = new QueryView({
     model: appQuery
 });
 
+// var appFacets = new Facets();
 var appFacetsBits = new Facets();
 var appFacetsTags = new Facets();
 
@@ -418,7 +419,7 @@ var appActivityView = new ActivityView({
 // })
 
 
-/* -------------------------------------------------- Free Funcs 
+/* -------------------------------------------------- Free Funcs
 function locTrigger(e, goto, active) {
     if(verbose==true){
         console.log("loctriggered!")
@@ -487,7 +488,7 @@ function locTrigger(e, goto, active) {
             }).get("name")
             var fa = appCartoQuery.get("facetarray").join(",");
 
-            var url = h + "/" + qs + "/" + bbx + "/" + bl 
+            var url = h + "/" + qs + "/" + bbx + "/" + bl
 
             if(typeof activecouple !== 'undefined' && activecouple !== null){
                 var ac = activeFactory();
@@ -635,7 +636,7 @@ function locTrigger(e, goto, active) {
         }
     });
 
-    /* -------------------------------------------------- STRAIGHT UP FUNCS 
+    /* -------------------------------------------------- STRAIGHT UP FUNCS
 
     function doctorId(type,id,updown){
 
@@ -670,5 +671,5 @@ function locTrigger(e, goto, active) {
 var pm = new Popup(p.model).set({leafletid:p.layer._leaflet_id});
 var pv = new PopupView({model:pm,el: nel})
 
-}   
+}
 -----------------------  */

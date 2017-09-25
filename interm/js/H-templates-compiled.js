@@ -277,11 +277,13 @@ this["CBB"]["templates"]["facetView"] = Handlebars.template({"1":function(contai
     + "</ul>";
 },"useData":true});
 this["CBB"]["templates"]["facetsView"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
-    var helper;
+    var helper, alias1=helpers.helperMissing, alias2="function", alias3=container.escapeExpression;
 
-  return "<li class=\"pick\">\n<span class=\"instance\">facet: "
-    + container.escapeExpression(((helper = (helper = helpers.key || (data && data.key)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"key","hash":{},"data":data}) : helper)))
-    + "</span>\n</li>\n";
+  return "<li class=\"pick\">\n<span class=\"instance\">f."
+    + alias3(((helper = (helper = helpers.facet || (depth0 != null ? depth0.facet : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"facet","hash":{},"data":data}) : helper)))
+    + " (c."
+    + alias3(((helper = (helper = helpers.count || (depth0 != null ? depth0.count : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"count","hash":{},"data":data}) : helper)))
+    + ")</span>\n</li>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
