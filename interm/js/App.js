@@ -2,11 +2,12 @@
 var CONFIG = {
 	verbose:true
     ,dev:true
-    ,mode:"33"
+    ,mode:"T"
     ,proxy:null
     ,query:"*:*"
     ,basemap:"pencil"
     ,index_root:"http://solr-lbones.rhcloud.com/cbb_bits/select?"
+		,pliers:{line:999,poly:9999,point:1}
 }
 
 window.map = new L.Map('map',
@@ -265,8 +266,10 @@ var appQueryView = new QueryView({
 var appFacetsBits = new Facets();
 var appFacetsTags = new Facets();
 
+var appLocations = new Locations();
 var appBits = new Bits();
 var appBitsView = new BitsView({collection:appBits});
+var appLocationsView = new LocationsView({collection:appLocations});
 
 // new View( { el : some_el } );
 var appFacetsBitsView = new FacetsView({el:"#search-facets-bits",collection:appFacetsBits});

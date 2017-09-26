@@ -111,7 +111,7 @@ this["CBB"]["templates"]["bitsView-Mobile"] = Handlebars.template({"1":function(
 this["CBB"]["templates"]["bitsView"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var helper;
 
-  return "<li class=\"pick\">\n<span class=\"instance\">instance: "
+  return "<li class=\"pick\">\n<span class=\"instance\">"
     + container.escapeExpression(((helper = (helper = helpers.instance || (depth0 != null ? depth0.instance : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"instance","hash":{},"data":data}) : helper)))
     + "</span>\n</li>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {

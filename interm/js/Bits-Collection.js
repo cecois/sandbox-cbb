@@ -8,7 +8,7 @@ var Bits = Backbone.Collection.extend({
 			case 'T':
 
 //http://localhost:8983/solr/cbb_bits/select?q=titular&wt=json&indent=true&facet=true&facet.query=titular&facet.field=fat_name
-u = 'http://localhost:8983/solr/cbb_bits/select?indent=off&rows='+appQuery.get("numRows")+'&json.wrf=cwmccallback&wt=json&fl=_id,episode,slug_earwolf,bit,instance,created_at,updated_at,elucidation,tags&q=(holding:false) AND '+encodeURI(appQuery.get("querystring"))
+u = 'http://localhost:8983/solr/cbb_bits/select?indent=off&rows='+appQuery.get("numRows")+'&json.wrf=cwmccallback&wt=json&fl=_id,episode,slug_earwolf,bit,instance,location_type,location_id,created_at,updated_at,elucidation,tags&q=(holding:false) AND '+encodeURI(appQuery.get("querystring"))
 +'&'+appQuery.get("facetstring")+'&facet.query='+encodeURI(appQuery.get("querystring"))
 
 					// return Config.SOLRROOT+"select/?version=2.2&rows=50&indent=off&wt=json&json.wrf=cwmccallback&q=" + quQuery.get_query()
@@ -16,7 +16,7 @@ u = 'http://localhost:8983/solr/cbb_bits/select?indent=off&rows='+appQuery.get("
 
 					break;
 					default:
-					u = CONFIG.index_root+'indent=off&rows='+appQuery.get("numRows")+'&json.wrf=cwmccallback&wt=json&fl=_id,episode,slug_earwolf,bit,instance,created_at,updated_at,elucidation,tags&q=(holding:false) AND '+encodeURI(appQuery.get("querystring"))
+					u = CONFIG.index_root+'indent=off&rows='+appQuery.get("numRows")+'&json.wrf=cwmccallback&wt=json&fl=_id,episode,slug_earwolf,bit,instance,location_type,location_id,created_at,updated_at,elucidation,tags&q=(holding:false) AND '+encodeURI(appQuery.get("querystring"))
 					+'&'+appQuery.get("facetstring")+'&facet.query='+encodeURI(appQuery.get("querystring"))
 				}
 
@@ -35,6 +35,7 @@ u = 'http://localhost:8983/solr/cbb_bits/select?indent=off&rows='+appQuery.get("
 	,parse: function(data) {
 		var locations = _.filter(data.response.docs,function(d){return d.bit=="Location"})
 
+appLocations.reset(locations)
 
 		var fat_bits = _.map(data.facet_counts.facet_fields.fat_name,function(v,k){
 

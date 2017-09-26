@@ -2,14 +2,12 @@ var GULP = require('gulp')
 ,LESS = require('gulp-less')
 ,FS = require('fs')
 ,MONGO = require('mongodb').MongoClient
-// ,MONGO = require('mongo-async')
 ,__ = require('underscore')
 ,CONCAT = require('gulp-concat')
 ,UGLIFY = require('gulp-uglify')
 ,BROWSERSYNC = require('browser-sync')
 ,DEL = require('del')
 ,HANDLEBARS      = require('gulp-handlebars')
-// ,HBC      = require('handlebars')
 ,PLUMBER     = require('gulp-plumber')
 ,HTMLMIN     = require('gulp-htmlmin')
 ,DEBUG     = require('gulp-debug')
@@ -86,12 +84,14 @@ var copyjs=  ()=>{
     ,paths.site.src+"/node_modules/underscore/underscore-min.js"
     ,paths.site.src+"/node_modules/backbone.stickit/backbone.stickit.js"
     ,paths.site.src+"/node_modules/backbone/backbone-min.js"
-//   
+//
 ,paths.site.src+"/js/Query-Model.js"
 ,paths.site.src+"/js/Query-View.js"
 ,paths.site.src+"/js/Util-Model.js"
 ,paths.site.src+"/js/Bit-Model.js"
 ,paths.site.src+"/js/Facets-Collection.js"
+,paths.site.src+"/js/Locations-Collection.js"
+,paths.site.src+"/js/Locations-View.js"
 ,paths.site.src+"/js/Bits-Collection.js"
 ,paths.site.src+"/js/Bit-View.js"
 ,paths.site.src+"/js/Bits-View.js"
@@ -101,7 +101,7 @@ var copyjs=  ()=>{
 ,paths.site.src+"/js/BaseLayers-View.js"
 ,paths.site.src+"/js/BaseLayersMenuItem-View.js"
 ,paths.site.src+"/js/BaseLayersMenu-View.js"
-   // 
+   //
    ,paths.site.src+"/js/Activity-Model.js"
    ,paths.site.src+"/js/Activity-View.js"
    ,paths.site.src+"/js/State-Model.js"

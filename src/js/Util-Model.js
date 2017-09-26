@@ -1,7 +1,7 @@
 var Util = Backbone.Model.extend({
     initialize: function(options) {
         options || (options = {});
-        
+
         //this.listenTo(this, "change", this.update)
         return this
     }
@@ -15,6 +15,24 @@ var Util = Backbone.Model.extend({
         var ne = L.latLng(bba[3],bba[2])
         return L.latLngBounds(sw,ne)
 
+    }
+    ,geom_id_nudge:function(type,id,updown){
+
+        if(typeof updown =='undefined' || updown==null)
+            {var updown="down"}
+
+        var cid = null
+        switch(type) {
+            case 'line':
+            if(updown=="down"){cid=Number(id)/CONFIG.pliers.line} else {cid=Number(id)*CONFIG.pliers.line}
+                break;
+            case 'poly':
+            if(updown=="down"){cid=Number(id)/CONFIG.pliers.poly} else {cid=Number(id)*CONFIG.pliers.poly}
+                break;
+            default:
+            cid = Number(id);
+        }
+        return cid
     }
 
 });//state
