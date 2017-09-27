@@ -2,12 +2,13 @@
 var CONFIG = {
 	verbose:true
     ,dev:true
-    ,mode:"T"
+    ,mode:"33"
     ,proxy:null
     ,query:"*:*"
     ,basemap:"pencil"
     ,index_root:"http://solr-lbones.rhcloud.com/cbb_bits/select?"
-		,pliers:{line:999,poly:9999,point:1}
+    ,geom_root:"http://solr-lbones.rhcloud.com/cbb_carto/select?"
+    ,pliers:{line:999,poly:9999,point:1}
 }
 
 window.map = new L.Map('map',
@@ -53,7 +54,7 @@ Handlebars.registerHelper("debug", function(optionalValue) {
 
 
 Handlebars.registerHelper('debug', function(thing) {
-console.log(thing)
+    console.log(thing)
     return new Handlebars.SafeString(this.instance);
 });
 
