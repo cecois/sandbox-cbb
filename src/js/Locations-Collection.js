@@ -8,7 +8,7 @@ var Locations = Backbone.Collection.extend({
 
 		// var u =null;
 
-		var u= "http://localhost:8983/solr/cbb_carto/select?wt=json&q=cartodb_id:829917"
+		var u= "http://localhost:8983/solr/cbb_carto/select?wt=json&json.wrf=cwmccallback&q=cartodb_id:829917"
 
 		// switch(CONFIG.mode) {
 		// 	case 'T':
@@ -23,26 +23,29 @@ var Locations = Backbone.Collection.extend({
 
 	}
 	,sync: function(method, collection, options) {
-console.log("26, sync");
 		options.dataType = "jsonp";
 		options.jsonpCallback = 'cwmccallback';
 		return Backbone.sync(method, collection, options)
 	}
 	,parse: function(data) {
-console.log("32, parse");
 
+var drd = data.response.docs
+console.log("og models in parse",this.models);
+console.log("daa.resonse.docs",data.response.docs);
+
+var actuals = _.map(this.models,function(m)=>{
+	var the_geom_m = _.findWhere(drd,{cartodb_id:m.get("cartodb_id")})
+m.the_geom=the_geom_m.the_geom
+m.the_geom_anno=the_geom_m.anno
+m.the_geom_name=the_geom_m.name
+return m
+})
+
+console.log("actuals",actuals)
 		// heres wehre where z ip back with bits?
 
-		return data.response.docs
-	}
-	,fetch_geoms: function(){
-
-// var mfm = this.map_for_map()
-		$.getJSON(this.vurl(), null, function(json, textStatus) {
-			console.log("json in fetch_geoms:");console.log(json);
-		});
-
-		return null
+		// return data.response.docs
+		return actuals
 	}
 
 })//extend
