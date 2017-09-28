@@ -33,9 +33,11 @@ u = 'http://localhost:8983/solr/cbb_bits/select?indent=off&rows='+appQuery.get("
 		return Backbone.sync(method, collection, options)
 	}
 	,parse: function(data) {
-		var locations = _.filter(data.response.docs,function(d){return d.bit=="Location"})
+		var locations = _.map(_.filter(data.response.docs,function(d){return d.bit=="Location"}),function(d){
+				return "cartodb_id:"+UTIL.geom_id_nudge(d.location_type,parseFloat(d.location_id),"up")
+		})
 
-appLocations.reset(locations)
+appLocations.fetch({ data: $.param({ q: locations.join(" OR ")}) });
 
 		var fat_bits = _.map(data.facet_counts.facet_fields.fat_name,function(v,k){
 
