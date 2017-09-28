@@ -2,7 +2,7 @@
 var CONFIG = {
 	verbose:true
     ,dev:true
-    ,mode:"33"
+    ,mode:"T"
     ,proxy:null
     ,query:"*:*"
     ,basemap:"pencil"
@@ -29,8 +29,6 @@ window.map = new L.Map('map',
 // } else {
 //     window.agent = "desktop";
 // }
-
-// window.thedomain="bitmap-lbones.rhcloud.com"
 
 NProgress.configure({
     parent: '#cbb-main'
@@ -81,48 +79,6 @@ Handlebars.registerHelper('urler', function(str,options) {
 // $.getJSON(solrhost+'/cbb_bits/admin/luke?numTerms=0', {wt: 'json'}, function(json, textStatus) {
 //   console.log("fields call:");console.log(json);
 // });
-markernew = {
-    radius: 6,
-    fillColor: "rgba(126, 223, 216, 100)",
-    color: "#000",
-    weight: 1,
-    opacity: 1,
-    fillOpacity: 0.6,
-};
-markeractive = {
-    radius: 18,
-    fillColor: "#fecd0b",
-    color: "#000",
-    weight: 1,
-    opacity: 1,
-    fillOpacity: 0.6,
-};
-markerseen = {
-    radius: 6,
-    fillColor: "#ffffff",
-    color: "#1288b9",
-    weight: 1,
-    opacity: .6,
-    fillOpacity: 0.3,
-};
-linenew = {
-    fillColor: "rgba(126, 223, 216, 100)",
-    color: "rgba(126, 223, 216, 100)",
-    weight: 6,
-    opacity: .8,
-};
-lineactive = {
-    fillColor: "#fecd0b",
-    color: "#fecd0b",
-    weight: 8,
-    opacity: 1,
-};
-lineseen = {
-    fillColor: "#ffffff",
-    color: "#ffffff",
-    weight: 6,
-    opacity: .6,
-};
 //
 
 // window.appURL = new URL();

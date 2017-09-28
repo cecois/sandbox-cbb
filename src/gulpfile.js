@@ -54,7 +54,7 @@ var img = ()=>{
   return GULP.src(paths.site.src+"/images/**/*.{jpg,png,gif,svg}")
   .pipe(PLUMBER())
   .pipe(IMAGEMIN({ optimizationLevel: 3, progressive: true, interlaced: true }))
-  .pipe(DEBUG())
+  // .pipe(DEBUG())
   .pipe(GULP.dest(paths.interm+"/images/"));
  }//img
 
@@ -69,7 +69,7 @@ var img = ()=>{
     ,paths.site.src+"/lib/icomoon/fonts/*.{woff,ttf,svg,eot}"
     ]
     )
-  .pipe(DEBUG())
+  // .pipe(DEBUG())
   .pipe(GULP.dest(paths.interm+"/fonts/"))
 };
 
@@ -166,7 +166,7 @@ var lessen = ()=>{
     paths.site.src+"/css/app.less"
     )
   .pipe(LESS())
-  .pipe(DEBUG())
+  // .pipe(DEBUG())
   // .pipe(RENAME({
   //   basename: 'zzzz'
   // }))
@@ -235,7 +235,7 @@ var watch = ()=>{
     ,paths.site.src+"js/templates/*.handlebars"
     ,paths.site.src+"*.html"
     // ,paths.site.src+"/css/*.less"
-    ], GULP.series(
+  ], GULP.parallel(
       handlez
       ,htmlmin
       ,copyjs

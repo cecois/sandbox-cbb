@@ -43,10 +43,10 @@ var BitsView = Backbone.View.extend({
         //   // var bitv = new BitView({model:m})
 
         //   // $(this.el).append(bitv.render().el)
-        //   // 
+        //   //
         //   $(this.el).html.append('<div>divvvv</div>')
         // })
-
+$("#cbb-pane-menu > li[data-id='search']").attr('data-badge',this.collection.length)
         $(this.el).html(this.template({rows:this.collection.toJSON()}));
         // $(this.el).html(this.template({baselayers:this.collection.models}));
         // $(this.el).html("loolaknlkan");

@@ -1,10 +1,7 @@
 var LocationsView = Backbone.View.extend({
-    // tagName: "ul",
     el: null,
-    // template: CBB['templates']['bitsView'],
     events: {
     },
-    // className : "mnuThumbnails",
     initialize: function() {
       BitGroup = new L.featureGroup().addTo(map);
       // this.listenTo(this.collection,"change","render")
@@ -16,10 +13,12 @@ var LocationsView = Backbone.View.extend({
       BitGroup.clearLayers();
 
       this.collection.each(function(bit, i) {
-            // var bitTemplate = CBB['templates']['bitMarkerViewTpl']
-            // var pu = bitTemplate(bit.toJSON());
-            var pu = "ankfaldn";
+            var bitTemplate = CBB['templates']['bitMarkerViewTpl']
+            var pu = bitTemplate(bit.toJSON());
             var geomtype = bit.get("geom_type")
+            var stile = this.get_style();
+            var acdive = this.get_style('active');
+            var ceen = this.get_style('seen');
             var bitm = {
               "type": "Feature",
               "properties": {
@@ -34,20 +33,20 @@ var LocationsView = Backbone.View.extend({
               "geometry": $.parseJSON(bit.get("the_geom"))
             };
             if (geomtype == "point") {
-              var activeStyle = markernew
               var foot = L.geoJson(bitm, {
                 seen: false,
                 cartodb_id: bit.get("cartodb_id"),
                 pointToLayer: function(feature, latlng) {
-                  return L.circleMarker(latlng, activeStyle);
+                  return L.circleMarker(latlng, stile);
                 }
               })
               foot.bindPopup(pu).addTo(BitGroup).on("click", function(m) {
                         // first mark it seen
-                        var stale = _.find(BitGroup._layers, function(i) {
-                          return i.options.seen == true
-                        });
-                        processLeaf(bit.get("cartodb_id").toString(), false, geomtype);
+                        // var stale = _.find(BitGroup._layers, function(i) {
+                        //   return i.options.seen == true
+                        // });
+                        m.target.setStyle(acdive);
+                        // processLeaf(bit.get("cartodb_id").toString(), false, geomtype);
                       }).addOneTimeEventListener("popupopen", function(p) {
                         /* --------------------------------------------------
                         ok what dafuk is going on here? Well in order to use native Backbone stuff *within* the popup we needed to be able inject a model-view couple into its guts - i.e. we want the guts of this popup to be the $el of a BB view. The way to do that is to throw the popupopen event to an external popup factory that *we* write - just so happens to be a BB view generator based on the "model" we also pass as part of the object. See that piece where we add an attribute to p? p.model = bitm.properties is us passing along this (this!) model to the popup factory. Kinda. You know what i mean.
@@ -57,17 +56,18 @@ var LocationsView = Backbone.View.extend({
                       })
                     //on popup
                   } else {
-                    var activeStyle = linenew
+                    // var stile = this.get_style()
                     var foot = L.geoJson(bitm, {
                       seen: false,
                       cartodb_id: bit.get("cartodb_id"),
-                      style: activeStyle
+                      style: stile
                     })
                     foot.bindPopup(pu).addTo(BitGroup).on("click", function(m) {
+                      m.target.setStyle(acdive);
                       var stale = _.find(BitGroup._layers, function(i) {
                         return i.options.seen == true
                       });
-                      processLeaf(bit.get("cartodb_id").toString(), false, geomtype);
+                      // processLeaf(bit.get("cartodb_id").toString(), false, geomtype);
                     }).addOneTimeEventListener("popupopen", function(p) {
                         /* --------------------------------------------------
                         ok what dafuk is going on here? Well in order to use native Backbone stuff *within* the popup we needed to be able inject a model-view couple into its guts - i.e. we want the guts of this popup to be the $el of a BB view. The way to do that is to throw the popupopen event to an external popup factory that *we* write - just so happens to be a BB view generator based on the "model" we also pass as part of the object. See that piece where we add an attribute to p? p.model = bitm.properties is us passing along this (this!) model to the popup factory. Kinda. You know what i mean.
@@ -76,10 +76,11 @@ var LocationsView = Backbone.View.extend({
                         // puFactory(p)
                     }) //on popup
                   }
-                  foot.on("popupopen", function(p) {
-                    activecouple = activeFactory(bit.get("geom_type") + ":" + bit.get("cartodb_id"))
-                    var silent = false
-                    appCBB.activate(silent);
+                  foot.on("popupclose", function(p) {
+                    // activecouple = activeFactory(bit.get("geom_type") + ":" + bit.get("cartodb_id"))
+                    // var silent = false
+                    // appCBB.activate(silent);
+                    p.target.setStyle(ceen)
                 }) //.on
                   if (typeof bitm.options == 'undefined') {
                     bitm.options = {
@@ -87,7 +88,7 @@ var LocationsView = Backbone.View.extend({
                     }
                   }
                   bitm.options.cartodb_id = bit.get("cartodb_id").toString()
-                })
+                },this)
 
 if(this.collection.length > 0){
   map.fitBounds(BitGroup.getBounds());
@@ -96,5 +97,63 @@ if(this.collection.length > 0){
 appActivityView.stfu()
 
 return this
+}
+,get_style: function(s){
+
+switch (s) {
+case 'active':
+return {
+radius: 18,
+fillColor: "#fecd0b",
+color: "#000",
+weight: 1,
+opacity: 1,
+fillOpacity: 0.6,
+};
+break;
+case 'seen':
+return {
+radius: 6,
+fillColor: "#ffffff",
+color: "#1288b9",
+weight: 1,
+opacity: .6,
+fillOpacity: 0.3,
+};
+break;
+case 'linenew':
+return {
+fillColor: "rgba(126, 223, 216, 100)",
+color: "rgba(126, 223, 216, 100)",
+weight: 6,
+opacity: .8,
+};
+break;
+case 'lineactive':
+return {
+fillColor: "#fecd0b",
+color: "#fecd0b",
+weight: 8,
+opacity: 1,
+};
+break;
+case 'lineseen':
+return {
+fillColor: "#ffffff",
+color: "#ffffff",
+weight: 6,
+opacity: .6,
+};
+default:
+return {
+radius: 6,
+fillColor: "rgba(6, 6, 6, 50)",
+color: "#000",
+weight: 1,
+opacity: 1,
+};
+break;
+}//switch
+
 }
 });
