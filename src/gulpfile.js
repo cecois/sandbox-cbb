@@ -67,6 +67,7 @@ var img = ()=>{
     ,paths.site.src+"/lib/icomoon/fonts/**/*.{eot,svg,ttf,woff}"
     // ,paths.site.src+"/lib/components/bootstrap/fonts/**/*.{eot,svg,ttf,woff}"
     ,paths.site.src+"/lib/icomoon/fonts/*.{woff,ttf,svg,eot}"
+    ,paths.site.src+"/node_modules/font-awesome/fonts/*.{woff,ttf,svg,eot,woff2,otf}"
     ]
     )
   // .pipe(DEBUG())
@@ -235,7 +236,7 @@ var watch = ()=>{
     ,paths.site.src+"js/templates/*.handlebars"
     ,paths.site.src+"*.html"
     // ,paths.site.src+"/css/*.less"
-  ], GULP.parallel(
+    ], GULP.parallel(
       handlez
       ,htmlmin
       ,copyjs
