@@ -297,14 +297,17 @@ var appActivityView = new ActivityView({
         model: appState
     });
 
-    // if(CONFIG.dev==true){
-    //     baselayers=baselayersdummified
-    // } else {
+    if(CONFIG.mode=='T'){
+        baselayers=baselayersdummified
+    } else {
 
-    //     if(agent=='mobile'){
-    //     }else{baselayers=baselayersdesk}}
+        // if(agent=='mobile'){
+        // }else{
+            baselayers=baselayersdesk
+        // }
+    }
 
-    baselayers=baselayersdummified
+    // baselayers=baselayersdummified
     var appBaseLayers = new BaseLayersCollection(baselayers.layers);
     var appBaseLayersMenuView = new BaseLayersMenuView({
         collection: appBaseLayers
