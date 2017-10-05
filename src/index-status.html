@@ -27,78 +27,44 @@
 
     </head>
     <body ontouchstart="">
-        <div id="map"></div>
+        
 
-        <section id="cbb-header" class="columns">
-            <div class="column is-one-quarter">
+        <section style="padding-top:10%;" class="columns">
+            <div class="column is-one-quarter"></div>
+            
+            <div style="text-align:center;" id="" class="column is-half"><span style="font-size:7em;" class="icom-bang"></span><strong style="font-size:2em;">what's this now?</strong></div>
+            
+            <div class="column is-one-quarter"></div>
+            <!-- 1/4 for banner-bang -->
+</section>
+
+        <section style="" class="columns">
+            <div class="column is-one-quarter"></div>
+            
+            <div style="text-align:center;" id="" class="column is-half">This thing is being rebuilt. Taken down on September 30th, 2017 to swap out...
 
 
-<!--
-<div id="cbb-map-toggle" class="icom-bang">
-<div id="cbb-map-toggle-copy" class=""></div>
-</div>
--->
 
-            </div>
-            <div id="query-form" class="column is-half">search form</div>
-            <div class="column is-one-quarter">
+  <dl>
+    <dt style="margin-top:3%;"><strong style="font-variant:small-caps;">underlying platform</strong></dt>
+    <dd><a href="http://openshift.com">OpenShift</a> v3 was too much infrastructure - this thing is being migrated to a <a href="https://en.wikipedia.org/wiki/Virtual_private_server">VPS</a> for more hands-on management</dd>
+    <dt style="margin-top:3%;"><strong style="font-variant:small-caps;">processing</strong></dt>
+    <dd>Believe it or not, there's kind of a lot of processing that goes on in order to generate this dumb thing. Data need to be pushed/pulled from a <a href="https://www.mongodb.com">MongoDB</a> instance, indexed in a <a href="http://lucene.apache.org/solr/">Solr</a> instance, then visualized, etc. The work behind the scenes is being rewritten in <a href="https://nodejs.org/en/">NodeJS</a> for easier and faster everything.</dd>
+    <dt style="margin-top:3%;"><strong style="font-variant:small-caps;">design</strong></dt>
+    <dd>Partially inspired by the show's own move into (and out of, kinda) <a href="http://howl.fm/audio/playlists/4343/comedy-bang-bang-the-podcast">Howl</a> and then <a href="https://www.stitcher.com/podcast/earwolf/comedy-bang-bang-the-podcast-55055">Stitcher</a>, the design is undergoing a refresh, all the way down to its <a href="http://bulma.io">CSS framework</a>. The result will be cleaner and simpler. It's for the best.</dd>
+        <dt style="margin-top:3%;"><strong style="font-variant:small-caps;">bits</strong></dt>
+    <dd>We're coming back with a splash. October 2017 release estimate, with <em>over a thousand</em> new bits and an easier way to engage them. See you soon.</dd>
+  </dl>
+
+         </div>
 
 
-<!--
-<div id="cbb-graphic-burst" class="icom-bang">
-<div id="cbb-graphic-copy" class="">CBB<br>Bit<br>Map</div>
-</div>
- -->
-
-            </div>
+            
+            <div class="column is-one-quarter"></div>
             <!-- 1/4 for banner-bang -->
 </section>
 <!-- #cbb-header -->
 
-        <section id="cbb-menus" class="columns">
-<div id="cbb-map-toggle" class="column is-one-quarter">map toggle</div>
-            <div class="column is-half">
-<div class="tabs is-centered">
-  <ul id="cbb-pane-menu">
-<!--     <li class="is-active"><a>Static.Home</a></li>
-    <li><a>Static.Huh?</a></li>
-    <li><a>Static.Search</a></li>
-    <li><a>Static.Browse</a></li>
-    <li><a>Static.Updates</a></li>
-    <li><a>Static.Help</a></li> -->
-  </ul>
-</div>
-            </div>
-            <!-- ./half -->
-
-<div id="cbb-menu-share" class="column is-one-quarter">share menu</div>
-</section>
-<!-- #cbb-main -->
-
-        <section id="cbb-main" class="columns">
-<ul id="cbb-main-panes">
-
-        <li id="pane-huh" class="cbb-main-pane hidden">
-    <div class="column is-one-third"><h2>huh</h2></div>
-            <div class="column is-one-third">2</div>
-            <div class="column is-one-third">3</div>
-        </li>
-        <li id="pane-home" class="cbb-main-pane hidden"></li>
-        <li id="pane-search" class="cbb-main-pane hidden">
-          <div class="columns">
-    <ul class="column is-one-half" id="search-bits"></ul>
-    <ul class="column is-one-quarter" id="search-facets-bits"></ul>
-    <ul class="column is-one-quarter" id="search-facets-tags"></ul>
-  </div>
-  </li>
-        </ul>
-</section>
-
-        <section id="cbb-footer" class="columns">
-            <div class="column is-one-quarter">one</div>
-            <div class="column is-half">two</div>
-            <div class="column is-one-quarter">three</div>
-</section>
 
   <!-- <ul id="basemap-menu" class=""></ul> -->
 
@@ -109,7 +75,7 @@
     <!-- <script type="text/javascript" language="Javascript" src="/js/moment.min.js"></script> -->
     <!-- <script type="text/javascript" language="Javascript" src="/js/octokat.min.js"></script> -->
     <!-- <script type="text/javascript" language="Javascript" src="/js/throbber.js"></script> -->
-    <script src="/js/leaflet.js" type="text/javascript" language="Javascript"></script>
+    <!-- <script src="/js/leaflet.js" type="text/javascript" language="Javascript"></script> -->
     <!-- <script src="/js/tile.stamen.js?v1.2.0" type="text/javascript" language="Javascript"></script> -->
     <!-- <script src="/js/H-templates-compiled.js" type="text/javascript" language="Javascript"></script> -->
     <script src="/js/jquery.min.js" type="text/javascript" language="Javascript"></script>
@@ -118,11 +84,11 @@
 
 <!-- <script src="/js/leaflet-history.js" type="text/javascript" language="Javascript"></script> -->
 <!-- <script src="/js/wicket-leaflet.js" type="text/javascript" language="Javascript"></script> -->
-<script src="/js/nprogress.js" type="text/javascript" language="Javascript"></script>
+<!-- <script src="/js/nprogress.js" type="text/javascript" language="Javascript"></script> -->
 <!-- <script src="/js/bootstrap.min.js" type="text/javascript" language="Javascript"></script> -->
-<script src="/js/underscore-min.js" type="text/javascript" language="Javascript"></script>
-<script src="/js/backbone-min.js" type="text/javascript" language="Javascript"></script>
-<script src="/js/backbone.stickit.js" type="text/javascript" language="Javascript"></script>
+<!-- <script src="/js/underscore-min.js" type="text/javascript" language="Javascript"></script> -->
+<!-- <script src="/js/backbone-min.js" type="text/javascript" language="Javascript"></script> -->
+<!-- <script src="/js/backbone.stickit.js" type="text/javascript" language="Javascript"></script> -->
 <!-- <script src="/js/globals.js" type="text/javascript" language="Javascript"></script> -->
 
 <!-- <script src="/js/models.js" type="text/javascript" language="Javascript"></script> -->
@@ -151,7 +117,7 @@
 <script src="/js/QuerySubNavView.js" type="text/javascript" language="Javascript"></script>
 <script src="/js/QueryView.js" type="text/javascript" language="Javascript"></script>
 <script src="/js/SolrFieldzView.js" type="text/javascript" language="Javascript"></script> -->
-<script src="/js/Util-Model.js" type="text/javascript" language="Javascript"></script>
+<!-- <script src="/js/Util-Model.js" type="text/javascript" language="Javascript"></script>
 <script src="/js/Query-Model.js" type="text/javascript" language="Javascript"></script>
 <script src="/js/Query-View.js" type="text/javascript" language="Javascript"></script>
 <script src="/js/Bit-Model.js" type="text/javascript" language="Javascript"></script>
@@ -174,7 +140,7 @@
 <script src="/js/Bits-View.js" type="text/javascript" language="Javascript"></script>
 <script src="/js/Facets-View.js" type="text/javascript" language="Javascript"></script>
 <script src="/js/App.js" type="text/javascript" language="Javascript"></script>
-<script src="/js/Routes.js" type="text/javascript" language="Javascript"></script>
+<script src="/js/Routes.js" type="text/javascript" language="Javascript"></script> -->
 <!-- <script src="/js/App.js" type="text/javascript" language="Javascript"></script>
 <script src="/js/Routes.js" type="text/javascript" language="Javascript"></script> -->
 <!-- <script src="/js/vm.min.js" type="text/javascript" language="Javascript"></script> -->

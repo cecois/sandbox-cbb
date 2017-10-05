@@ -2,7 +2,7 @@
 var CONFIG = {
 	verbose:true
     ,dev:true
-    ,mode:"33"
+    ,mode:"T"
     ,proxy:null
     ,query:"*:*"
     ,basemap:"pencil"

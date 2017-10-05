@@ -4,20 +4,22 @@ var Bits = Backbone.Collection.extend({
 
 		var u =null;
 
+		var Q = (appQuery.get("querystring")==null || appQuery.get("querystring")=='undefined')?"*:*":appQuery.get("querystring")
+
 		switch(CONFIG.mode) {
 			case 'T':
 
 //http://localhost:8983/solr/cbb_bits/select?q=titular&wt=json&indent=true&facet=true&facet.query=titular&facet.field=fat_name
-u = 'http://localhost:8983/solr/cbb_bits/select?indent=off&rows='+appQuery.get("numRows")+'&json.wrf=cwmccallback&wt=json&fl=_id,episode,slug_earwolf,bit,instance,location_type,location_id,created_at,updated_at,elucidation,tags&q=(holding:false) AND '+encodeURI(appQuery.get("querystring"))
-+'&'+appQuery.get("facetstring")+'&facet.query='+encodeURI(appQuery.get("querystring"))
+u = 'http://localhost:8983/solr/cbb_bits/select?indent=off&rows='+appQuery.get("numRows")+'&json.wrf=cwmccallback&wt=json&fl=_id,episode,slug_earwolf,bit,instance,location_type,location_id,created_at,updated_at,elucidation,tags&q=(holding:false) AND '+encodeURI(Q)
++'&'+appQuery.get("facetstring")+'&facet.query='+encodeURI(Q)
 
 					// return Config.SOLRROOT+"select/?version=2.2&rows=50&indent=off&wt=json&json.wrf=cwmccallback&q=" + quQuery.get_query()
 
 
 					break;
 					default:
-					u = CONFIG.index_root+'indent=off&rows='+appQuery.get("numRows")+'&json.wrf=cwmccallback&wt=json&fl=_id,episode,slug_earwolf,bit,instance,location_type,location_id,created_at,updated_at,elucidation,tags&q=(holding:false) AND '+encodeURI(appQuery.get("querystring"))
-					+'&'+appQuery.get("facetstring")+'&facet.query='+encodeURI(appQuery.get("querystring"))
+					u = CONFIG.index_root+'indent=off&rows='+appQuery.get("numRows")+'&json.wrf=cwmccallback&wt=json&fl=_id,episode,slug_earwolf,bit,instance,location_type,location_id,created_at,updated_at,elucidation,tags&q=(holding:false) AND '+encodeURI(Q)
+					+'&'+appQuery.get("facetstring")+'&facet.query='+encodeURI(Q)
 				}
 
 				return u
