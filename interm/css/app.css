@@ -5,6 +5,7 @@
 --------------  VARS
 */
 /*blue*/
+/*blue*/
 /*brn*/
 /*gold*/
 /*lt. blue*/
@@ -16,14 +17,14 @@ body {
 #cbb-header {
   height: 10vh;
   text-align: center;
-  background-color: yellow;
+  background-color: rgba(255, 255, 255, 0.9);
   position: relative;
   padding: 0;
   margin: 0;
 }
 #cbb-menus {
   height: 10vh;
-  background-color: blue;
+  background-color: rgba(255, 255, 255, 0.9);
   position: relative;
   padding: 0;
   margin: 0;
@@ -52,7 +53,7 @@ body {
 #cbb-footer {
   height: 5vh;
   text-align: center;
-  background-color: pink;
+  background-color: rgba(255, 255, 255, 0.9);
   position: relative;
   padding: 0;
   margin: 0;
