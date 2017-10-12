@@ -235,7 +235,7 @@ var watch = ()=>{
     paths.site.src+"js/*.js"
     ,paths.site.src+"js/templates/*.handlebars"
     ,paths.site.src+"*.html"
-    // ,paths.site.src+"/css/*.less"
+    ,paths.site.src+"css/*.less"
     ], GULP.parallel(
       handlez
       ,htmlmin

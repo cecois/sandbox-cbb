@@ -15,26 +15,28 @@ body {
   height: 100%;
 }
 #cbb-header {
-  height: 10vh;
   text-align: center;
   background-color: rgba(255, 255, 255, 0.9);
   position: relative;
+  top: 0;
+  width: 100%;
   padding: 0;
   margin: 0;
 }
 #cbb-menus {
-  height: 10vh;
   background-color: rgba(255, 255, 255, 0.9);
   position: relative;
+  width: 100%;
   padding: 0;
   margin: 0;
 }
 #cbb-main {
   background-color: orange;
-  position: relative;
+  z-index: -2;
+  position: absolute;
   padding: 0;
   margin: 0;
-  height: 75vh;
+  width: 100%;
 }
 #cbb-main.down {
   left: 95%;
@@ -51,7 +53,6 @@ body {
 }
 /*#cbb-map-toggle.down{color:green;}*/
 #cbb-footer {
-  height: 5vh;
   text-align: center;
   background-color: rgba(255, 255, 255, 0.9);
   position: relative;
@@ -163,6 +164,18 @@ body {
 .leaflet-control-container .leaflet-control a:hover {
   background-color: transparent;
   text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;
+}
+.bang:after {
+  z-index: 1;
+  content: "\e601";
+  font-family: 'icomoon';
+  font-size: 35.0em;
+  text-align: center;
+  display: block;
+  color: white;
+  position: absolute;
+  left: 50%;
+  top: -10%;
 }
 /* --------------------------------------- MAP -------------- */
 #map {
