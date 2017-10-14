@@ -46,21 +46,33 @@ body {
   position: absolute;
 }
 #cbb-main .cbb-main-pane {
-  padding: 10% 5%;
+  padding: 5% 5%;
   z-index: 2;
   position: relative;
 }
 #cbb-main .cbb-main-pane.hidden {
   display: none;
 }
-#cbb-map-toggle {
+.cbb-bt {
   color: rgba(230, 230, 230, 0.9);
-  padding-left: 2%;
+  z-index: 5;
   font-size: 3em;
+}
+.cbb-bt .cbb-bt-copy {
   cursor: pointer;
 }
-#cbb-map-toggle #cbb-map-toggle-copy.down {
-  color: green;
+.cbb-bt .cbb-bt-copy.down {
+  color: rgba(171, 171, 171, 0.9);
+}
+.cbb-bt .cbb-bt-copy:hover {
+  color: rgba(204, 204, 204, 0.9);
+}
+#cbb-map-toggle {
+  padding-left: 2%;
+}
+.earwolf-img {
+  -webkit-filter: grayscale(1);
+  filter: grayscale(1);
 }
 .cbb-hero-instance {
   font-size: 2em;
@@ -130,7 +142,6 @@ body {
 
 */
 #cbb-menu-share {
-  color: rgba(230, 230, 230, 0.9);
   padding-right: 2%;
   text-align: right;
   font-size: 3em;
@@ -189,10 +200,14 @@ body {
   font-size: 35.0em;
   text-align: center;
   display: block;
-  color: rgba(245, 245, 245, 0.9);
+  color: rgba(230, 230, 230, 0.9);
   position: absolute;
   left: 50%;
   top: -20%;
+}
+.bang-inline {
+  font-size: 1.2em;
+  position: relative;
 }
 /* --------------------------------------- MAP -------------- */
 #map {

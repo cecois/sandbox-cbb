@@ -9,6 +9,7 @@ var CONFIG = {
     ,index_root:"http://solr-lbones.rhcloud.com/cbb_bits/select?"
     ,geom_root:"http://solr-lbones.rhcloud.com/cbb_carto/select?"
     ,pliers:{line:999,poly:9999,point:1}
+		,default_query:"(episode:510 OR episode:511)"
 }
 
 window.map = new L.Map('map',
@@ -213,8 +214,7 @@ var baselayersmobile = {
 //     model: appCartoQuery
 // });
 //
-//
-var appQuery = new Query();
+var appQuery = new Query({querystring:CONFIG.default_query});
 var appQueryView = new QueryView({
     model: appQuery
 });
