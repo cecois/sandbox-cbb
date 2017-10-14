@@ -6,21 +6,21 @@ var ActivityView = Backbone.View.extend({
     },
     initialize: function() {
         // this.listenTo(appConsole,"change",this.listler)
-        
-        NProgress.configure({
-            parent: "#activityContainer"
-        });
+
+        // NProgress.configure({
+        //     parent: "#activity-console"
+        // });
 
         this.model.bind("change", this.render, this);
         //this.render();
     },
     stfu: function(){
-        NProgress.done()
+        // NProgress.done()
         $(this.el).addClass("idle")
         $("#query-form").removeClass("hidden")
 
         $(this.el).removeClass('warn')
-        
+
         // better these would listen for this but it wasn't working/i was lazy
         // appCBBCountView.render()
         // appBitsCountView.render()
@@ -29,7 +29,7 @@ var ActivityView = Backbone.View.extend({
     },
     warn: function(){
 
-        NProgress.done()
+        // NProgress.done()
 
         $(this.el).addClass('warn')
 
@@ -41,7 +41,7 @@ return this
 },
 render: function() {
     if(CONFIG.verbose==true){console.log("rendering activityview")}
-        NProgress.start();
+        // NProgress.start();
         // var show = this.model.get("show")
         // var show = true
         // var msg = this.model.get("message")

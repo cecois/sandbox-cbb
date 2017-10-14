@@ -13,7 +13,7 @@ var CONFIG = {
 
 window.map = new L.Map('map',
 {
-    zoomControl:true,
+    zoomControl:false,
     center: [51.505, -0.09],
     zoom:7
     ,attributionControl:false
@@ -30,9 +30,9 @@ window.map = new L.Map('map',
 //     window.agent = "desktop";
 // }
 
-NProgress.configure({
-    parent: '#cbb-main'
-});
+// NProgress.configure({
+//     parent: 'html body.layout-documentation.page-columns section#cbb-header.columns div#query-form.column.is-half div.field.has-addons.level div.control.level-item input.input.is-large'
+// });
 
 /* -------------------------------------------------- HANDLEBARS START
 

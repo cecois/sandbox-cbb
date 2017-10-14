@@ -1,6 +1,6 @@
 var State = Backbone.Model.extend({
     defaults: {slugs:[
-        ,{name:"Home",slug:"home",active:'is-active'}
+        {name:"Home",slug:"home",active:'is-active'}
         ,{name:"Huh?",slug:"huh",active:null}
         ,{name:"Search",slug:"search",active:null}
         ,{name:"Browse",slug:"browse",active:null}

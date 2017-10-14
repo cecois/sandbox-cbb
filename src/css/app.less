@@ -61,6 +61,7 @@ body{
 
 #cbb-menus{
   // height:10vh;
+  z-index:4;
   background-color:@cbb-white;
   position:relative;
   // position:fixed;
@@ -87,8 +88,10 @@ body{
   &.down{
     left:95%;
   }
-.cbb-main-panes{z-index:1;position:absolute;}
+.cbb-main-panes{
+  z-index:1;position:absolute;}
 .cbb-main-pane{
+  padding-top:5%;
   z-index:2;
   position:relative;
   &.hidden{
@@ -100,25 +103,38 @@ body{
 
 
   #cbb-map-toggle{
-color:white;
+color:pink;
+font-size:3em;
 cursor:pointer;
 #cbb-map-toggle-copy{
   &.down{color:green;}
 }
 }
 
+.cbb-hero-instance{
+  font-size:2em;
+  font-weight: 900;
+  text-align: right;
+}
+
+.cbb-hero-credit{
+  text-align: right;
+  font-size:1.1em;
+  font-weight: 100;
+}
 /*#cbb-map-toggle.down{color:green;}*/
 
 
-#cbb-footer{
-  // height:5vh;
-  text-align:center;
-  background-color:@cbb-white;
-  position:absolute;
-  bottom:0;
-  padding:0;
-  margin:0;
-}
+// #cbb-footer{
+//   // height:5vh;
+//   text-align:center;
+//   background-color:@cbb-white;
+//   position:absolute;
+//   width:100%;
+//   bottom:0;
+//   padding:0;
+//   margin:0;
+// }
 
 .cbb-badge{
   // font-size:22em;
@@ -181,10 +197,11 @@ cursor:pointer;
     -webkit-transform: rotate(-40deg);
 }
 
+*/
 #cbb-menu-share{
   text-align:right;
+  font-size:3em;
 }
-*/
 
 // ------------------------------------- LEAFLET/PLUGIN OVERRIDES
 
@@ -250,7 +267,7 @@ text-shadow:
       color:white;
       position:absolute;
       left:50%;
-      top:-10%;
+      top:-40%;
 }
 
 // .bang:before {

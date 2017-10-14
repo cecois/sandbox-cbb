@@ -24,6 +24,7 @@ body {
   margin: 0;
 }
 #cbb-menus {
+  z-index: 4;
   background-color: rgba(255, 255, 255, 0.9);
   position: relative;
   width: 100%;
@@ -45,6 +46,7 @@ body {
   position: absolute;
 }
 #cbb-main .cbb-main-pane {
+  padding-top: 5%;
   z-index: 2;
   position: relative;
 }
@@ -52,21 +54,24 @@ body {
   display: none;
 }
 #cbb-map-toggle {
-  color: white;
+  color: pink;
+  font-size: 3em;
   cursor: pointer;
 }
 #cbb-map-toggle #cbb-map-toggle-copy.down {
   color: green;
 }
-/*#cbb-map-toggle.down{color:green;}*/
-#cbb-footer {
-  text-align: center;
-  background-color: rgba(255, 255, 255, 0.9);
-  position: absolute;
-  bottom: 0;
-  padding: 0;
-  margin: 0;
+.cbb-hero-instance {
+  font-size: 2em;
+  font-weight: 900;
+  text-align: right;
 }
+.cbb-hero-credit {
+  text-align: right;
+  font-size: 1.1em;
+  font-weight: 100;
+}
+/*#cbb-map-toggle.down{color:green;}*/
 .cbb-badge {
   position: absolute;
   z-index: 2;
@@ -122,10 +127,11 @@ body {
     -webkit-transform: rotate(-40deg);
 }
 
-#cbb-menu-share{
-  text-align:right;
-}
 */
+#cbb-menu-share {
+  text-align: right;
+  font-size: 3em;
+}
 .leaflet-control-container {
   right: 27%;
   position: fixed;
@@ -183,7 +189,7 @@ body {
   color: white;
   position: absolute;
   left: 50%;
-  top: -10%;
+  top: -40%;
 }
 /* --------------------------------------- MAP -------------- */
 #map {

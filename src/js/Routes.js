@@ -49,7 +49,7 @@ var Route = Backbone.Router.extend({
         ,query = (typeof q == 'undefined' || q==null)?appQuery.get("querystring"):q
         ,page = (typeof p == 'undefined' || p==null)?1:p
         ,active = (typeof a == 'undefined' || a==null)?"nil":a
-        ,downout = (typeof d == 'undefined' || d==null)?"down":d
+        ,downout = (typeof d == 'undefined' || d==null)?"out":d
         ,basemap = (typeof b == 'undefined' || b==null)?"pencil":b
         ,bbox = (typeof x == 'undefined' || x==null)?"-112.8515625,22.105998799750566,37.44140625,57.61010702068388":x
         ;
