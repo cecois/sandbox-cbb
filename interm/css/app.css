@@ -14,6 +14,16 @@ body {
   padding: 0;
   height: 100%;
 }
+.tabs li.is-active a {
+  color: #5BC0DE;
+}
+a {
+  color: #5BC0DE;
+}
+.input {
+  font-family: 'Cabin';
+  font-weight: 900;
+}
 #cbb-header {
   text-align: center;
   background-color: rgba(255, 255, 255, 0.9);
@@ -37,6 +47,7 @@ body {
   padding: 0;
   margin: 0;
   width: 100%;
+  height: 100%;
 }
 #cbb-main.down {
   left: 95%;
@@ -61,18 +72,21 @@ body {
 .cbb-bt .cbb-bt-copy {
   cursor: pointer;
 }
-.cbb-bt .cbb-bt-copy.down {
-  color: rgba(171, 171, 171, 0.9);
-}
 .cbb-bt .cbb-bt-copy:hover {
   color: rgba(204, 204, 204, 0.9);
 }
 #cbb-map-toggle {
   padding-left: 2%;
 }
+#cbb-map-toggle #cbb-bt-copy-map.down {
+  color: purple;
+}
 .earwolf-img {
   -webkit-filter: grayscale(1);
   filter: grayscale(1);
+}
+#cbb-search {
+  background-color: #5BC0DE;
 }
 .cbb-hero-instance {
   font-size: 2em;

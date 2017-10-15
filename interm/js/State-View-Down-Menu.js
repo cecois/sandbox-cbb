@@ -4,7 +4,7 @@ var StateViewDownMenu = Backbone.View.extend({
     ,template_default: CBB['templates']['statesViewTpl_default']
     ,template_down: CBB['templates']['statesViewTpl_down']
     ,events: {
-        "click #cbb-map-toggle-copy": "setm"
+        "click #cbb-bt-copy-map": "setm"
     }
     ,initialize: function() {
 
@@ -14,7 +14,7 @@ var StateViewDownMenu = Backbone.View.extend({
         .render();
     }
     ,setm: function(){
-console.log("in setm",this.model.get("downout"));
+        console.log("in setm",this.model.get("downout"));
         var news = (this.model.get("downout")=="out")?"down":"out";
         this.model.set({downout:news})
 
@@ -23,17 +23,17 @@ console.log("in setm",this.model.get("downout"));
     ,render: function(){
 
         if(this.model.get("downout")=="down"){
-            $(this.el).html(this.template())
             $("#cbb-main").addClass("down")
-            $(this.el).addClass("down")
+            // $(this.el).addClass("down")
             // $(this.el).html(this.template_down())
         } else {
-            $(this.el).html(this.template())
             $("#cbb-main").removeClass("down")
-            $(this.el).removeClass("down")
+            // $(this.el).html(this.template())
+            // $(this.el).removeClass("down")
 
         }
 
+        $(this.el).html(this.template(this.model.toJSON()))
         return this
     }
     ,rewire: function() {

@@ -15,7 +15,8 @@
 @cbb-white: rgba(255, 255, 255, .9);
 
 /*blue*/
-@primarycolor: rgba(126, 223, 216, 100);
+// @primarycolor: rgba(0, 180, 170, 100);
+@primarycolor: #5BC0DE;
 @primarycolor-alt: rgba(96,163,160,1);
 @primarycolor-trans: rgba(126, 223, 216, .4);
 
@@ -44,6 +45,19 @@ body{
   margin:0;
   padding:0;
   height:100%;
+}
+
+.tabs li.is-active a
+{
+  color:@primarycolor;
+}
+a{
+  color:@primarycolor;
+}
+
+.input{
+  font-family:'Cabin';
+  font-weight:900;
 }
 
 #cbb-header{
@@ -83,7 +97,7 @@ body{
   // overflow:scroll;
   // top:25vh;
   width:100%;
-  // height:75vh;
+  height:100%;
 
   &.down{
     left:95%;
@@ -108,7 +122,7 @@ body{
 
   .cbb-bt-copy{
   cursor:pointer;
-    &.down{color:darken(@cbb-white,33%);}
+
     &:hover{
       // text-shadow: 0px 0px 2px rgba(2,3,4,.5);
       color:darken(@cbb-white,20%);
@@ -119,11 +133,20 @@ body{
 
   #cbb-map-toggle{
     padding-left:2%;
+    #cbb-bt-copy-map{
+      &.down{
+        color:purple;
+      }
+    }
 }
 
 .earwolf-img{
   -webkit-filter: grayscale(1);
   filter: grayscale(1);
+}
+
+#cbb-search{
+background-color:@primarycolor;
 }
 
 .cbb-hero-instance{

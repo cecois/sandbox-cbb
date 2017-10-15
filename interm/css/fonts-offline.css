@@ -39,3 +39,10 @@
   font-weight: 400;
   src: local('Oswald-Regular'), local('Oswald-Regular'), url('/fonts/Oswald-Regular.ttf') format('truetype');
 }
+
+@font-face {
+  font-family: 'Cabin';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Cabin-Bold'), local('Cabin-Bold'), url('/fonts/Cabin-Bold.ttf') format('truetype');
+}
