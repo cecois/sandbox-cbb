@@ -14,8 +14,14 @@ body {
   padding: 0;
   height: 100%;
 }
+/* ----------------- BULMA OVERRIDES ------------------ */
 .tabs li.is-active a {
   color: #5BC0DE;
+  border-bottom-color: #5BC0DE;
+}
+.tabs a:hover {
+  color: #5BC0DE;
+  border-bottom-color: #5BC0DE;
 }
 a {
   color: #5BC0DE;
