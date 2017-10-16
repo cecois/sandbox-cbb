@@ -85,14 +85,26 @@ a {
   padding-left: 2%;
 }
 #cbb-map-toggle #cbb-bt-copy-map.down {
-  color: purple;
+  color: rgba(64, 64, 64, 0.9);
+}
+#cbb-map-toggle #cbb-bt-copy-map.down:hover {
+  color: rgba(255, 255, 255, 0.9);
 }
 .earwolf-img {
   -webkit-filter: grayscale(1);
   filter: grayscale(1);
 }
-#cbb-search {
+#cbb-bt-search {
   background-color: #5BC0DE;
+}
+#cbb-bt-search:hover {
+  background-color: #31b0d5;
+}
+#cbb-bt-random:hover {
+  background-color: rgba(230, 230, 230, 0.9);
+}
+#cbb-bt-reset:hover {
+  background-color: rgba(230, 230, 230, 0.9);
 }
 .cbb-hero-instance {
   font-size: 2em;

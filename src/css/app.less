@@ -134,7 +134,6 @@ a{
   cursor:pointer;
 
     &:hover{
-      // text-shadow: 0px 0px 2px rgba(2,3,4,.5);
       color:darken(@cbb-white,20%);
     }
   }
@@ -145,7 +144,10 @@ a{
     padding-left:2%;
     #cbb-bt-copy-map{
       &.down{
-        color:purple;
+        color:darken(@cbb-white,75%);
+            &:hover{
+      color:lighten(@cbb-white,20%);
+    }
       }
     }
 }
@@ -155,8 +157,23 @@ a{
   filter: grayscale(1);
 }
 
-#cbb-search{
+#cbb-bt-search{
 background-color:@primarycolor;
+&:hover{
+  background-color:darken(@primarycolor,10%);
+}
+}
+
+#cbb-bt-random{
+&:hover{
+  background-color:darken(@cbb-white,10%);
+}
+}
+
+#cbb-bt-reset{
+&:hover{
+  background-color:darken(@cbb-white,10%);
+}
 }
 
 .cbb-hero-instance{
