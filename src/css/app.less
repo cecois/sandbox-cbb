@@ -68,6 +68,10 @@ a{
 .input{
   font-family:'Cabin';
   font-weight:900;
+  &:focus{
+    border-color:@primarycolor;
+    box-shadow: 0 0 0 0.125em @primarycolor;
+  }
 }
 
 #cbb-header{
@@ -339,7 +343,8 @@ text-shadow:
 }
 
 .bang-inline{
-  font-size:1.2em;
+  font-size:1.1em;
+  color:darken(@cbb-white,10%);
   position:relative;
 }
 

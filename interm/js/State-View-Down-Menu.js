@@ -14,7 +14,7 @@ var StateViewDownMenu = Backbone.View.extend({
         .render();
     }
     ,setm: function(){
-        console.log("in setm",this.model.get("downout"));
+
         var news = (this.model.get("downout")=="out")?"down":"out";
         this.model.set({downout:news})
 

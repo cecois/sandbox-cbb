@@ -2,14 +2,14 @@
 var CONFIG = {
 	verbose:true
     ,dev:true
-    ,mode:"T"
+    ,mode:"33"
     ,proxy:null
     ,query:"*:*"
     ,basemap:"pencil"
-    ,index_root:"http://solr-lbones.rhcloud.com/cbb_bits/select?"
-    ,geom_root:"http://solr-lbones.rhcloud.com/cbb_carto/select?"
+    ,index_root:"http://10.0.0.150:8983/solr/#/cbb_bits/select?"
+    ,geom_root:"http://10.0.0.150:8983/solr/#/cbb_carto/select?"
     ,pliers:{line:999,poly:9999,point:1}
-		,default_query:"(episode:510 OR episode:511)"
+    ,default_query:"(episode:510 OR episode:511)"
 }
 
 window.map = new L.Map('map',

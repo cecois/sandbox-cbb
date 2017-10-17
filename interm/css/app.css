@@ -30,6 +30,10 @@ a {
   font-family: 'Cabin';
   font-weight: 900;
 }
+.input:focus {
+  border-color: #5BC0DE;
+  box-shadow: 0 0 0 0.125em #5BC0DE;
+}
 #cbb-header {
   text-align: center;
   background-color: rgba(255, 255, 255, 0.9);
@@ -238,7 +242,8 @@ a {
   top: -20%;
 }
 .bang-inline {
-  font-size: 1.2em;
+  font-size: 1.1em;
+  color: rgba(230, 230, 230, 0.9);
   position: relative;
 }
 /* --------------------------------------- MAP -------------- */
