@@ -9,6 +9,12 @@ var BitsView = Backbone.View.extend({
       // this.listenTo(this.collection,"change","render")
       this.collection.bind("sync", this.render, this);
       return this
+      .proxyfetch()
+    }
+    ,proxyfetch: function(){
+
+this.collection.fetch()
+      return this
     }
   //   ,render: function() {
   //   var element = $(this.el);
@@ -46,7 +52,7 @@ var BitsView = Backbone.View.extend({
         //   //
         //   $(this.el).html.append('<div>divvvv</div>')
         // })
-$("#cbb-pane-menu > li[data-id='search']").attr('data-badge',this.collection.length)
+$("#cbb-pane-menu > li[data-id='search'] a span").attr('data-badge',this.collection.length)
         $(this.el).html(this.template({rows:this.collection.toJSON()}));
         // $(this.el).html(this.template({baselayers:this.collection.models}));
         // $(this.el).html("loolaknlkan");

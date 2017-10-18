@@ -229,7 +229,26 @@ var handlez = ()=>{
 
 /* ------------------------- WATCHES ------------- */
 
-var watch = ()=>{
+var watch_js = ()=>{
+  return GULP
+  .watch([
+    paths.site.src+"js/*.js"
+    ], GULP.parallel(
+      copyjs
+      ))
+}
+
+var watch_style = ()=>{
+  return GULP
+  .watch([
+    paths.site.src+"css/*.less"
+    ], GULP.parallel(
+      copycss
+      ,lessen
+      ))
+}
+
+var watch_og = ()=>{
   return GULP
   .watch([
     paths.site.src+"js/*.js"
@@ -271,7 +290,8 @@ var develop = GULP.series(
     ,fonts)
   ,GULP.parallel(
     browsersync
-    ,watch
+    ,watch_js
+    ,watch_style
     )
   );//develop
 

@@ -8,15 +8,6 @@
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, width=device-width, minimal-ui">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
  <link href="/css/leaflet.css" rel="stylesheet" type="text/css" />
-<!--
-    <link href="/css/nprogress.css" rel="stylesheet" type="text/css" />
-    <link href="/css/normalize.css" rel="stylesheet" type="text/css">
-    <link href="/css/off-canvas-menu.css" rel="stylesheet" type="text/css">
-    <link href="/css/general.css" rel="stylesheet" type="text/css">
-    <link href="/css/header.css" rel="stylesheet" type="text/css">
-    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="/css/style.css" rel="stylesheet" type="text/css">
-    -->
 
     <link href='/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
     <link href='/css/fonts-offline.css' rel='stylesheet' type='text/css'>
@@ -32,24 +23,9 @@
         <section id="cbb-header" class="columns">
             <div class="column is-one-quarter">
 
-
-<!--
-<div id="cbb-map-toggle" class="icom-bang">
-<div id="cbb-map-toggle-copy" class=""></div>
-</div>
--->
-
             </div>
             <div id="query-form" class="column is-half">search form</div>
             <div class="column is-one-quarter">
-
-
-<!--
-<div id="cbb-graphic-burst" class="icom-bang">
-<div id="cbb-graphic-copy" class="">CBB<br>Bit<br>Map</div>
-</div>
- -->
-
             </div>
             <!-- 1/4 for banner-bang -->
 </section>
@@ -93,9 +69,16 @@
         <li id="pane-home" class="cbb-main-pane hidden section"></li>
         <li id="pane-search" class="cbb-main-pane hidden section">
           <div class="columns">
-    <ul class="column is-one-half" id="search-bits"></ul>
-    <ul class="column is-one-quarter" id="search-facets-bits"></ul>
-    <ul class="column is-one-quarter" id="search-facets-tags"></ul>
+            <div class="column is-one-quarter" id="search-facets-container">
+              <h5 style="margin-bottom:.5rem;" class='title is-5'>Bits</h5>
+            <ul class="search-facets-group" id="search-facets-bits"></ul>
+              <h5 style="margin-bottom:.5rem;" class='title is-5'>Tags</h5>
+            <ul class="search-facets-group" id="search-facets-tags"></ul>
+              <h5 style="margin-bottom:.5rem;" class='title is-5'>Guests</h5>
+            <ul class="search-facets-group" id="search-facets-guests"></ul>
+          </div>
+    <ul class="column is-three-quarters" id="search-bits"></ul>
+
   </div>
   </li>
         </ul>

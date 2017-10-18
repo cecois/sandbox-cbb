@@ -16,7 +16,8 @@
 
 /*blue*/
 // @primarycolor: rgba(0, 180, 170, 100);
-@primarycolor: #5BC0DE;
+// @primarycolor: #5BC0DE;
+@primarycolor: #00d1b2;
 @primarycolor-alt: rgba(96,163,160,1);
 @primarycolor-trans: rgba(126, 223, 216, .4);
 
@@ -49,21 +50,25 @@ body{
 
 
 /* ----------------- BULMA OVERRIDES ------------------ */
+.tabs ul{
+  border-bottom:none;
+  height:15vh;
+}
+.tabs a{border-bottom:none;font-weight:600;}
 .tabs li.is-active a
 {
   color:@primarycolor;
-  border-bottom-color: @primarycolor;
+  border-bottom: solid 1px @primarycolor;
 }
-
 .tabs a:hover {
   color:@primarycolor;
   border-bottom-color: @primarycolor;
 }
 
-
 a{
   color:@primarycolor;
 }
+/* ----------------- /BULMA OVERRIDES ------------------ */
 
 .input{
   font-family:'Cabin';
@@ -98,6 +103,13 @@ a{
   margin:0;
   // top:15vh;
   // height:10vh;
+}
+
+#search-facets-container{
+  font-size:.8em;
+  .search-facets-group{
+    margin-bottom:6%;
+  }
 }
 
 #cbb-main{
