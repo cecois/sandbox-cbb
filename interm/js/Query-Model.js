@@ -7,7 +7,7 @@ var Query = Backbone.Model.extend({
 		numRows:20
 		,recordOffset:0
 		,page:1
-		,facetstring:"facet=true&facet.mincount=1&facet.field=fat_name&facet.field=tags&json.nl=arrmap"
+		,facetstring:"facet=true&facet.mincount=1&facet.field=fat_name&facet.field=tags&facet.field=guests&json.nl=arrmap"
 	}
 
 

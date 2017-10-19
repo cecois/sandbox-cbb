@@ -135,11 +135,17 @@ this["CBB"]["templates"]["bitsView-Mobile"] = Handlebars.template({"1":function(
     + ((stack1 = helpers.each.call(depth0,(depth0 != null ? depth0.rows : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
 },"useData":true});
 this["CBB"]["templates"]["bitsView"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
-    var helper;
+    var helper, alias1=helpers.helperMissing, alias2="function", alias3=container.escapeExpression;
 
-  return "<li class=\"pick\">\n<span class=\"instance\">"
-    + container.escapeExpression(((helper = (helper = helpers.instance || (depth0 != null ? depth0.instance : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"instance","hash":{},"data":data}) : helper)))
-    + "</span>\n</li>\n";
+  return "<li class=\"bit\">\n<span class=\"bit-instance\">"
+    + alias3(((helper = (helper = helpers.instance || (depth0 != null ? depth0.instance : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"instance","hash":{},"data":data}) : helper)))
+    + "</span>\n<div class=\"columns\">\n	<div style=\"\" class='column bit-data'>("
+    + alias3(((helper = (helper = helpers.bit || (depth0 != null ? depth0.bit : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"bit","hash":{},"data":data}) : helper)))
+    + " | ep."
+    + alias3(((helper = (helper = helpers.episode || (depth0 != null ? depth0.episode : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"episode","hash":{},"data":data}) : helper)))
+    + " | ~"
+    + alias3(((helper = (helper = helpers.tstart || (depth0 != null ? depth0.tstart : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"tstart","hash":{},"data":data}) : helper)))
+    + ")</div>\n</div>\n</li>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 

@@ -2,12 +2,12 @@
 var CONFIG = {
 	verbose:true
     ,dev:true
-    ,mode:"T"
+    ,mode:"33"
     ,proxy:null
     ,query:"*:*"
     ,basemap:"pencil"
-    ,index_root:"http://10.0.0.150:8983/solr/#/cbb_bits/select?"
-    ,geom_root:"http://10.0.0.150:8983/solr/#/cbb_carto/select?"
+    ,index_root:"http://10.0.0.150:8983/solr/cbb_bits/select?"
+    ,geom_root:"http://10.0.0.150:8983/solr/cbb_carto/select?"
     ,pliers:{line:999,poly:9999,point:1}
     ,default_query:"(episode:510 OR episode:511)"
 }
@@ -222,6 +222,7 @@ var appQueryView = new QueryView({
 // var appFacets = new Facets();
 var appFacetsBits = new Facets();
 var appFacetsTags = new Facets();
+var appFacetsGuests = new Facets();
 
 var appLocations = new Locations();
 var appBits = new Bits();
@@ -231,6 +232,7 @@ var appLocationsView = new LocationsView({collection:appLocations});
 // new View( { el : some_el } );
 var appFacetsBitsView = new FacetsView({el:"#search-facets-bits",collection:appFacetsBits});
 var appFacetsTagsView = new FacetsView({el:"#search-facets-tags",collection:appFacetsTags});
+var appFacetsGuestsView = new FacetsView({el:"#search-facets-guests",collection:appFacetsGuests});
 
 
 // var appConsole = new Console().set({
