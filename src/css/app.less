@@ -13,6 +13,7 @@
 
 /*blue*/
 @cbb-white: rgba(255, 255, 255, .9);
+@cbb-white-off: darken(@cbb-white,10%);
 
 /*blue*/
 // @primarycolor: rgba(0, 180, 170, 100);
@@ -79,7 +80,9 @@ a{
     // box-shadow: 0 0 0 0.125em @primarycolor;
   }
 }
-
+.cbb-title-sub{
+  color:@cbb-white-off;
+}
 #cbb-header{
   // height:10vh;
   text-align:center;
@@ -113,7 +116,7 @@ a{
   width:100%;
   padding:0;
   margin:0;
-  border-bottom: solid darken(@cbb-white,11%) 1px;
+  border-bottom: solid @cbb-white-off 1px;
   // top:15vh;
   // height:10vh;
 }
@@ -155,7 +158,7 @@ overflow:auto;
 }
 
 .cbb-bt{
-  color:darken(@cbb-white,10%);
+  color:@cbb-white-off;
   z-index:5;
   font-size:3em;
 
@@ -163,7 +166,7 @@ overflow:auto;
   cursor:pointer;
 
     &:hover{
-      color:darken(@cbb-white,20%);
+      color:darken(@cbb-white-off,20%);
     }
   }
 
@@ -173,9 +176,9 @@ overflow:auto;
     padding-left:2%;
     #cbb-bt-copy-map{
       &.down{
-        color:darken(@cbb-white,75%);
+        color:darken(@cbb-white-off,25%);
             &:hover{
-      color:lighten(@cbb-white,20%);
+      color:lighten(@cbb-white-off,25%);
     }
       }
     }
@@ -195,13 +198,13 @@ background-color:@primarycolor;
 
 #cbb-bt-random{
 &:hover{
-  background-color:darken(@cbb-white,10%);
+  background-color:@cbb-white-off;
 }
 }
 
 #cbb-bt-reset{
 &:hover{
-  background-color:darken(@cbb-white,10%);
+  background-color:@cbb-white-off;
 }
 }
 
@@ -361,7 +364,7 @@ text-shadow:
       font-size: 35.0em;
       text-align: center;
       display: block;
-      color:darken(@cbb-white,10%);
+      color:@cbb-white-off;
       position:absolute;
       left:50%;
       top:-20%;
@@ -369,7 +372,7 @@ text-shadow:
 
 .bang-inline{
   font-size:1.1em;
-  color:darken(@cbb-white,10%);
+  color:@cbb-white-off;
   position:relative;
 }
 

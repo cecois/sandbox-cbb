@@ -7,7 +7,8 @@ var StateViewPanesMenu = Backbone.View.extend({
     ,initialize: function() {
 
 
-        this.model.bind("change:slugs", this.render, this);
+        // this.model.bind("change:slugs", this.render, this);
+        this.model.bind("change", this.render, this);
         return this
         .render();
     }
