@@ -3,7 +3,7 @@ var State = Backbone.Model.extend({
         {name:"Home",slug:"home",active:'is-active'}
         ,{name:"Huh?",slug:"huh",active:null}
         ,{name:"Search",slug:"search",active:null}
-        ,{name:"Browse",slug:"browse",active:null}
+        // ,{name:"Browse",slug:"browse",active:null}
         ,{name:"Updates",slug:"updates",active:null}
         ,{name:"Support",slug:"support",active:null}
         ]
@@ -11,9 +11,20 @@ var State = Backbone.Model.extend({
     ,initialize: function(options) {
         options || (options = {});
 
+        // appBits
+        this.listenTo(appBits,'sync',this.set_bits_length)
+
         return this
     },
-    slugify: function(ss){
+    set_bits_length:function(){
+
+        console.log("borrowing this len from appbits:",appBits.length);
+        this.set({search_results_count:appBits.length})
+
+        return this
+
+    }
+    ,slugify: function(ss){
 
 // map through this.slugs, setting active:"is-active" where it matches s
 var ogs = this.get("slugs")

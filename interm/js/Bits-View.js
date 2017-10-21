@@ -13,7 +13,7 @@ var BitsView = Backbone.View.extend({
     }
     ,proxyfetch: function(){
 
-this.collection.fetch()
+      this.collection.fetch()
       return this
     }
   //   ,render: function() {
@@ -52,8 +52,14 @@ this.collection.fetch()
         //   //
         //   $(this.el).html.append('<div>divvvv</div>')
         // })
-$("#cbb-pane-menu > li[data-id='search'] a span").attr('data-badge',this.collection.length)
-        $(this.el).html(this.template({rows:this.collection.toJSON()}));
+// $("#cbb-pane-menu > li[data-id='search'] a span").attr('data-badge',this.collection.length)
+if(this.collection.length<1){
+
+  $(this.el).html(
+    "no bits for "+appQuery.querystring()
+    );
+} else {
+  $(this.el).html(this.template({rows:this.collection.toJSON()}));}
         // $(this.el).html(this.template({baselayers:this.collection.models}));
         // $(this.el).html("loolaknlkan");
 

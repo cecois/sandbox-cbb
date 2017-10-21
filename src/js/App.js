@@ -21,7 +21,7 @@ window.map = new L.Map('map',
 }).on('moveend',function(e){
     // hey not great but Route's .listenTo method wz causing a deep undefined in leafletjs
     if(typeof appRoute !== 'undefined'){
-        appRoute.up()
+        // appRoute.up()
     }
 })
 
@@ -51,6 +51,17 @@ Handlebars.registerHelper("debug", function(optionalValue) {
 
 */
 
+//http://doginthehat.com.au/2012/02/comparison-block-helper-for-handlebars-templates/
+Handlebars.registerHelper('equal', function(lvalue, rvalue, options) {
+
+    if (arguments.length < 3)
+        throw new Error("Handlebars Helper equal needs 2 parameters");
+    if( lvalue!=rvalue ) {
+        return options.inverse(this);
+    } else {
+        return options.fn(this);
+    }
+});
 
 Handlebars.registerHelper('debug', function(thing) {
     console.log(thing)
@@ -214,7 +225,7 @@ var baselayersmobile = {
 //     model: appCartoQuery
 // });
 //
-var appQuery = new Query({querystring:CONFIG.default_query});
+var appQuery = new Query({raw:CONFIG.default_query});
 var appQueryView = new QueryView({
     model: appQuery
 });
@@ -230,9 +241,9 @@ var appBitsView = new BitsView({collection:appBits});
 var appLocationsView = new LocationsView({collection:appLocations});
 
 // new View( { el : some_el } );
-var appFacetsBitsView = new FacetsView({el:"#search-facets-bits",collection:appFacetsBits});
-var appFacetsTagsView = new FacetsView({el:"#search-facets-tags",collection:appFacetsTags});
-var appFacetsGuestsView = new FacetsView({el:"#search-facets-guests",collection:appFacetsGuests});
+var appFacetsBitsView = new FacetsView({el:"#search-facets-bits",collection:appFacetsBits,type:'bit'});
+var appFacetsTagsView = new FacetsView({el:"#search-facets-tags",collection:appFacetsTags,type:'tags'});
+var appFacetsGuestsView = new FacetsView({el:"#search-facets-guests",collection:appFacetsGuests,type:'guests'});
 
 
 // var appConsole = new Console().set({

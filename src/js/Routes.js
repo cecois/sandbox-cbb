@@ -4,10 +4,10 @@ var Route = Backbone.Router.extend({
     },
     initialize: function(options) {
         options || (options={});
-        // this.listenTo(map,'moveend',this.upm)
+        this.listenTo(map,'moveend',this.upm)
         this.listenTo(appBaseLayers,'change:active',this.up)
         this.listenTo(appState,'change',this.up)
-        this.listenTo(appQuery,'change:querystring',this.up)
+        this.listenTo(appQuery,'change:raw',this.up)
         return this
     },
     upm: function(){
@@ -15,16 +15,16 @@ var Route = Backbone.Router.extend({
 
         return this
     }
-    ,up: function(){
-        return this
-        .navigate(this.url(),{trigger:true,replace:false})
-    }
+    // ,up: function(){
+    //     return this
+    //     .navigate(this.url(),{trigger:true,replace:false})
+    // }
     ,url:function(){
 
         vz=[]
         var uslug=_.findWhere(appState.get("slugs"),{active:'is-active'}).slug
         ,upage=(typeof appQuery.get("page")=='undefined')?1:appQuery.get("page")
-        ,uquer=(typeof appQuery.get("querystring") == 'undefined')?'nil':appQuery.get("querystring")
+        ,uquer=(typeof appQuery.querystring() == 'undefined')?'nil':appQuery.querystring()
         ,ublay=appBaseLayers.findWhere({active:true}).get("name")
         ,udown=(typeof appState.get("downout") == 'undefined')?'nil':appState.get("downout")
         ,uacti=(typeof appState.get("active") == 'undefined')?'nil':appState.get("active")
@@ -45,8 +45,12 @@ var Route = Backbone.Router.extend({
     }
     ,default: function(s,p,q,b,d,a,x) {
 
+
+        console.log("q in routes.default",q);
+        console.log("CONFIG.default_query in routes.default",CONFIG.default_query);
+
         var slug = (typeof s == 'undefined' || s==null)?_.findWhere(appState.get("slugs"),{active:'is-active'}).slug:s
-        ,query = (typeof q == 'undefined' || q==null)?appQuery.get("querystring"):q
+        ,query = (typeof q == 'undefined' || q==null)?CONFIG.default_query:q
         ,page = (typeof p == 'undefined' || p==null)?1:p
         ,active = (typeof a == 'undefined' || a==null)?"nil":a
         ,downout = (typeof d == 'undefined' || d==null)?"out":d
@@ -61,7 +65,7 @@ var Route = Backbone.Router.extend({
         if(appBaseLayers.findWhere({active:true}).get("name")!==b && b!==null){appBaseLayers.switch(b)}
 
             appQuery.set({
-                querystring:query
+                raw:query
                 ,page:page
             })
 

@@ -5,7 +5,7 @@ var QueryView = Backbone.View.extend({
         // "click .activity-cancel": "stfu",
     }
     ,bindings: {
-    	'input': 'querystring'
+    	'input': 'raw'
     }
     ,initialize: function() {
     	return this
@@ -15,6 +15,7 @@ var QueryView = Backbone.View.extend({
 
     	$(this.el).html(this.template(this.model.toJSON()))
 
-    	return this.stickit();
+    	return this
+        .stickit();
     }
 });

@@ -4,29 +4,32 @@ var Bits = Backbone.Collection.extend({
 
 		var u =null;
 
-		var Q = (appQuery.get("querystring")==null || appQuery.get("querystring")=='undefined')?"*:*":appQuery.get("querystring")
+		var Q = (appQuery.querystring()==null || appQuery.querystring()=='undefined')?"*:*":appQuery.querystring()
 
 		switch(CONFIG.mode) {
 			case 'T':
 
-//http://localhost:8983/solr/cbb_bits/select?q=titular&wt=json&indent=true&facet=true&facet.query=titular&facet.field=fat_name
-u = 'http://localhost:8983/solr/cbb_bits/select?indent=off&rows='+appQuery.get("numRows")+'&json.wrf=cwmccallback&wt=json&fl=tstart,_id,episode,slug_earwolf,bit,instance,location_type,location_id,created_at,updated_at,elucidation,tags&q=(holding:false) AND '+encodeURI(Q)
-+'&'+appQuery.get("facetstring")+'&facet.query='+encodeURI(Q)
-
-					// return Config.SOLRROOT+"select/?version=2.2&rows=50&indent=off&wt=json&json.wrf=cwmccallback&q=" + quQuery.get_query()
+			u = 'http://localhost:8983/solr/cbb_bits/select?indent=off&rows='+appQuery.get("numRows")+'&json.wrf=cwmccallback&wt=json&fl=tstart,_id,episode,slug_earwolf,bit,instance,location_type,location_id,created_at,updated_at,elucidation,tags&q=(holding:false) AND '+encodeURI(Q)
+			+'&'+appQuery.get("facetstring")+'&facet.query='+encodeURI(Q)
 
 
-					break;
-					default:
-					u = CONFIG.index_root+'indent=off&rows='+appQuery.get("numRows")+'&json.wrf=cwmccallback&wt=json&fl=tstart,_id,episode,slug_earwolf,bit,instance,location_type,location_id,created_at,updated_at,elucidation,tags&q=(holding:false) AND '+encodeURI(Q)
-					+'&'+appQuery.get("facetstring")+'&facet.query='+encodeURI(Q)
-				}
+			break;
+			default:
+			u = CONFIG.index_root+'indent=off&rows='+appQuery.get("numRows")+'&json.wrf=cwmccallback&wt=json&fl=tstart,_id,episode,slug_earwolf,bit,instance,location_type,location_id,created_at,updated_at,elucidation,tags&q=(holding:false) AND '+encodeURI(Q)
+			+'&'+appQuery.get("facetstring")+'&facet.query='+encodeURI(Q)
+		}
 
-				return u
-			}
-			,initialize:function(options){
-				options||(options={})
-		// this.listenTo(appState,'change:baselayer',this.switch)
+		return u
+	}
+	,initialize:function(options){
+		options||(options={})
+		this.listenTo(appQuery,'change:raw',this.up)
+	}
+	,up:function(){
+
+		appActivity.set({message:"updating bits..."})
+		return this
+		.fetch()
 	}
 	,sync: function(method, collection, options) {
 
@@ -35,7 +38,10 @@ u = 'http://localhost:8983/solr/cbb_bits/select?indent=off&rows='+appQuery.get("
 		return Backbone.sync(method, collection, options)
 	}
 	,parse: function(data) {
+
+
 		var locations = _.map(_.filter(data.response.docs,function(d){return d.bit=="Location"}),function(d){
+
 			return "cartodb_id:"+UTIL.geom_id_nudge(d.location_type,parseFloat(d.location_id),"up")
 		})
 
