@@ -24,6 +24,7 @@ var Bits = Backbone.Collection.extend({
 	,initialize:function(options){
 		options||(options={})
 		this.listenTo(appQuery,'change:raw',this.up)
+		return this
 	}
 	,up:function(){
 
@@ -73,6 +74,8 @@ var Bits = Backbone.Collection.extend({
 		})//.Map
 
 		// var fats = _.union(fat_bits,fat_tags);
+		
+		appState.set({search_results_count:data.response.docs.length})
 
 		appFacetsBits.reset(fat_bits)
 		appFacetsTags.reset(fat_tags)

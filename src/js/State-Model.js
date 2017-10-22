@@ -11,19 +11,19 @@ var State = Backbone.Model.extend({
     ,initialize: function(options) {
         options || (options = {});
 
-        // appBits
-        this.listenTo(appBits,'sync',this.set_bits_length)
+        // this.listenTo(appBits,'change',this.set_bits_length)
 
         return this
-    },
-    set_bits_length:function(){
-
-        console.log("borrowing this len from appbits:",appBits.length);
-        this.set({search_results_count:appBits.length})
-
-        return this
-
     }
+    // ,
+    // set_bits_length:function(){
+
+    //     console.log("borrowing this len from appbits:",appBits.length);
+    //     this.set({search_results_count:appBits.length})
+
+    //     return this
+
+    // }
     ,slugify: function(ss){
 
 // map through this.slugs, setting active:"is-active" where it matches s
@@ -31,8 +31,8 @@ var ogs = this.get("slugs")
 ,ns = _.map(ogs,function(s){
     if(s.slug==ss){return {name:s.name,slug:s.slug,active:"is-active"}}
         else {
-         return {name:s.name,slug:s.slug,active:null}
-     }
+           return {name:s.name,slug:s.slug,active:null}
+       }
 })//map
 this.set({slugs:ns})
 return this

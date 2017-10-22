@@ -219,18 +219,22 @@ var baselayersmobile = {
 }
 
 
-
-// var appCartoQuery = new CartoQuery();
-// var appCartoQueryView = new QueryView({
-//     model: appCartoQuery
-// });
-//
 var appQuery = new Query({raw:CONFIG.default_query});
 var appQueryView = new QueryView({
     model: appQuery
 });
 
-// var appFacets = new Facets();
+var appState = new State();
+var appStateViewDownMenu = new StateViewDownMenu({
+    model: appState
+});
+var appStateViewPanes = new StateViewPanes({
+    model: appState
+});
+var appStateViewPanesMenu = new StateViewPanesMenu({
+    model: appState
+});
+
 var appFacetsBits = new Facets();
 var appFacetsTags = new Facets();
 var appFacetsGuests = new Facets();
@@ -240,23 +244,9 @@ var appBits = new Bits();
 var appBitsView = new BitsView({collection:appBits});
 var appLocationsView = new LocationsView({collection:appLocations});
 
-// new View( { el : some_el } );
 var appFacetsBitsView = new FacetsView({el:"#search-facets-bits",collection:appFacetsBits,type:'bit'});
 var appFacetsTagsView = new FacetsView({el:"#search-facets-tags",collection:appFacetsTags,type:'tags'});
 var appFacetsGuestsView = new FacetsView({el:"#search-facets-guests",collection:appFacetsGuests,type:'guests'});
-
-
-// var appConsole = new Console().set({
-//     message: "Console. Quasi-important messages will appear here."
-// });
-// var appConsoleView = new ConsoleView({
-//     model: appConsole
-// });
-
-// var appQuerySubNav = new QuerySubNav();
-// var appQuerySubNavView = new QuerySubNavView({
-//     model: appQuerySubNav
-// });
 
 
 var states = [{
@@ -295,24 +285,10 @@ var appActivityView = new ActivityView({
     model: appActivity
 });
 
-/*var appState = new State(
-  states
-    );
-    */
-    var appState = new State();
-    var appStateViewDownMenu = new StateViewDownMenu({
-        model: appState
-    });
-    var appStateViewPanes = new StateViewPanes({
-        model: appState
-    });
-    var appStateViewPanesMenu = new StateViewPanesMenu({
-        model: appState
-    });
 
-    if(CONFIG.mode=='T'){
-        baselayers=baselayersdummified
-    } else {
+if(CONFIG.mode=='T'){
+    baselayers=baselayersdummified
+} else {
 
         // if(agent=='mobile'){
         // }else{
@@ -330,224 +306,6 @@ var appActivityView = new ActivityView({
         collection: appBaseLayers
     });
 
-// var appShares = new Shares(
-//     shares
-//     );
-// var appSharesView = new SharesView({
-//     collection: appShares
-// });
-
-/* -------------------------------------------------- INITS -----------------------  */
-
-// var appBits = new BitCollection();
-// var appCBB = new CartoCollection();
-// var appRecents = new RecentsCollection();
-
-
-// var appCBBListView = new CartoListView({
-//     collection: appCBB
-// })
-// var appBitsView = new BitsView({
-//     collection: appBits
-// })
-// var appBitsCountView = new BitsCountView({
-//     collection: appBits
-// })
-// var appBitsRecentsView = new RecentsView({
-//     collection: appRecents
-// })
-// var appCBBMapView = new CartoCollxView({
-//     collection: appCBB
-// })
-// var appCBBCountView = new CartoCollxCountView({
-//     collection: appCBB
-// })
-
-// window.appFats = new MetaFacets();
-// window.appFatTags = new FacetsTags();
-// window.appFatSlugs = new FacetsSlugs();
-// window.appFatNames = new FacetsNames();
-// window.aFTV = new FacetsView({collection:appFatTags,el:$("#facet-tags")})
-// aFTV.group="Tags"
-// window.aFNV = new FacetsView({collection:appFatNames,el:$("#facet-names")})
-// aFNV.group="Bits"
-// window.aFSV = new FacetsView({collection:appFatSlugs,el:$("#facet-slugs")})
-// aFSV.group="Episodes"
-
-// var huh = new Huh();
-// var huhV = new HuhView({
-//     model: huh
-// })
-
-// var ups = new Update();
-// var upsV = new UpdateView({
-//     model: ups
-// })
-
-// var help = new Help();
-// var helpV = new HelpView({
-//     model: help
-// })
-
-// var method = new Method();
-// var methodV = new MethodView({
-//     model: method
-// })
-
-
-/* -------------------------------------------------- Free Funcs
-function locTrigger(e, goto, active) {
-    if(verbose==true){
-        console.log("loctriggered!")
-        console.log("e:");
-        console.log(e)
-        console.log("goto:");
-        console.log(goto)
-        console.log("active:");
-        console.log(active)
-    }
-
-    if(typeof e !== 'undefined' && e !== null){
-        e.preventDefault()}
-
-        if (typeof goto == 'undefined') {
-            var goto = true
-        }
-
-        if(typeof active !== 'undefined'){
-            if(active.indexOf("point:")>=0 || active.indexOf("poly:")>=0 || active.indexOf("line:")>=0){
-                var loctype = active.split(":")[0]
-                var locid = doctorId(loctype,active.split(":")[1]);
-                activeFactory(active)
-                qstring = "location_type:"+loctype+" AND location_id:"+locid
-            } else {
-                qstring = $(e.currentTarget).attr("data-string")
-            }
-            appCartoQuery.set({rawstring:qstring})
-        }
-    }
-
-    function activeFactory(a){
-
-        if(typeof a == 'undefined' || a == null){
-
-            if(typeof activecouple !== 'undefined' && activecouple !== null){
-                var activeid = activecouple.split(":")[1]
-                var activetype = activecouple.split(":")[0]
-
-                return [activetype,activeid]}
-                else {
-                    return null
-                }
-            } else {
-                activecouple=a
-                return a
-            }
-
-        }
-
-        function urlFactory(goto,qs) {
-            if (typeof goto == 'undefined') {
-                var hel = $(".mainpanel:not('.hidden')")
-                var h = '#' + $(hel).attr("id")
-                if (h == "#undefined") {
-                    h = "#huh"
-                }
-            } else {
-                var h = goto;
-            }
-            var bbx = map.getBounds().toBBoxString();
-
-            var qs = appCartoQuery.get("urlstring")
-            var bl = appBaseLayers.findWhere({
-                active: true
-            }).get("name")
-            var fa = appCartoQuery.get("facetarray").join(",");
-
-            var url = h + "/" + qs + "/" + bbx + "/" + bl
-
-            if(typeof activecouple !== 'undefined' && activecouple !== null){
-                var ac = activeFactory();
-
-                url+="/"+ac.join(":")
-
-            }
-
-            return url
-        }
-
-        function captureState(){
-
-            // eh not great - we just troll the gui for the mainpanel that's currently showing - hope it's right!
-            var hel = $(".mainpanel:not('.hidden')")
-            var h = '#' + $(hel).attr("id")
-            var bbx = map.getBounds().toBBoxString();
-            var qs = encodeURIComponent(appCartoQuery.get("urlstring"))
-            var bl = appBaseLayers.findWhere({
-                active: true
-            }).get("name")
-
-            var fa = encodeURIComponent(appCartoQuery.get("facetarray").join(","));
-
-
-            if(typeof activecouple !== 'undefined' && activecouple !== null){
-                var ac = activeFactory();
-
-                acv=ac.join(":")
-
-            } else {
-                acv="noactive"
-            }
-            var url = "http://" + thedomain+ "/"+ h + "/" + qs + "/" + bbx + "/" + bl +"/"+acv+"/"+fa
-
-            return url
-
-        }
-
-        function processLeaf(mid, pop, geom, zoomto) {
-
-            if(typeof pop == 'undefined'){
-                var pop = true
-            }
-            if (geom == "point") {
-            // points get their own style
-            var activeStyle = markeractive
-        } else {
-            var activeStyle = lineactive
-        }
-        _.each(cbbItems._layers, function(i) {
-
-            if (i.options.seen == true) {
-                // feature clicks set them as seen - if they're set here, they're stale and we restyle them
-                if (typeof i._point == 'undefined') {
-                    // not a point, so
-                    i.setStyle(lineseen)
-                } else {
-                    i.setStyle(markerseen)
-                }
-            }
-            if (i.options.cartodb_id.toString() == mid) {
-                i.setStyle(activeStyle)
-                i.options.seen = true;
-
-                if (pop == true) {
-                    i.openPopup()
-                }
-
-                if(zoomto==true){
-                    map.fitBounds(i.getBounds())
-                }
-
-            }
-        }) //each
-    }
-    -----------------------  FREEFUNCS */
-
-    /* -------------------------------------------------- RUN! -----------------------  */
-    // cbbItems = L.geoJson().addTo(map);
-    // window.appWikiaz = new Wikiaz()
-    // appWikiaz.fetch();
-    // appRecents.fetch({reset:true});
 
     var fields = {
         "fields": [{
@@ -582,25 +340,11 @@ function locTrigger(e, goto, active) {
             "scope_and_use": "Eh. You can <a href='#recent'>query for updates</a> with it I suppose."
         }]
     }
-    // window.appSoFoz = new SolrFieldz(fields.fields);
-    // window.appSoFozView = new SolrFieldzView({
-    //     collection: appSoFoz
-    // });
 
     /* -------------------------------------------------- READY -----------------------  */
     $(document).ready(function() {
 
-    //     $("#bt-solrfields").click(function(e) {
-    //         e.preventDefault()
-    //         $("#solrfields-list").toggleClass('hidden')
-    // }) //solrfields.click
 
-    // L.control.zoom({position:'topright'}).addTo(map)
-    // new L.HistoryControl().addTo(map);
-
-    // appActivityView.stfu()
-
-    //
 }); //ready
 
     $(document).keydown(function(e) {
@@ -611,41 +355,3 @@ function locTrigger(e, goto, active) {
 
         }
     });
-
-    /* -------------------------------------------------- STRAIGHT UP FUNCS
-
-    function doctorId(type,id,updown){
-
-        if(typeof updown =='undefined' || updown==null)
-            {var updown="down"}
-
-        var cid = null
-        switch(type) {
-            case 'line':
-            if(updown=="down"){cid=Number(id)/plierline} else {cid=Number(id)*plierline}
-                break;
-            case 'poly':
-            if(updown=="down"){cid=Number(id)/plierpoly} else {cid=Number(id)*plierpoly}
-                break;
-            default:
-            cid = Number(id);
-        }
-        return cid
-    }
-    function cwmccallback(){
-        if(verbose==true){console.log("breaker breaker")}
-            if(verbose==true){console.log("------> (generic) cwmccallback")}
-        }
-
-    function puFactory(p){
-
-    // first grab the pu's container node
-    var nel = p.popup._contentNode
-
-    // and since the p obj has been affixed with the original leaflet object's model ("model") we just pass it along like so
-// but also we affix the leaflet id of the feature so we can close this mofo later (among other ops maybe)
-var pm = new Popup(p.model).set({leafletid:p.layer._leaflet_id});
-var pv = new PopupView({model:pm,el: nel})
-
-}
------------------------  */

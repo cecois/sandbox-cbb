@@ -8,7 +8,8 @@ var StateViewPanesMenu = Backbone.View.extend({
 
 
         // this.model.bind("change:slugs", this.render, this);
-        this.model.bind("change", this.render, this);
+        this.model.bind("change:search_results_count", this.render, this);
+        // this.listenTo(this.model,'change',this.render)
         return this
         .render();
     }
@@ -22,24 +23,20 @@ var StateViewPanesMenu = Backbone.View.extend({
     }
     ,render: function(){
 
+        console.log("in render of statev",this.model.get("search_results_count"));
         $(this.el).html(this.template(this.model.toJSON()));
 
 
         return this
     }
-    ,
-    rewire: function() {
-        if (CONFIG.verbose == true) {
-            console.info("------> StatesVIew --> rewire")
-        }
-        $(this.el).find('[data-toggle="tooltip"]').tooltip('destroy')
-        $(this.el).find('[data-toggle="tooltip"]').tooltip({
-            position: "right",
-            container: 'body'
-        })
+    ,rerender: function(){
+
+        console.log("in rerender of statev",this.model.get("search_results_count"));
+
+
         return this
-    },
-    reset: function() {
+    }
+    ,reset: function() {
         if (CONFIG.verbose == true) {
             console.info("------> StatesVIew --> reset")
         }

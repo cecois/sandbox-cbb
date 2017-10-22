@@ -4,7 +4,7 @@ var Route = Backbone.Router.extend({
     },
     initialize: function(options) {
         options || (options={});
-        this.listenTo(map,'moveend',this.upm)
+        this.listenTo(map,'moveend',this.up)
         this.listenTo(appBaseLayers,'change:active',this.up)
         this.listenTo(appState,'change',this.up)
         this.listenTo(appQuery,'change:raw',this.up)
@@ -15,16 +15,16 @@ var Route = Backbone.Router.extend({
 
         return this
     }
-    // ,up: function(){
-    //     return this
-    //     .navigate(this.url(),{trigger:true,replace:false})
-    // }
+    ,up: function(){
+        return this
+        .navigate(this.url(),{trigger:true,replace:false})
+    }
     ,url:function(){
 
         vz=[]
         var uslug=_.findWhere(appState.get("slugs"),{active:'is-active'}).slug
         ,upage=(typeof appQuery.get("page")=='undefined')?1:appQuery.get("page")
-        ,uquer=(typeof appQuery.querystring() == 'undefined')?'nil':appQuery.querystring()
+        ,uquer=(typeof appQuery.get("raw") == 'undefined')?'nil':appQuery.get("raw")
         ,ublay=appBaseLayers.findWhere({active:true}).get("name")
         ,udown=(typeof appState.get("downout") == 'undefined')?'nil':appState.get("downout")
         ,uacti=(typeof appState.get("active") == 'undefined')?'nil':appState.get("active")
@@ -45,9 +45,6 @@ var Route = Backbone.Router.extend({
     }
     ,default: function(s,p,q,b,d,a,x) {
 
-
-        console.log("q in routes.default",q);
-        console.log("CONFIG.default_query in routes.default",CONFIG.default_query);
 
         var slug = (typeof s == 'undefined' || s==null)?_.findWhere(appState.get("slugs"),{active:'is-active'}).slug:s
         ,query = (typeof q == 'undefined' || q==null)?CONFIG.default_query:q
