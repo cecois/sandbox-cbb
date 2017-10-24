@@ -24,11 +24,16 @@ var Bits = Backbone.Collection.extend({
 	,initialize:function(options){
 		options||(options={})
 		this.listenTo(appQuery,'change:raw',this.up)
+		this.listenTo(appQuery,'change:facets',this.up)
 		return this
 	}
 	,up:function(){
 
-		appActivity.set({message:"updating bits..."})
+		if(CONFIG.verbose == true){
+			console.log("updating bits");
+		}
+
+		// appActivity.set({message:"updating bits..."})
 		return this
 		.fetch()
 	}

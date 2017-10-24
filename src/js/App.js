@@ -21,7 +21,7 @@ window.map = new L.Map('map',
 }).on('moveend',function(e){
     // hey not great but Route's .listenTo method wz causing a deep undefined in leafletjs
     if(typeof appRoute !== 'undefined'){
-        // appRoute.up()
+        appRoute.up()
     }
 })
 
@@ -100,6 +100,22 @@ var appEpisodesView = new EpisodesView({
     collection: appEpisodes
 });
 */
+
+var states = [{
+    "name": "main",
+    "posish": "open",
+    "visible":true
+}, {
+    "name": "episodes",
+    "posish": "open",
+    "visible":true
+}, {
+    "name": "banner-bang",
+    "posish": "open",
+    "visible":true
+}
+
+]
 
 /* -------------------------------------------------- BASEMAPS -----------------------  */
 var baselayersdummified = {
@@ -249,21 +265,7 @@ var appFacetsTagsView = new FacetsView({el:"#search-facets-tags",collection:appF
 var appFacetsGuestsView = new FacetsView({el:"#search-facets-guests",collection:appFacetsGuests,type:'guests'});
 
 
-var states = [{
-    "name": "main",
-    "posish": "open",
-    "visible":true
-}, {
-    "name": "episodes",
-    "posish": "open",
-    "visible":true
-}, {
-    "name": "banner-bang",
-    "posish": "open",
-    "visible":true
-}
 
-]
 
 var shares = [
 

@@ -22,13 +22,20 @@ var Route = Backbone.Router.extend({
     ,url:function(){
 
         vz=[]
+
+        var bnds = _.map(map.getBounds().toBBoxString().split(","),function(co){
+            return Math.round(co).toFixed(1)
+        })
+
+
         var uslug=_.findWhere(appState.get("slugs"),{active:'is-active'}).slug
         ,upage=(typeof appQuery.get("page")=='undefined')?1:appQuery.get("page")
         ,uquer=(typeof appQuery.get("raw") == 'undefined')?'nil':appQuery.get("raw")
         ,ublay=appBaseLayers.findWhere({active:true}).get("name")
         ,udown=(typeof appState.get("downout") == 'undefined')?'nil':appState.get("downout")
         ,uacti=(typeof appState.get("active") == 'undefined')?'nil':appState.get("active")
-        ,ubbox=map.getBounds().toBBoxString()
+        // ,ubbox=map.getBounds().toBBoxString()
+        ,ubbox=bnds
 
 
         vz.push(uslug)

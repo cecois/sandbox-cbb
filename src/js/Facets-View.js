@@ -26,7 +26,6 @@ var FacetsView = Backbone.View.extend({
     }
     ,render: function(){
 
-      console.log("view opts",this.options.type);
 // this.subset();
 // console.log("raw collection",this.collection)
 // console.log("subset",this.subset())
