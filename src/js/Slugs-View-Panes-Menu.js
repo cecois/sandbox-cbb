@@ -1,4 +1,4 @@
-var StateViewPanesMenu = Backbone.View.extend({
+var SlugsViewPanesMenu = Backbone.View.extend({
     el: $("#cbb-pane-menu"),
     template: CBB['templates']['statesViewTpl_menu']
     ,events: {
@@ -7,8 +7,10 @@ var StateViewPanesMenu = Backbone.View.extend({
     ,initialize: function() {
 
 
-        this.model.bind("change:slugs", this.render, this);
-        this.model.bind("change:search_results_count", this.render, this);
+        // this.collection.bind("change", this.render, this);
+        this.collection.on('change reset add remove', this.render, this);
+        // this.model.bind("change:search_results_count", this.render, this);
+        this.listenTo(appState,"change:search_results_count", this.render);
         // this.model.bind("change", this.render, this);
         // this.listenTo(this.model,'change',this.render)
         return this
@@ -18,15 +20,19 @@ var StateViewPanesMenu = Backbone.View.extend({
 
         e.preventDefault()
 
-        appState.slugify($(e.currentTarget).attr("data-id"))
+        var s = $(e.currentTarget).attr("data-id");
+        console.log("switch to s in SVPm",s);
+        // appState.slugify($(e.currentTarget).attr("data-id"))
+        this.collection.switch(s)
 
         return this
     }
     ,render: function(){
 
+        console.log("in render of SVPm");
         // if(CONFIG.verbose == true){console.log("in render of statev",this.model.get("search_results_count"));}
         
-        $(this.el).html(this.template(this.model.toJSON()));
+        $(this.el).html(this.template({slugs:this.collection.toJSON()}));
 
 
         return this
@@ -39,7 +45,7 @@ var StateViewPanesMenu = Backbone.View.extend({
         return this
     }
     ,reset: function() {
-        
+
         return this.render()
     }
 });

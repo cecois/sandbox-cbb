@@ -114,7 +114,6 @@ var states = [{
     "posish": "open",
     "visible":true
 }
-
 ]
 
 /* -------------------------------------------------- BASEMAPS -----------------------  */
@@ -235,6 +234,17 @@ var baselayersmobile = {
 }
 
 
+var appSlugs = new Slugs(
+    [
+    {name:"Home",slug:"home",active:'is-active'}
+    ,{name:"Huh?",slug:"huh",active:null}
+    ,{name:"Search",slug:"search",active:null}
+        // ,{name:"Browse",slug:"browse",active:null}
+        ,{name:"Updates",slug:"updates",active:null}
+        ,{name:"Support",slug:"support",active:null}
+        ]
+        ); //new Slugs
+
 var appQuery = new Query({raw:CONFIG.default_query});
 var appQueryView = new QueryView({
     model: appQuery
@@ -244,11 +254,11 @@ var appState = new State();
 var appStateViewDownMenu = new StateViewDownMenu({
     model: appState
 });
-var appStateViewPanes = new StateViewPanes({
-    model: appState
+var appSlugsViewPanes = new SlugsViewPanes({
+    collection: appSlugs
 });
-var appStateViewPanesMenu = new StateViewPanesMenu({
-    model: appState
+var appSlugsViewPanesMenu = new SlugsViewPanesMenu({
+    collection: appSlugs
 });
 
 var appFacetsBits = new Facets();

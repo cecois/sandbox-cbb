@@ -3,6 +3,7 @@ var BitsView = Backbone.View.extend({
     el: "#search-bits",
     template: CBB['templates']['bitsView'],
     events: {
+      // "click .instance": "addfac",
     },
     // className : "mnuThumbnails",
     initialize: function() {
@@ -16,27 +17,7 @@ var BitsView = Backbone.View.extend({
       this.collection.fetch()
       return this
     }
-  //   ,render: function() {
-  //   var element = $(this.el);
-  //   // Clear potential old entries first
-  //   element.empty();
-
-  //   // Go through the collection items
-  //   this.collection.forEach(function(item) {
-
-  //     // Instantiate a PeopleItem view for each
-  //     var bitv = new BitView({
-  //       model: item
-  //     });
-
-  //     // Render the PeopleView, and append its element
-  //     // to the table
-  //     element.append(bitv.render().el);
-  //   });
-
-  //   return this;
-  // }
-  ,render: function(){
+    ,render: function(){
 
 
         // $(this.el).html(this.template({

@@ -23,15 +23,16 @@ var Bits = Backbone.Collection.extend({
 	}
 	,initialize:function(options){
 		options||(options={})
-		this.listenTo(appQuery,'change:raw',this.up)
-		this.listenTo(appQuery,'change:facets',this.up)
+		this.listenTo(appQuery,'change:raw',this.upf)
+		this.listenTo(appState,'change:facets',this.upf)
+		// this.listenTo(appQuery,'change:facets',this.upf)
 		return this
 	}
-	,up:function(){
+	,upf:function(){
 
-		if(CONFIG.verbose == true){
-			console.log("updating bits");
-		}
+		// if(CONFIG.verbose == true){
+			console.log("updating bits from facet chane...");
+		// }
 
 		// appActivity.set({message:"updating bits..."})
 		return this
@@ -59,7 +60,12 @@ var Bits = Backbone.Collection.extend({
 				{ if (!v.hasOwnProperty(key))
 					{ continue; }
 
-					return {type:'bits',facet:key,count:v[key]}}
+					var fkey = 'bit:"'+key+'"'
+					var active = (_.contains(appQuery.get("facets"),fkey))?'is-active':'';
+
+					// console.log("active for "+fkey,active);
+
+					return {type:'bits',facet:key,count:v[key],active:active}}
 		})//.Map
 
 		var fat_tags = _.map(data.facet_counts.facet_fields.tags,function(v,k){

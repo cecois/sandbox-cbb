@@ -1,32 +1,35 @@
 var State = Backbone.Model.extend({
-    defaults: {slugs:[
-        {name:"Home",slug:"home",active:'is-active'}
-        ,{name:"Huh?",slug:"huh",active:null}
-        ,{name:"Search",slug:"search",active:null}
-        // ,{name:"Browse",slug:"browse",active:null}
-        ,{name:"Updates",slug:"updates",active:null}
-        ,{name:"Support",slug:"support",active:null}
-        ]
+    defaults: {
+        facets:''
     }
     ,initialize: function(options) {
         options || (options = {});
 
-        // this.listenTo(appBits,'change',this.set_bits_length)
+        // this.listenTo(this,'change:facets',this.proxy)
 
         return this
     }
-    // ,
-    // set_bits_length:function(){
+    ,
+    facet:function(F){
 
-    //     console.log("borrowing this len from appbits:",appBits.length);
-    //     this.set({search_results_count:appBits.length})
+        var facets = this.get("facets")
+        var facetsa = facets.split(",")
 
-    //     return this
+        if(_.contains(facetsa,F)){
+            var keep = _.uniq(_.partition(facetsa,function(f){return f==fa}))[1]
+            this.set({facets:keep.join(",")})
+        } else {
+            facetsa.push(F)
+            this.set({facets:facetsa.join(",")})
+        }
 
-    // }
+
+
+        return this
+
+    }
     ,slugify: function(ss){
 
-        console.log("ss in slugify",ss);
 // map through this.slugs, setting active:"is-active" where it matches s
 var ogs = this.get("slugs")
 ,ns = _.map(ogs,function(s){

@@ -4,7 +4,7 @@ var StateViewPanes = Backbone.View.extend({
     ,initialize: function() {
 
 
-        this.model.bind("change:slugs", this.render, this);
+        // this.model.bind("change:slugs", this.render, this);
         return this
         .render();
     }
@@ -32,12 +32,12 @@ var StateViewPanes = Backbone.View.extend({
         })
 // $(this.el).find(".cbb-main-pane").
 var subel = $( ".cbb-main-pane[id='pane-"+s+"']" )
-console.log("s",s);
+
 if(s!=='search'){
     // $(subel).html("this yo subel-->"+s)
-        $(subel).html(tpl(this.model.toJSON()))
-      }
-    if($(subel).hasClass('hidden')){$(subel).removeClass('hidden')}
+    $(subel).html(tpl(this.model.toJSON()))
+}
+if($(subel).hasClass('hidden')){$(subel).removeClass('hidden')}
 
 
     return this

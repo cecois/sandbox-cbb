@@ -275,6 +275,13 @@ a {
   color: rgba(230, 230, 230, 0.9);
   position: relative;
 }
+#search-facets-bits .instance:hover {
+  cursor: pointer;
+  color: blue;
+}
+#search-facets-bits .instance.is-active {
+  color: pink;
+}
 /* --------------------------------------- MAP -------------- */
 #map {
   width: 100%;

@@ -1,21 +1,26 @@
 var Route = Backbone.Router.extend({
     routes: {
-        "(:slug)(/:page)(/:query)(/:panestate)(/:activecouple)(/:basemap)(/:bbox)(/)": "default"
+        "(:slug)(/:page)(/:query)(/:panestate)(/:activecouple)(/:basemap)(/:bbox)(/:facets)(/)": "default"
     },
     initialize: function(options) {
         options || (options={});
         this.listenTo(map,'moveend',this.up)
         this.listenTo(appBaseLayers,'change:active',this.up)
-        this.listenTo(appState,'change',this.up)
+        // this.listenTo(appState,'change',this.up)
+        // this.listenTo(appState,'change:slugs',this.up)
+        // this.listenTo(appQuery,'change:raw',this.up)
+        // this.listenTo(appState,'change:facets',this.up)
         this.listenTo(appQuery,'change:raw',this.up)
         return this
     },
-    upm: function(){
+    ups: function(){
 
-
+        console.log("ups");
         return this
     }
     ,up: function(){
+
+
         return this
         .navigate(this.url(),{trigger:true,replace:false})
     }
@@ -28,15 +33,21 @@ var Route = Backbone.Router.extend({
         })
 
 
-        var uslug=_.findWhere(appState.get("slugs"),{active:'is-active'}).slug
+        var uslug=appSlugs.active().get("slug")
         ,upage=(typeof appQuery.get("page")=='undefined')?1:appQuery.get("page")
         ,uquer=(typeof appQuery.get("raw") == 'undefined')?'nil':appQuery.get("raw")
         ,ublay=appBaseLayers.findWhere({active:true}).get("name")
         ,udown=(typeof appState.get("downout") == 'undefined')?'nil':appState.get("downout")
         ,uacti=(typeof appState.get("active") == 'undefined')?'nil':appState.get("active")
+        ,ubbox = _.map(map.getBounds().toBBoxString().split(","),function(c){
+            return Number(Math.round(c+'e5')+'e-5');
+            // return Number(Math.round(c).toFixed(4));
+        })
+        ,ufac = _.map(appState.get("facets").split(","),function(f){return encodeURI(f);}).join(",")
+        ;
         // ,ubbox=map.getBounds().toBBoxString()
-        ,ubbox=bnds
-
+        // ,ubbox=bndsjor
+        // console.log("ufac",ufac);
 
         vz.push(uslug)
         vz.push(upage)
@@ -45,21 +56,23 @@ var Route = Backbone.Router.extend({
         vz.push(udown)
         vz.push(uacti)
         vz.push(ubbox)
+        vz.push(ufac)
 
         var url = "#"+vz.join("/")
 
         return url
     }
-    ,default: function(s,p,q,b,d,a,x) {
+    ,default: function(s,p,q,b,d,a,x,f) {
 
 
-        var slug = (typeof s == 'undefined' || s==null)?_.findWhere(appState.get("slugs"),{active:'is-active'}).slug:s
+        var slug = (typeof s == 'undefined' || s==null)?appSlugs.active().get("slug"):s
         ,query = (typeof q == 'undefined' || q==null)?CONFIG.default_query:q
         ,page = (typeof p == 'undefined' || p==null)?1:p
         ,active = (typeof a == 'undefined' || a==null)?"nil":a
         ,downout = (typeof d == 'undefined' || d==null)?"out":d
         ,basemap = (typeof b == 'undefined' || b==null)?"pencil":b
-        ,bbox = (typeof x == 'undefined' || x==null)?"-112.8515625,22.105998799750566,37.44140625,57.61010702068388":x
+        ,bbox = (typeof x == 'undefined' || x==null)?"-112.851,22.105998,37.4414,57.610107":x
+        ,facets = (typeof f == 'undefined' || f==null)?'':_.map(f.split(","),function(f){ return decodeURI(f);}).join(",")
         ;
 
         if(x!==null && (typeof x!=='undfined')){
@@ -74,23 +87,27 @@ var Route = Backbone.Router.extend({
             })
 
 
-        var newslugs = _.filter(_.map(appState.get("slugs"),function(s){
+    //     var newslugs = _.filter(_.map(appState.get("slugs"),function(s){
 
 
-            if(typeof s !== 'undefined'){
-                var active = (s.slug == slug)?'is-active':null;
-                return {name:s.name,slug:s.slug,active:active}
-        }//if.undefined
+    //         if(typeof s !== 'undefined'){
+    //             var active = (s.slug == slug)?'is-active':null;
+    //             return {name:s.name,slug:s.slug,active:active}
+    //     }//if.undefined
 
-    })
-        ,function(s){return (typeof s) !== 'undefined'})//filter;
+    // })
+    //     ,function(s){return (typeof s) !== 'undefined'})//filter;
 //newslugs
+console.log("slug b4 switch",slug);
+
+appSlugs.switch(slug)
 
 appState.set({
     downout:downout
     ,active:active
             // ,slug:slug
-            ,slugs:newslugs
+            ,facets:facets
+            // ,slugs:newslugs
         })
 
 

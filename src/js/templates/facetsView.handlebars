@@ -1,5 +1,5 @@
 {{#each facets}}
 <li class="pick">
-<span data-id="{{../this.type}}" class="instance">{{facet}} ({{count}})</span>
+<span data-type="{{../this.type}}" data-id="{{facet}}" class="instance {{active}}">{{facet}} ({{count}})</span>
 </li>
 {{/each}}

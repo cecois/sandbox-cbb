@@ -311,9 +311,13 @@ this["CBB"]["templates"]["facetView"] = Handlebars.template({"1":function(contai
 this["CBB"]["templates"]["facetsView"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var helper, alias1=container.escapeExpression, alias2=helpers.helperMissing, alias3="function";
 
-  return "<li class=\"pick\">\n<span data-id=\""
+  return "<li class=\"pick\">\n<span data-type=\""
     + alias1(container.lambda((depths[1] != null ? depths[1].type : depths[1]), depth0))
-    + "\" class=\"instance\">"
+    + "\" data-id=\""
+    + alias1(((helper = (helper = helpers.facet || (depth0 != null ? depth0.facet : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(depth0,{"name":"facet","hash":{},"data":data}) : helper)))
+    + "\" class=\"instance "
+    + alias1(((helper = (helper = helpers.active || (depth0 != null ? depth0.active : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(depth0,{"name":"active","hash":{},"data":data}) : helper)))
+    + "\">"
     + alias1(((helper = (helper = helpers.facet || (depth0 != null ? depth0.facet : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(depth0,{"name":"facet","hash":{},"data":data}) : helper)))
     + " ("
     + alias1(((helper = (helper = helpers.count || (depth0 != null ? depth0.count : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(depth0,{"name":"count","hash":{},"data":data}) : helper)))

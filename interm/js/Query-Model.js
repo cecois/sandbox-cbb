@@ -5,13 +5,15 @@ var Query = Backbone.Model.extend({
 		// querystring:"*:*"
 		// querystring:null
 		numRows:20
-		,facets:[]
 		,recordOffset:0
 		,page:1
 		,facetstring:"&facet=true&facet.mincount=1&facet.field=fat_name&facet.field=tags&facet.field=guests&json.nl=arrmap"
 	}
 	,querystring:function(){
-		var facetadd = (this.get("facets").length>0)?" AND ("+this.get("facets").join(" AND ")+")":'';
+		var facetadd = (
+			appState.get("facets").indexOf(",")>=0
+			// appState.get("facets").split(",").length>0
+			)?" AND ("+appState.get("facets").split(",").join(" AND ")+")":'';
 		return this.get("raw")+facetadd+this.get("facetstring");
 	}
 
