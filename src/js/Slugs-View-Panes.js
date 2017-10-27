@@ -21,8 +21,6 @@ var SlugsViewPanes = Backbone.View.extend({
         // var s = _.findWhere(this.model.get("slugs"),{active:"is-active"}).slug
         var s = this.collection.active().get("slug")
 
-        console.log("s in SVP",s);
-
         var tpl = null;
         tpl=CBB['templates']['0-'+s]
 

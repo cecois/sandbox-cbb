@@ -6,7 +6,7 @@ var Route = Backbone.Router.extend({
         options || (options={});
         this.listenTo(map,'moveend',this.up)
         this.listenTo(appBaseLayers,'change:active',this.up)
-        // this.listenTo(appState,'change',this.up)
+        this.listenTo(appSlugs,'reset',this.up)
         // this.listenTo(appState,'change:slugs',this.up)
         // this.listenTo(appQuery,'change:raw',this.up)
         // this.listenTo(appState,'change:facets',this.up)
@@ -15,7 +15,6 @@ var Route = Backbone.Router.extend({
     },
     ups: function(){
 
-        console.log("ups");
         return this
     }
     ,up: function(){
@@ -47,8 +46,7 @@ var Route = Backbone.Router.extend({
         ;
         // ,ubbox=map.getBounds().toBBoxString()
         // ,ubbox=bndsjor
-        // console.log("ufac",ufac);
-
+        
         vz.push(uslug)
         vz.push(upage)
         vz.push(uquer)
@@ -64,7 +62,7 @@ var Route = Backbone.Router.extend({
     }
     ,default: function(s,p,q,b,d,a,x,f) {
 
-
+        
         var slug = (typeof s == 'undefined' || s==null)?appSlugs.active().get("slug"):s
         ,query = (typeof q == 'undefined' || q==null)?CONFIG.default_query:q
         ,page = (typeof p == 'undefined' || p==null)?1:p
@@ -98,7 +96,6 @@ var Route = Backbone.Router.extend({
     // })
     //     ,function(s){return (typeof s) !== 'undefined'})//filter;
 //newslugs
-console.log("slug b4 switch",slug);
 
 appSlugs.switch(slug)
 

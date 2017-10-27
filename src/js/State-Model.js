@@ -10,20 +10,22 @@ var State = Backbone.Model.extend({
         return this
     }
     ,
-    facet:function(F){
+    facetArray: function(){
+
+        var A = [];
+        if(this.get("facets").indexOf(",")>0){
+            A=this.get("facets").split(",")
+        } else if(this.get("facets")!==""){
+            A.push(this.get("facets"))
+        }
+        return A;
+    }
+    ,facet:function(F){
 
         var facets = this.get("facets")
-        var facetsa = facets.split(",")
-
-        if(_.contains(facetsa,F)){
-            var keep = _.uniq(_.partition(facetsa,function(f){return f==fa}))[1]
-            this.set({facets:keep.join(",")})
-        } else {
-            facetsa.push(F)
-            this.set({facets:facetsa.join(",")})
-        }
-
-
+        console.log("facets",facets);
+        
+        
 
         return this
 

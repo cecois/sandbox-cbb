@@ -9,7 +9,7 @@ var CONFIG = {
     ,index_root:"http://10.0.0.150:8983/solr/cbb_bits/select?"
     ,geom_root:"http://10.0.0.150:8983/solr/cbb_carto/select?"
     ,pliers:{line:999,poly:9999,point:1}
-    ,default_query:"(episode:510 OR episode:511)"
+    ,default_query:"(episode:350 OR episode:351)"
 }
 
 window.map = new L.Map('map',
@@ -236,12 +236,12 @@ var baselayersmobile = {
 
 var appSlugs = new Slugs(
     [
-    {name:"Home",slug:"home",active:'is-active'}
-    ,{name:"Huh?",slug:"huh",active:null}
-    ,{name:"Search",slug:"search",active:null}
-        // ,{name:"Browse",slug:"browse",active:null}
-        ,{name:"Updates",slug:"updates",active:null}
-        ,{name:"Support",slug:"support",active:null}
+    {name:"Home",slug:"home",active:false}
+    ,{name:"Huh?",slug:"huh",active:false}
+    ,{name:"Search",slug:"search",active:'is-active'}
+        // ,{name:"Browse",slug:"browse",active:false}
+        ,{name:"Updates",slug:"updates",active:false}
+        ,{name:"Support",slug:"support",active:false}
         ]
         ); //new Slugs
 
@@ -254,12 +254,7 @@ var appState = new State();
 var appStateViewDownMenu = new StateViewDownMenu({
     model: appState
 });
-var appSlugsViewPanes = new SlugsViewPanes({
-    collection: appSlugs
-});
-var appSlugsViewPanesMenu = new SlugsViewPanesMenu({
-    collection: appSlugs
-});
+
 
 var appFacetsBits = new Facets();
 var appFacetsTags = new Facets();
@@ -269,6 +264,13 @@ var appLocations = new Locations();
 var appBits = new Bits();
 var appBitsView = new BitsView({collection:appBits});
 var appLocationsView = new LocationsView({collection:appLocations});
+
+var appSlugsViewPanes = new SlugsViewPanes({
+    collection: appSlugs
+});
+var appSlugsViewPanesMenu = new SlugsViewPanesMenu({
+    collection: appSlugs
+});
 
 var appFacetsBitsView = new FacetsView({el:"#search-facets-bits",collection:appFacetsBits,type:'bit'});
 var appFacetsTagsView = new FacetsView({el:"#search-facets-tags",collection:appFacetsTags,type:'tags'});

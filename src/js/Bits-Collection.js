@@ -2,21 +2,20 @@ var Bits = Backbone.Collection.extend({
 	model:Bit
 	,url:function(){
 
-		var u =null;
+		var Q = appQuery.querystring()
 
-		var Q = (appQuery.querystring()==null || appQuery.querystring()=='undefined')?"*:*":appQuery.querystring()
+		var u =null;
 
 		switch(CONFIG.mode) {
 			case 'T':
-
-			u = 'http://localhost:8983/solr/cbb_bits/select?indent=off&rows='+appQuery.get("numRows")+'&json.wrf=cwmccallback&wt=json&fl=tstart,_id,episode,slug_earwolf,bit,instance,location_type,location_id,created_at,updated_at,elucidation,tags&q=(holding:false) AND '+encodeURI(Q)
-			+'&'+appQuery.get("facetstring")+'&facet.query='+encodeURI(Q)
-
-
+			u = 'http://localhost:8983/solr/cbb_bits/select?indent=off&rows='+appQuery.get("numRows")+'&json.wrf=cwmccallback&wt=json&fl=tstart,_id,episode,slug_earwolf,bit,instance,location_type,location_id,created_at,updated_at,elucidation,tags&q='
+			+encodeURI(Q);
 			break;
+
 			default:
-			u = CONFIG.index_root+'indent=off&rows='+appQuery.get("numRows")+'&json.wrf=cwmccallback&wt=json&fl=tstart,_id,episode,slug_earwolf,bit,instance,location_type,location_id,created_at,updated_at,elucidation,tags&q=(holding:false) AND '+encodeURI(Q)
-			+'&'+appQuery.get("facetstring")+'&facet.query='+encodeURI(Q)
+			u = CONFIG.index_root+'indent=off&rows='+appQuery.get("numRows")+'&json.wrf=cwmccallback&wt=json&fl=tstart,_id,episode,slug_earwolf,bit,instance,location_type,location_id,created_at,updated_at,elucidation,tags&q='
+			+encodeURI(Q);
+			break;
 		}
 
 		return u
@@ -31,7 +30,7 @@ var Bits = Backbone.Collection.extend({
 	,upf:function(){
 
 		// if(CONFIG.verbose == true){
-			console.log("updating bits from facet chane...");
+			console.log("updating bits from upf...");
 		// }
 
 		// appActivity.set({message:"updating bits..."})
@@ -42,6 +41,7 @@ var Bits = Backbone.Collection.extend({
 
 		options.dataType = "jsonp";
 		options.jsonpCallback = 'cwmccallback';
+
 		return Backbone.sync(method, collection, options)
 	}
 	,parse: function(data) {
@@ -61,7 +61,8 @@ var Bits = Backbone.Collection.extend({
 					{ continue; }
 
 					var fkey = 'bit:"'+key+'"'
-					var active = (_.contains(appQuery.get("facets"),fkey))?'is-active':'';
+					// var active = (_.contains(appState.get("facets"),fkey))?'is-active':'';
+					var active = (_.contains(appState.facetArray(),fkey))?'is-active':'';
 
 					// console.log("active for "+fkey,active);
 

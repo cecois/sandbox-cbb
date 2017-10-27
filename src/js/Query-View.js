@@ -3,6 +3,7 @@ var QueryView = Backbone.View.extend({
 	,template: CBB['templates']['queryViewTpl']
 	,events: {
         // "click .activity-cancel": "stfu",
+        "click #cbb-bt-search": 'set'
     }
     ,bindings: {
     	'input': 'raw'
@@ -10,6 +11,15 @@ var QueryView = Backbone.View.extend({
     ,initialize: function() {
     	return this
     	.render()
+    },
+    set: function(e){
+
+        console.log(e);
+
+        this.model.set({raw:"episode:200"})
+
+        return this
+
     },
     render: function(){
 

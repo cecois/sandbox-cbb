@@ -73,12 +73,6 @@ a {
   margin: 0;
   border-bottom: solid rgba(230, 230, 230, 0.9) 1px;
 }
-#search-facets-container {
-  font-size: .8em;
-}
-#search-facets-container .search-facets-group {
-  margin-bottom: 6%;
-}
 #cbb-main {
   overflow: auto;
   background-color: rgba(255, 255, 255, 0.9);
@@ -163,7 +157,6 @@ a {
   letter-spacing: -1px;
   line-height: 32px;
   text-align: center;
-  text-shadow: 2px 2px 0 #f0c60c, 5px 5px 0 #5c6f68, 7px 7px 0 #5c6f68, 9px 9px 0 #5c6f68, 11px 11px 0 #5c6f68, 13px 13px 0 #f0c60c;
   transform: rotate(40deg);
   -webkit-transform: rotate(40deg);
 }
@@ -239,7 +232,7 @@ a {
   background-color: transparent;
 }
 .leaflet-control-container .leaflet-control {
-  box-shadow: 0 0 2px 2px #f0c60c;
+  box-shadow: 0 0 2px 2px #011E36;
   background-color: transparent;
 }
 .leaflet-control-container .leaflet-control .leaflet-disabled {
@@ -275,12 +268,22 @@ a {
   color: rgba(230, 230, 230, 0.9);
   position: relative;
 }
-#search-facets-bits .instance:hover {
-  cursor: pointer;
-  color: blue;
+.search-facets-group {
+  margin-bottom: 6%;
+  color: #011E36;
 }
-#search-facets-bits .instance.is-active {
-  color: pink;
+.search-facets-group .pick {
+  line-height: 1;
+}
+.search-facets-group .pick .instance {
+  font-size: .7em;
+}
+.search-facets-group .pick .instance:hover {
+  cursor: pointer;
+  color: #00d1b2;
+}
+.search-facets-group .pick .instance.is-active {
+  color: #ff8000;
 }
 /* --------------------------------------- MAP -------------- */
 #map {
