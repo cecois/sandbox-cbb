@@ -22,10 +22,22 @@ var State = Backbone.Model.extend({
     }
     ,facet:function(F){
 
-        var facets = this.get("facets")
-        console.log("facets",facets);
+        var FA = this.facetArray()
+        console.log("before",FA);
+
+
+        console.log("checking...");
+        console.log(_.contains(FA,F));
+
+        if(_.contains(FA,F)){
+            this.set({facets:_.without(FA,F).join(",")})
+        } else {
+            FA.push(F)
+            this.set({facets:FA.join(",")});
+        }
         
-        
+        console.log("now?");
+        console.log(this.facetArray());
 
         return this
 
@@ -37,8 +49,8 @@ var ogs = this.get("slugs")
 ,ns = _.map(ogs,function(s){
     if(s.slug==ss){return {name:s.name,slug:s.slug,active:"is-active"}}
         else {
-         return {name:s.name,slug:s.slug,active:null}
-     }
+           return {name:s.name,slug:s.slug,active:null}
+       }
 })//map
 this.set({slugs:ns})
 return this
