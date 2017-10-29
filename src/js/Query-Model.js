@@ -9,11 +9,16 @@ var Query = Backbone.Model.extend({
 		,page:1
 		// ,facetstring:"&facet=true&facet.mincount=1&facet.field=fat_name&facet.field=tags&facet.field=guests&json.nl=arrmap"
 		,query_root:'indent=off&rows=20&facet=true&facet.mincount=1&json.wrf=cwmccallback&wt=json&fl=tstart,_id,episode,slug_earwolf,bit,instance,location_type,location_id,created_at,updated_at,elucidation,tags'
+		+'&facet.field=tags'
+		+'&facet.field=guests'
+		+'&facet.field=fat_name'
+		+'&json.nl=arrmap'
+		+'&facet.field={!ex=bitf}fat_name'
+		+'&facet.field={!ex=tagsf}tags'
+		+'&facet.field={!ex=guestsf}guests'
 		// ,facetstring:'&facet=true&facet.mincount=1'
 		// +'&facet.field=fat_name'
-		+'&facet.field=tags&facet.field=guests&json.nl=arrmap'
 		// +'&facet.query='
-		+'&facet.field={!ex=bitf}fat_name'
 		// +'&facet.field={!ex=tagsf}tags'
 		// +'&facet.field={!ex=guestsf}guests'
 
@@ -42,24 +47,45 @@ var Query = Backbone.Model.extend({
 
 
 		var Q1 = this.get("query_root")+'&q='+this.get("raw");
-		// var FQ1 = '&fq='+Q1
-		var Q2 = this.get("raw")+facetadd;
+
+		var fqz = _.map(A,function(a){
+
+			var fqn = null
+			switch (a.split(":")[0]) {
+				case "bit":
+				fqn = "fat_name"
+				break;
+				default:
+				fqn=a.split(":")[0]
+				break;
+			}
+
+			return 'fq={!tag='+fqn+'f}'+a
+		})
+
+		// var FQ1 = '&fq={!tag=bitf}bit:Location'
+		var FQ = '&'+fqz.join("&")
+		//var FQ2 = &fq={!tag%3Dtagsf}&fq={!tag%3Dguestsf}'
+		var Q2 = Q1+facetadd+FQ
+		// +FQ1;
 		// var FQ2 = '&fq={!tag=bitf}'+facetadd
-		var Q3 = Q1
+		// var Q3 = Q1
 		// +FQ1
 		// +FQ2
 		// 
 		
 		// console.log("ideal:");
-		// console.log('&q=episode:333&fq={!tag=bitf}bit:Location&fq=episode:333&rows=0&wt=json&indent=true&facet=true&facet.mincount=1&facet.field={!ex=bitf}bit');
+		// &q=episode:333
+		// &fq={!tag=bitf}bit:Location&fq=episode:333&rows=0&wt=json&indent=true&facet=true&facet.mincount=1&facet.field={!ex=bitf}bit');
+		// 
 
 		// console.log("facetadd:",facetadd);
-		// console.log("Q1:",Q1);
-		// console.log("Q2:",Q2);
-		console.log("Q3:",Q3);
+		console.log("Q1:",Q1);
+		console.log("FQ:",FQ);
+		console.log("Q2:",Q2);
 
 		// return this.get("raw")+facetadd+this.get("facetstring");
-		return Q3;
+		return Q2;
 		// return '&q=episode:333&fq={!tag=bitf}bit:Location&fq=episode:333&rows=0&wt=json&indent=true&facet=true&facet.mincount=1&facet.field={!ex=bitf}bit';
 
 	}

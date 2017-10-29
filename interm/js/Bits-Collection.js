@@ -10,13 +10,15 @@ var Bits = Backbone.Collection.extend({
 			case 'T':
 			u = 'http://localhost:8983/solr/cbb_bits/select?'
 			// indent=off&rows='+appQuery.get("numRows")+'&json.wrf=cwmccallback&wt=json&fl=tstart,_id,episode,slug_earwolf,bit,instance,location_type,location_id,created_at,updated_at,elucidation,tags&q='
-			+encodeURI(Q);
+			// +encodeURI(Q);
+			+Q;
 			break;
 
 			default:
 			u = CONFIG.index_root
 			// +'indent=off&rows='+appQuery.get("numRows")+'&json.wrf=cwmccallback&wt=json&fl=tstart,_id,episode,slug_earwolf,bit,instance,location_type,location_id,created_at,updated_at,elucidation,tags&q='
-			+encodeURI(Q);
+			// +encodeURI(Q);
+			+Q;
 			break;
 		}
 
