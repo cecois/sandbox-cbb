@@ -135,17 +135,21 @@ this["CBB"]["templates"]["bitsView-Mobile"] = Handlebars.template({"1":function(
     + ((stack1 = helpers.each.call(depth0,(depth0 != null ? depth0.rows : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
 },"useData":true});
 this["CBB"]["templates"]["bitsView"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
-    var helper, alias1=helpers.helperMissing, alias2="function", alias3=container.escapeExpression;
+    var stack1, alias1=container.lambda, alias2=container.escapeExpression;
 
-  return "<li class=\"bit\">\n<span class=\"bit-instance\">"
-    + alias3(((helper = (helper = helpers.instance || (depth0 != null ? depth0.instance : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"instance","hash":{},"data":data}) : helper)))
+  return "<li class=\"bit\">\n	"
+    + ((stack1 = (helpers.equal || (depth0 && depth0.equal) || helpers.helperMissing).call(depth0,((stack1 = (depth0 != null ? depth0._source : depth0)) != null ? stack1.bit : stack1),"Location",{"name":"equal","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\n<span class=\"bit-instance\">"
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0._source : depth0)) != null ? stack1.instance : stack1), depth0))
     + "</span>\n<div class=\"columns\">\n	<div style=\"\" class='column bit-data'>("
-    + alias3(((helper = (helper = helpers.bit || (depth0 != null ? depth0.bit : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"bit","hash":{},"data":data}) : helper)))
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0._source : depth0)) != null ? stack1.bit : stack1), depth0))
     + " | ep."
-    + alias3(((helper = (helper = helpers.episode || (depth0 != null ? depth0.episode : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"episode","hash":{},"data":data}) : helper)))
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0._source : depth0)) != null ? stack1.episode : stack1), depth0))
     + " | ~"
-    + alias3(((helper = (helper = helpers.tstart || (depth0 != null ? depth0.tstart : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"tstart","hash":{},"data":data}) : helper)))
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0._source : depth0)) != null ? stack1.tstart : stack1), depth0))
     + ")</div>\n</div>\n</li>\n";
+},"2":function(container,depth0,helpers,partials,data) {
+    return "<i class=\"fa fa-map-marker\"/>";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 

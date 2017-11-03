@@ -2,11 +2,12 @@
 var CONFIG = {
 	verbose:true
     ,dev:true
-    ,mode:"33"
+    ,mode:"T"
     ,proxy:null
     ,query:"*:*"
     ,basemap:"pencil"
-    ,index_root:"http://10.0.0.150:8983/solr/cbb_bits/select?"
+    // ,index_root:"http://10.0.0.150:8983/solr/cbb_bits/select?"
+    ,index_root:"http://milleria.org:9200/cbb/_search?"
     ,geom_root:"http://10.0.0.150:8983/solr/cbb_carto/select?"
     ,pliers:{line:999,poly:9999,point:1}
     // ,default_query:"(episode:350 OR episode:351)"

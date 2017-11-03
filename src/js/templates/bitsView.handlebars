@@ -1,8 +1,9 @@
 {{#each rows}}
 <li class="bit">
-<span class="bit-instance">{{instance}}</span>
+	{{#equal _source.bit 'Location'}}<i class="fa fa-map-marker"/>{{/equal}}
+<span class="bit-instance">{{_source.instance}}</span>
 <div class="columns">
-	<div style="" class='column bit-data'>({{bit}} | ep.{{episode}} | ~{{tstart}})</div>
+	<div style="" class='column bit-data'>({{_source.bit}} | ep.{{_source.episode}} | ~{{_source.tstart}})</div>
 </div>
 </li>
 {{/each}}

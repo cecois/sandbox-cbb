@@ -25,7 +25,76 @@ var Query = Backbone.Model.extend({
 		// &facet=true&facet.mincount=1&facet.field=fat_name&facet.field=tags&facet.field=guests&json.nl=arrmap
 		// q=episode%3A333&fq={!tag%3Dbitf}bit%3ALocation&fq=episode%3A333&rows=0&wt=json&indent=true&facet=true&facet.mincount=1&facet.field={!ex=bitf}bit
 	}
-	,querystring:function(){
+	,query_primitive:function(){
+
+		return {
+			"query_string" : {
+				"default_operator" : "AND",
+				"query" : this.get("raw")
+			}
+		}
+
+		return null
+
+	}
+	,queryobj:function(){
+
+
+		return {
+			"query": this.query_primitive(),
+			"aggregations": {
+				"all_bits": {
+					"global": {},
+					"aggregations": {
+						"bits": {
+							"filter": {
+								"bool": {"must":[
+								{
+									"terms": {"episode": ["333"]}
+								}
+								]}
+							},
+							"aggregations": {
+								"filtered_bits": {
+									"terms": {"field": "bit.keyword"}
+								}
+							}
+						},
+						"tags": {
+							"filter": {
+								"bool": {"must":[
+								{
+									"terms": {"episode": ["333"]}
+								}
+								]}
+							},
+							"aggregations": {
+								"filtered_tags": {
+									"terms": {"field": "tags.comma_del"}
+								}
+							}
+						},
+						"guests": {
+							"filter": {
+								"bool": {"must":[
+								{
+									"terms": {"episode": ["333"]}
+								}
+								]}
+							},
+							"aggregations": {
+								"filtered_guests": {
+									"terms": {"field": "episode_guests.comma_del"}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+	}
+	,querystringSOLR:function(){
 		
 
 		// var facetadd = (appState.get("facets").indexOf(",")>=0)?" AND ("+appState.get("facets").split(",").join(" AND ")+")":'';
@@ -46,27 +115,16 @@ var Query = Backbone.Model.extend({
 
 
 
+		// http://10.0.0.150:8983/solr/cbb_bits/select?q=episode:333
 		var Q1 = this.get("query_root")+'&q='+this.get("raw");
+		// &fq=episode:333
 
-		var fqz = _.map(A,function(a){
-
-			var fqn = null
-			switch (a.split(":")[0]) {
-				case "bit":
-				fqn = "fat_name"
-				break;
-				default:
-				fqn=a.split(":")[0]
-				break;
-			}
-
-			return 'fq={!tag='+fqn+'f}'+a
-		})
 
 		// var FQ1 = '&fq={!tag=bitf}bit:Location'
-		var FQ = '&'+fqz.join("&")
+		// var FQ = '&'+fqz.join("&")
 		//var FQ2 = &fq={!tag%3Dtagsf}&fq={!tag%3Dguestsf}'
-		var Q2 = Q1+facetadd+FQ
+		var Q2 = Q1+facetadd
+		// +FQ
 		// +FQ1;
 		// var FQ2 = '&fq={!tag=bitf}'+facetadd
 		// var Q3 = Q1
@@ -74,19 +132,21 @@ var Query = Backbone.Model.extend({
 		// +FQ2
 		// 
 		
-		// console.log("ideal:");
-		// &q=episode:333
-		// &fq={!tag=bitf}bit:Location&fq=episode:333&rows=0&wt=json&indent=true&facet=true&facet.mincount=1&facet.field={!ex=bitf}bit');
-		// 
+		// WORKS:
+		// http://10.0.0.150:8983/solr/cbb_bits/select?q=episode:333
+		// &fq=episode:333
+		// &rows=0
+		// &wt=json
+		// &indent=true
+		// &facet=true
+		// &facet.mincount=1
+		// &facet.field={!ex=bitf}fat_name
 
-		// console.log("facetadd:",facetadd);
-		console.log("Q1:",Q1);
-		console.log("FQ:",FQ);
-		console.log("Q2:",Q2);
+		// console.log("Q1:",Q1);
+		// console.log("FQ:",FQ);
+		// console.log("Q2:",Q2);
 
-		// return this.get("raw")+facetadd+this.get("facetstring");
 		return Q2;
-		// return '&q=episode:333&fq={!tag=bitf}bit:Location&fq=episode:333&rows=0&wt=json&indent=true&facet=true&facet.mincount=1&facet.field={!ex=bitf}bit';
 
 	}
 
