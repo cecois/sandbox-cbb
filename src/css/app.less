@@ -101,14 +101,30 @@ a{
   margin:0;
   // height:15vh;
 }
+
+.facet-type{
+  text-transform: initial;
+}
+
 #search-bits{
 .bit{
-  .fa{color:@primarycolor; .copy-shadow}
+  .fa{
+    .copy-shadow;
+    color:@primarycolor;
+
+&:hover{
+  cursor:pointer;
+  color:darken(@primarycolor,25%);
+}
+  }
   margin-bottom:1%;
   .bit-instance{
     font-weight:600;
   }
   .bit-data{
+    span{
+      cursor:default;
+    }
     padding-left:5%;
     font-size:.7em;
   }

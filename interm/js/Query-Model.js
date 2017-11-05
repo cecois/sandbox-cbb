@@ -8,14 +8,14 @@ var Query = Backbone.Model.extend({
 		// ,numRows:20
 		,page:1
 		// ,facetstring:"&facet=true&facet.mincount=1&facet.field=fat_name&facet.field=tags&facet.field=guests&json.nl=arrmap"
-		,query_root:'indent=off&rows=20&facet=true&facet.mincount=1&json.wrf=cwmccallback&wt=json&fl=tstart,_id,episode,slug_earwolf,bit,instance,location_type,location_id,created_at,updated_at,elucidation,tags'
-		+'&facet.field=tags'
-		+'&facet.field=guests'
-		+'&facet.field=fat_name'
-		+'&json.nl=arrmap'
-		+'&facet.field={!ex=bitf}fat_name'
-		+'&facet.field={!ex=tagsf}tags'
-		+'&facet.field={!ex=guestsf}guests'
+		// ,query_root:'indent=off&rows=20&facet=true&facet.mincount=1&json.wrf=cwmccallback&wt=json&fl=tstart,_id,episode,slug_earwolf,bit,instance,location_type,location_id,created_at,updated_at,elucidation,tags'
+		// +'&facet.field=tags'
+		// +'&facet.field=guests'
+		// +'&facet.field=fat_name'
+		// +'&json.nl=arrmap'
+		// +'&facet.field={!ex=bitf}fat_name'
+		// +'&facet.field={!ex=tagsf}tags'
+		// +'&facet.field={!ex=guestsf}guests'
 		// ,facetstring:'&facet=true&facet.mincount=1'
 		// +'&facet.field=fat_name'
 		// +'&facet.query='
@@ -25,77 +25,93 @@ var Query = Backbone.Model.extend({
 		// &facet=true&facet.mincount=1&facet.field=fat_name&facet.field=tags&facet.field=guests&json.nl=arrmap
 		// q=episode%3A333&fq={!tag%3Dbitf}bit%3ALocation&fq=episode%3A333&rows=0&wt=json&indent=true&facet=true&facet.mincount=1&facet.field={!ex=bitf}bit
 	}
-	,query_primitive:function(){
+	,query_facetadd:function(){
+
+		var A = appQueryFacets.facetArray();
+
+		var facetadd=(A.length>0)?' AND ('+A.join(" AND ")+")":'';
+		
+		return facetadd;
+	}
+	,query_primitive:function(which){
+
+		var fac = (typeof which == 'undefined' || which == null)?'':this.query_facetadd();
 
 		return {
 			"query_string" : {
 				"default_operator" : "AND",
-				"query" : this.get("raw")
+				"query" : this.get("raw")+fac
 			}
 		}
-
-		return null
 
 	}
 	,queryobj:function(){
 
-
-		return {
-			"query": this.query_primitive(),
-			"aggregations": {
-				"all_bits": {
-					"global": {},
-					"aggregations": {
-						"bits": {
-							"filter": {
-								"bool": {"must":[
-								{
-									"terms": {"episode": ["333"]}
-								}
-								]}
-							},
-							"aggregations": {
-								"filtered_bits": {
-									"terms": {"field": "bit.keyword"}
-								}
-							}
-						},
-						"tags": {
-							"filter": {
-								"bool": {"must":[
-								{
-									"terms": {"episode": ["333"]}
-								}
-								]}
-							},
-							"aggregations": {
-								"filtered_tags": {
-									"terms": {"field": "tags.comma_del"}
-								}
-							}
-						},
-						"guests": {
-							"filter": {
-								"bool": {"must":[
-								{
-									"terms": {"episode": ["333"]}
-								}
-								]}
-							},
-							"aggregations": {
-								"filtered_guests": {
-									"terms": {"field": "episode_guests.comma_del"}
-								}
-							}
-						}
-					}
+		var bits = {
+			"filter":this.query_primitive()
+			,"aggregations": {
+				"filtered_bits": {
+					"terms": {"field": "bit.keyword"}
 				}
 			}
 		}
 
+		var guests = {
+			"filter": this.query_primitive()
+			,"aggregations": {
+				"filtered_guests": {
+					"terms": {"field": "episode_guests.comma_del"}
+				}
+			}
+		}
+
+		var tags = {
+			"filter": this.query_primitive()
+			,"aggregations": {
+				"filtered_tags": {
+					"terms": {"field": "tags.comma_del"}
+				}
+			}
+		}
+
+		var episodes = {
+			"filter": this.query_primitive()
+			,"aggregations": {
+				"filtered_episodes": {
+					"terms": {"field": "episode.keyword"}
+				}
+			}
+		}
+
+// aggs stem
+var aggs = {
+	"all_bits": {
+		"global": {},
+		"aggregations": {
+		}
 	}
-	,querystringSOLR:function(){
-		
+}
+
+		// null out facets we don't want
+		if(appQuery.get("raw").indexOf("episode:")>=0){
+			guests=null;
+		}
+
+		if(guests!==null){aggs.all_bits.aggregations.guests=guests}
+			if(tags!==null){aggs.all_bits.aggregations.tags=tags}
+				if(bits!==null){aggs.all_bits.aggregations.bits=bits}
+					if(episodes!==null){aggs.all_bits.aggregations.episodes=episodes}
+
+
+						return {
+							"size" : 100,
+							"query": this.query_primitive('full'),
+							"aggregations": aggs
+						}
+
+					}
+					,querystringSOLR:function(){
+
 
 		// var facetadd = (appState.get("facets").indexOf(",")>=0)?" AND ("+appState.get("facets").split(",").join(" AND ")+")":'';
 		var facetadd = '';

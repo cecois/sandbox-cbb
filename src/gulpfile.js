@@ -92,6 +92,7 @@ var copyjs=  ()=>{
 ,paths.site.src+"/js/Bit-Model.js"
 ,paths.site.src+"/js/Slug-Model.js"
 ,paths.site.src+"/js/Slugs-Collection.js"
+,paths.site.src+"/js/Query-Facets-Collection.js"
 ,paths.site.src+"/js/Facets-Collection.js"
 ,paths.site.src+"/js/Locations-Collection.js"
 ,paths.site.src+"/js/Locations-View.js"

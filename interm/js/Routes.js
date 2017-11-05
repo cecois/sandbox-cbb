@@ -10,6 +10,7 @@ var Route = Backbone.Router.extend({
         // this.listenTo(appState,'change:slugs',this.up)
         // this.listenTo(appQuery,'change:raw',this.up)
         // this.listenTo(appState,'change:facets',this.up)
+        this.listenTo(appQueryFacets,'add remove',this.up)
         this.listenTo(appQuery,'change:raw',this.up)
         return this
     },
@@ -42,7 +43,9 @@ var Route = Backbone.Router.extend({
             return Number(Math.round(c+'e5')+'e-5');
             // return Number(Math.round(c).toFixed(4));
         })
-        ,ufac = _.map(appState.get("facets").split(","),function(f){return encodeURI(f);}).join(",")
+        // ,ufac = _.map(appState.get("facets").split(","),function(f){return encodeURI(f);}).join(",")
+        // ,ufac=null
+        ,ufac = _.map(appQueryFacets.models,function(f){return encodeURI(JSON.stringify(f));}).join(",")
         ;
         // ,ubbox=map.getBounds().toBBoxString()
         // ,ubbox=bndsjor
@@ -62,7 +65,7 @@ var Route = Backbone.Router.extend({
     }
     ,default: function(s,p,q,b,d,a,x,f) {
 
-        
+
         var slug = (typeof s == 'undefined' || s==null)?appSlugs.active().get("slug"):s
         ,query = (typeof q == 'undefined' || q==null)?CONFIG.default_query:q
         ,page = (typeof p == 'undefined' || p==null)?1:p
@@ -70,7 +73,7 @@ var Route = Backbone.Router.extend({
         ,downout = (typeof d == 'undefined' || d==null)?"out":d
         ,basemap = (typeof b == 'undefined' || b==null)?"pencil":b
         ,bbox = (typeof x == 'undefined' || x==null)?"-112.851,22.105998,37.4414,57.610107":x
-        ,facets = (typeof f == 'undefined' || f==null)?'':_.map(f.split(","),function(f){ return decodeURI(f);}).join(",")
+        ,facets = (typeof f == 'undefined' || f==null)?null:_.map(f.split(","),function(f){ return decodeURI(JSON.parse(f));}).join(",")
         ;
 
         if(x!==null && (typeof x!=='undfined')){
@@ -98,12 +101,12 @@ var Route = Backbone.Router.extend({
 //newslugs
 
 appSlugs.switch(slug)
-
+if(facets!==null){appQueryFacets.reset(facets)}
 appState.set({
     downout:downout
     ,active:active
             // ,slug:slug
-            ,facets:facets
+            // ,facets:facets
             // ,slugs:newslugs
         })
 

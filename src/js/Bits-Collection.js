@@ -28,7 +28,7 @@ var Bits = Backbone.Collection.extend({
 	,initialize:function(options){
 		options||(options={})
 		this.listenTo(appQuery,'change:raw',this.upf)
-		this.listenTo(appState,'change:facets',this.upf)
+		this.listenTo(appQueryFacets,'add remove',this.upf)
 		// this.listenTo(appQuery,'change:facets',this.upf)
 		return this
 	}
@@ -80,28 +80,40 @@ var Bits = Backbone.Collection.extend({
 	}
 	,parse: function(data) {
 
-		var locations = _.map(_.filter(data.hits.hits,function(d){
-			return d._source.bit=="Location"}),function(d){
+		// var locations = _.map(_.filter(data.hits.hits,function(d){
+		// 	return d._source.bit=="Location"}),function(d){
 
-			return "cartodb_id:"+UTIL.geom_id_nudge(d._source.location_type,parseFloat(d._source.location_id),"up")
-		})
+		// 	return "cartodb_id:"+UTIL.geom_id_nudge(d._source.location_type,parseFloat(d._source.location_id),"up")
+		// })
 
-		appLocations.fetch({ data: $.param({ q: locations.join(" OR ")}) });
+		// appLocations.fetch({ data: $.param({ q: locations.join(" OR ")}) });
 
 		var fat_bits = _.map(data.aggregations.all_bits.bits.filtered_bits.buckets,function(v,k){
 
-			var active = (_.contains(appState.get("facets"),v.key))?'is-active':'';
+			// var b = 'bit:\"'+v+'\"'
+			// console.log('raw facet',v);
+			var b = {bit:v.key}
+			// console.log('lets see if this b',b);
+			// console.log('is in this collx',appQueryFacets);
+
+			var active = (appQueryFacets.findWhere(b))?'is-active':'';
+			// console.log('active after findwhere',active)
 			return {type:'bits',facet:v.key,count:v.doc_count,active:active}
 
 		})//.Map
+		appFacetsBits.reset(fat_bits)
 
-		var fat_tags = _.map(data.aggregations.all_bits.tags.filtered_tags.buckets,function(v,k){
+		if(typeof data.aggregations.all_bits.tags !== 'undefined'){
+			var fat_tags = _.map(data.aggregations.all_bits.tags.filtered_tags.buckets,function(v,k){
 
-			var active = (_.contains(appState.get("facets"),v.key))?'is-active':'';
-			return {type:'tags',facet:v.key,count:v.doc_count,active:active}
-			
+				var active = (_.contains(appState.get("facets"),v.key))?'is-active':'';
+				return {type:'tags',facet:v.key,count:v.doc_count,active:active}
+
 		})//.Map
+			appFacetsTags.reset(fat_tags)
+	}//if.facet
 
+	if(typeof data.aggregations.all_bits.guests !== 'undefined'){
 		var fat_guests = _.map(data.aggregations.all_bits.guests.filtered_guests.buckets,function(v,k){
 
 			var active = (_.contains(appState.get("facets"),v.key))?'is-active':'';
@@ -109,33 +121,14 @@ var Bits = Backbone.Collection.extend({
 
 		})//.Map
 
-
-		// var fat_tags = _.map(data.aggregations.all_bits.tags.filtered_tags.buckets,function(v,k){
-		// 	for (var key in v)
-		// 		{ if (!v.hasOwnProperty(key))
-		// 			{ continue; }
-
-		// 			return {type:'tags',facet:key,count:v[key]}}
-		// })//.Map
-
-		// var fat_guests = _.map(data.facet_counts.facet_fields.guests,function(v,k){
-		// 	for (var key in v)
-		// 		{ if (!v.hasOwnProperty(key))
-		// 			{ continue; }
-
-		// 			return {type:'guests',facet:key,count:v[key]}}
-		// })//.Map
-
-
-		// var fats = _.union(fat_bits,fat_tags);
-		
-		appState.set({search_results_count:data.hits.hits.length})
-
-		appFacetsBits.reset(fat_bits)
-		appFacetsTags.reset(fat_tags)
 		appFacetsGuests.reset(fat_guests)
+	}//if.facet
 
-		return data.hits.hits
-	}
+
+	appState.set({search_results_count:data.hits.hits.length})
+
+
+	return data.hits.hits
+}
 
 })//extend

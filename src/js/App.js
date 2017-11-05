@@ -243,10 +243,11 @@ var appSlugs = new Slugs(
     ,{name:"Search",slug:"search",active:'is-active'}
         // ,{name:"Browse",slug:"browse",active:false}
         ,{name:"Updates",slug:"updates",active:false}
-        ,{name:"Support",slug:"support",active:false}
+        ,{name:"Help",slug:"help",active:false}
         ]
         ); //new Slugs
 
+var appQueryFacets = new QueryFacets();
 var appQuery = new Query({raw:CONFIG.default_query});
 var appQueryView = new QueryView({
     model: appQuery

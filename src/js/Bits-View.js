@@ -37,7 +37,7 @@ var BitsView = Backbone.View.extend({
 if(this.collection.length<1){
 
   $(this.el).html(
-    "no bits for "+appQuery.querystring()
+    "no bits for "+appQuery.get("raw")+appQuery.query_facetadd()
     );
 } else {
   $(this.el).html(this.template({rows:this.collection.toJSON()}));}

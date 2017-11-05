@@ -18,8 +18,14 @@ var FacetsView = Backbone.View.extend({
       var bs = $(e.currentTarget).attr('data-id')
 
       // var caf = appState.get("facets");
+// var thetop = "top",
+//     obj = { [thetop]: 10 };
 
-      var fa = bt+':"'+bs+'"';
+// console.log(obj.top); // -> 10
+      // var fa = bt+':"'+bs+'"';
+      var tkey = bt
+      var fa = {[tkey]:bs}
+      console.log('check this fa',fa)
 
       // if(_.contains(caf,fa)){
       //   var keep = _.uniq(_.partition(caf,function(f){return f==fa}))[1]
@@ -35,7 +41,7 @@ var FacetsView = Backbone.View.extend({
       // 
       // we say appstate, here data facet
       // AS does with it what it needs
-      appState.facet(fa)
+      appQueryFacets.facet(fa)
       // 
       // console.log("af now:",appState.get("facets"));
       // appBits.upf()
@@ -55,7 +61,8 @@ var FacetsView = Backbone.View.extend({
 // console.log("raw collection",this.collection)
 // console.log("subset",this.subset())
 
-$(this.el).html(this.template({type:this.options.type,facets:this.collection.toJSON()}));
+if(this.collection.length>0){
+  $(this.el).html(this.template({type:this.options.type,facets:this.collection.toJSON()}));}
       // $(this.el).html(this.template({facets:this.subset()}));
 
       return this

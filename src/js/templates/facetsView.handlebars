@@ -1,3 +1,5 @@
+<h5 style="margin-bottom:.5rem;" class='facet-type title is-5'>{{this.type}}</h5>
+<ul>
 {{#each facets}}
 <li class="pick">
 <span data-type="{{../this.type}}" data-id="{{facet}}" class="instance {{#if active}}tag is-light{{/if}} {{active}}">{{facet}} ({{count}})
@@ -5,3 +7,4 @@
 </span>
 </li>
 {{/each}}
+</ul>
