@@ -6,12 +6,8 @@ var QueryFacets = Backbone.Collection.extend({
 	}
 	,facet:function(F){
 
-		console.log('findwhre',appQueryFacets.findWhere(F))
-
 		if(typeof appQueryFacets.findWhere(F) == 'undefined'){
-			console.log('not in there, adding...')
 			this.add(F);} else {
-				console.log('in there, removing...')
 				this.remove(appQueryFacets.findWhere(F))
 			}
 

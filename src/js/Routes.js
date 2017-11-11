@@ -88,30 +88,16 @@ var Route = Backbone.Router.extend({
             })
 
 
-    //     var newslugs = _.filter(_.map(appState.get("slugs"),function(s){
+        appSlugs.switch(slug)
+        if(facets!==null){appQueryFacets.reset(facets)}
+            appState.set({
+                downout:downout
+                ,active:active
+
+            })
 
 
-    //         if(typeof s !== 'undefined'){
-    //             var active = (s.slug == slug)?'is-active':null;
-    //             return {name:s.name,slug:s.slug,active:active}
-    //     }//if.undefined
-
-    // })
-    //     ,function(s){return (typeof s) !== 'undefined'})//filter;
-//newslugs
-
-appSlugs.switch(slug)
-if(facets!==null){appQueryFacets.reset(facets)}
-appState.set({
-    downout:downout
-    ,active:active
-            // ,slug:slug
-            // ,facets:facets
-            // ,slugs:newslugs
-        })
-
-
-return this
+        return this
         } // default
     });
 var appRoute = new Route();

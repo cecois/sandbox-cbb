@@ -29,7 +29,27 @@ var Query = Backbone.Model.extend({
 
 		var A = appQueryFacets.facetArray();
 
-		var facetadd=(A.length>0)?' AND ('+A.join(" AND ")+")":'';
+
+		var AA = _.map(A,function(f){
+			var ff = f.split(":")
+			var b = ff[0]
+			,v=ff[1];
+			var kee = null;	
+			switch (b) {
+				case 'tags':
+				kee = 'tags.comma_del'
+				break;
+				default:
+				kee=b
+				break;
+			}
+
+			return kee+":"+'"'+v+'"'
+
+		})
+
+		// var facetadd=(A.length>0)?' AND ('+A.join(" AND ")+")":'';
+		var facetadd=(AA.length>0)?' AND ('+AA.join(" AND ")+")":'';
 		
 		return facetadd;
 	}
@@ -40,7 +60,10 @@ var Query = Backbone.Model.extend({
 		return {
 			"query_string" : {
 				"default_operator" : "AND",
-				"query" : this.get("raw")+fac
+				"query" : (this.get("raw")+fac)
+				.replace('?','\\?')
+				.replace('!','\\!')
+				.replace('!','\\!')
 			}
 		}
 
@@ -51,7 +74,7 @@ var Query = Backbone.Model.extend({
 			"filter":this.query_primitive()
 			,"aggregations": {
 				"filtered_bits": {
-					"terms": {"field": "bit.keyword"}
+					"terms": {"size":1000,"field": "bit.keyword"}
 				}
 			}
 		}
@@ -60,7 +83,7 @@ var Query = Backbone.Model.extend({
 			"filter": this.query_primitive()
 			,"aggregations": {
 				"filtered_guests": {
-					"terms": {"field": "episode_guests.comma_del"}
+					"terms": {"size":1000,"field": "episode_guests.comma_del"}
 				}
 			}
 		}
@@ -69,7 +92,7 @@ var Query = Backbone.Model.extend({
 			"filter": this.query_primitive()
 			,"aggregations": {
 				"filtered_tags": {
-					"terms": {"field": "tags.comma_del"}
+					"terms": {"size":1000,"field": "tags.comma_del"}
 				}
 			}
 		}
@@ -78,7 +101,7 @@ var Query = Backbone.Model.extend({
 			"filter": this.query_primitive()
 			,"aggregations": {
 				"filtered_episodes": {
-					"terms": {"field": "episode.keyword"}
+					"terms": {"size":1000,"field": "episode.keyword"}
 				}
 			}
 		}

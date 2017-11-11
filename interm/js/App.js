@@ -11,7 +11,7 @@ var CONFIG = {
     ,geom_root:"http://10.0.0.150:8983/solr/cbb_carto/select?"
     ,pliers:{line:999,poly:9999,point:1}
     // ,default_query:"(episode:350 OR episode:351)"
-    ,default_query:"episode:333"
+    ,default_query:"wolf"
 }
 
 window.map = new L.Map('map',
@@ -260,6 +260,7 @@ var appStateViewDownMenu = new StateViewDownMenu({
 
 
 var appFacetsBits = new Facets();
+var appFacetsEpisodes = new Facets();
 var appFacetsTags = new Facets();
 var appFacetsGuests = new Facets();
 
@@ -276,6 +277,7 @@ var appSlugsViewPanesMenu = new SlugsViewPanesMenu({
 });
 
 var appFacetsBitsView = new FacetsView({el:"#search-facets-bits",collection:appFacetsBits,type:'bit'});
+var appFacetsEpisodesView = new FacetsView({el:"#search-facets-episodes",collection:appFacetsEpisodes,type:'episode'});
 var appFacetsTagsView = new FacetsView({el:"#search-facets-tags",collection:appFacetsTags,type:'tags'});
 var appFacetsGuestsView = new FacetsView({el:"#search-facets-guests",collection:appFacetsGuests,type:'guests'});
 
