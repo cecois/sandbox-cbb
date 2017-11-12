@@ -60,6 +60,17 @@ var Bits = Backbone.Collection.extend({
 		})//.Map
 		appFacetsBits.reset(fat_bits)
 
+		
+		var fat_bits = _.map(data.aggregations.all_bits.bits.filtered_bits.buckets,function(v,k){
+
+			var b = {bit:v.key}
+
+			var active = (appQueryFacets.findWhere(b))?'is-active':'';
+			return {type:'bits',facet:v.key,count:v.doc_count,active:active}
+
+		})//.Map
+		appFacetsBits.reset(fat_bits)
+
 		if(typeof data.aggregations.all_bits.tags !== 'undefined'){
 			var fat_tags = _.map(data.aggregations.all_bits.tags.filtered_tags.buckets,function(v,k){
 				var b = {tags:v.key}
