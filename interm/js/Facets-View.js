@@ -16,7 +16,9 @@ var FacetsView = Backbone.View.extend({
     var bs = $(e.currentTarget).attr('data-id')
 
     var tkey = bt
-    var fa = {[tkey]:bs}
+    console.log('tkey',tkey);
+    // var fa = {[tkey]:bs}
+    var fa = {'bit':bs}
 
     appQueryFacets.facet(fa)
 

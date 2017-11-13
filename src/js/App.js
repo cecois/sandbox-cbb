@@ -11,7 +11,7 @@ var CONFIG = {
     ,geom_root:"http://10.0.0.150:8983/solr/cbb_carto/select?"
     ,pliers:{line:999,poly:9999,point:1}
     // ,default_query:"(episode:350 OR episode:351)"
-    ,default_query:"wolf"
+    ,default_query:"island"
 }
 
 window.map = new L.Map('map',

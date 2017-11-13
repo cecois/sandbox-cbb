@@ -50,6 +50,25 @@ var Bits = Backbone.Collection.extend({
 	}
 	,parse: function(data) {
 
+		var fat_locs = _.map(data.hits.hits,function(v,k){
+
+			return v._source.bit=="Location"
+
+		})//.Map
+		appLocations.reset(fat_locs)
+
+
+		var fat_bits = _.map(data.aggregations.all_bits.bits.filtered_bits.buckets,function(v,k){
+
+			var b = {bit:v.key}
+
+			var active = (appQueryFacets.findWhere(b))?'is-active':'';
+			return {type:'bits',facet:v.key,count:v.doc_count,active:active}
+
+		})//.Map
+		appFacetsBits.reset(fat_bits)
+
+
 		var fat_bits = _.map(data.aggregations.all_bits.bits.filtered_bits.buckets,function(v,k){
 
 			var b = {bit:v.key}

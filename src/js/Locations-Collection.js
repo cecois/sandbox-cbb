@@ -3,6 +3,7 @@ var Locations = Backbone.Collection.extend({
 	,initialize:function(options){
 		options||(options={})
 		// this.listenTo(appState,'change:baselayer',this.switch)
+		//  this.on("reset", this.fetch, this);
 	}
 	,url:function(){
 

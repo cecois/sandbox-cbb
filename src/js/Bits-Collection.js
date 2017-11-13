@@ -52,7 +52,7 @@ var Bits = Backbone.Collection.extend({
 
 		var fat_locs = _.map(data.hits.hits,function(v,k){
 
-			return d._source.bit=="Location"
+			return v._source.bit=="Location"
 
 		})//.Map
 		appLocations.reset(fat_locs)
@@ -68,7 +68,7 @@ var Bits = Backbone.Collection.extend({
 		})//.Map
 		appFacetsBits.reset(fat_bits)
 
-		
+
 		var fat_bits = _.map(data.aggregations.all_bits.bits.filtered_bits.buckets,function(v,k){
 
 			var b = {bit:v.key}
