@@ -6,7 +6,7 @@ var FacetsView = Backbone.View.extend({
   initialize: function(attrs) {
     this.options = attrs;
     this.collection.bind("reset", this.render, this);
-    this.listenTo(appState,"change:facets",this.render)
+    // this.listenTo(appState,"change:facets",this.render)
     return this
   }
   ,addfac: function(e) {
@@ -17,13 +17,13 @@ var FacetsView = Backbone.View.extend({
 
     var tkey = bt
     // console.log('tkey',tkey);
-    // var fa = {[tkey]:bs}
-    var fa = bt+':"'+bs+'"'
-    console.log('well add this to aqf:',fa)
+    var fa = {[tkey]:bs}
+    // var fa = bt+':"'+bs+'"'
+    // console.log('well add this to aqf:',fa)
     // var fa = {'bit':bs}
 
-    // appQueryFacets.facet(fa)
-    appQueryFacets.add(fa)
+    appQueryFacets.facet(fa)
+    // appQueryFacets.add(fa)
 
     return this;
   }
