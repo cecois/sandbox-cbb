@@ -1,9 +1,9 @@
 var LocationsView = Backbone.View.extend({
-    el: null,
-    events: {
-    },
-    initialize: function() {
-      BitGroup = new L.featureGroup().addTo(map);
+  el: null,
+  events: {
+  },
+  initialize: function() {
+    BitGroup = new L.featureGroup().addTo(map);
       // this.listenTo(this.collection,"change","render")
       this.collection.bind("sync", this.render, this);
       return this
@@ -12,35 +12,37 @@ var LocationsView = Backbone.View.extend({
 
       BitGroup.clearLayers();
 
-      this.collection.each(function(bit, i) {
-            var bitTemplate = CBB['templates']['bitMarkerViewTpl']
-            var pu = bitTemplate(bit.toJSON());
-            var geomtype = bit.get("geom_type")
-            var stile = this.get_style();
-            var acdive = this.get_style('active');
-            var ceen = this.get_style('seen');
-            var bitm = {
-              "type": "Feature",
-              "properties": {
-                "name": bit.get("name"),
-                "active":bit.get("active"),
-                "cartodb_id": bit.get("cartodb_id"),
-                "geom_type": bit.get("geom_type"),
-                "anno": bit.get("anno"),
-                "created_at": bit.get("created_at"),
-                "updated_at": bit.get("updated_at")
-              },
-              "geometry": $.parseJSON(bit.get("the_geom"))
-            };
-            if (geomtype == "point") {
-              var foot = L.geoJson(bitm, {
-                seen: false,
-                cartodb_id: bit.get("cartodb_id"),
-                pointToLayer: function(feature, latlng) {
-                  return L.circleMarker(latlng, stile);
-                }
-              })
-              foot.bindPopup(pu).addTo(BitGroup).on("click", function(m) {
+      this.collection.each(function(geom, i) {
+        var geomTemplate = CBB['templates']['bitMarkerViewTpl']
+        var pu = geomTemplate(geom.get("properties"));
+        var geomtype = geom.get("geometry").type
+        var stile = this.get_style();
+        var acdive = this.get_style('active');
+        var ceen = this.get_style('seen');
+        // var bitm = {
+        //   "type": "Feature",
+        //   "properties": {
+        //     "name": bit.get("name"),
+        //     "active":bit.get("active"),
+        //     "cartodb_id": bit.get("cartodb_id"),
+        //     "geom_type": bit.get("geom_type"),
+        //     "anno": bit.get("anno"),
+        //     "created_at": bit.get("created_at"),
+        //     "updated_at": bit.get("updated_at")
+        //   },
+        //   "geometry": $.parseJSON(bit.get("the_geom"))
+        // };
+        var bitm = geom.attributes
+        if (geomtype.toLowerCase() == "point") {
+          var foot = L.geoJson(bitm, {
+            seen: false,
+            location_id: geom.get("properties").cartodb_id,
+            location_type: geom.get("geometry").type.toLowerCase(),
+            pointToLayer: function(feature, latlng) {
+              return L.circleMarker(latlng, stile);
+            }
+          })
+          foot.bindPopup(pu).addTo(BitGroup).on("click", function(m) {
                         // first mark it seen
                         // var stale = _.find(BitGroup._layers, function(i) {
                         //   return i.options.seen == true
@@ -59,7 +61,8 @@ var LocationsView = Backbone.View.extend({
                     // var stile = this.get_style()
                     var foot = L.geoJson(bitm, {
                       seen: false,
-                      cartodb_id: bit.get("cartodb_id"),
+                      location_id: geom.get("properties").cartodb_id,
+                      location_type: geom.get("geometry").type.toLowerCase(),
                       style: stile
                     })
                     foot.bindPopup(pu).addTo(BitGroup).on("click", function(m) {
@@ -87,7 +90,7 @@ var LocationsView = Backbone.View.extend({
                       cartodb_id: null
                     }
                   }
-                  bitm.options.cartodb_id = bit.get("cartodb_id").toString()
+                  bitm.options.cartodb_id = geom.get("properties").cartodb_id.toString()
                 },this)
 
 if(this.collection.length > 0){
@@ -100,59 +103,59 @@ return this
 }
 ,get_style: function(s){
 
-switch (s) {
-case 'active':
-return {
-radius: 18,
-fillColor: "#fecd0b",
-color: "#000",
-weight: 1,
-opacity: 1,
-fillOpacity: 0.6,
-};
-break;
-case 'seen':
-return {
-radius: 6,
-fillColor: "#ffffff",
-color: "#1288b9",
-weight: 1,
-opacity: .6,
-fillOpacity: 0.3,
-};
-break;
-case 'linenew':
-return {
-fillColor: "rgba(126, 223, 216, 100)",
-color: "rgba(126, 223, 216, 100)",
-weight: 6,
-opacity: .8,
-};
-break;
-case 'lineactive':
-return {
-fillColor: "#fecd0b",
-color: "#fecd0b",
-weight: 8,
-opacity: 1,
-};
-break;
-case 'lineseen':
-return {
-fillColor: "#ffffff",
-color: "#ffffff",
-weight: 6,
-opacity: .6,
-};
-default:
-return {
-radius: 6,
-fillColor: "rgba(6, 6, 6, 50)",
-color: "#000",
-weight: 1,
-opacity: 1,
-};
-break;
+  switch (s) {
+    case 'active':
+    return {
+      radius: 18,
+      fillColor: "#fecd0b",
+      color: "#000",
+      weight: 1,
+      opacity: 1,
+      fillOpacity: 0.6,
+    };
+    break;
+    case 'seen':
+    return {
+      radius: 6,
+      fillColor: "#ffffff",
+      color: "#1288b9",
+      weight: 1,
+      opacity: .6,
+      fillOpacity: 0.3,
+    };
+    break;
+    case 'linenew':
+    return {
+      fillColor: "rgba(126, 223, 216, 100)",
+      color: "rgba(126, 223, 216, 100)",
+      weight: 6,
+      opacity: .8,
+    };
+    break;
+    case 'lineactive':
+    return {
+      fillColor: "#fecd0b",
+      color: "#fecd0b",
+      weight: 8,
+      opacity: 1,
+    };
+    break;
+    case 'lineseen':
+    return {
+      fillColor: "#ffffff",
+      color: "#ffffff",
+      weight: 6,
+      opacity: .6,
+    };
+    default:
+    return {
+      radius: 6,
+      fillColor: "rgba(6, 6, 6, 50)",
+      color: "#000",
+      weight: 1,
+      opacity: 1,
+    };
+    break;
 }//switch
 
 }

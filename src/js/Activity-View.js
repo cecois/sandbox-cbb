@@ -15,9 +15,10 @@ var ActivityView = Backbone.View.extend({
         //this.render();
     },
     stfu: function(){
+        // $("#cbb-bt-search").removeClass("is-loading")
         // NProgress.done()
-        $(this.el).addClass("idle")
-        $("#query-form").removeClass("hidden")
+        $(this.el).hide()
+        // $("#query-form").removeClass("hidden")
 
         $(this.el).removeClass('warn')
 
@@ -31,7 +32,7 @@ var ActivityView = Backbone.View.extend({
 
         // NProgress.done()
 
-        $(this.el).addClass('warn')
+        $(this.el).find(".activity-cancel").show()
 
 // setTimeout(function(this){ this.stfu() }, 3000);
 setTimeout(_.bind(this.stfu, this), 4000);
@@ -43,11 +44,13 @@ render: function() {
     if(CONFIG.verbose==true){console.log("rendering activityview")}
         // NProgress.start();
         // var show = this.model.get("show")
+        $(this.el).show()
         // var show = true
         // var msg = this.model.get("message")
         // var altelstring = this.model.get("altel")
-        $(this.el).removeClass("idle")
-        $("#query-form").addClass("hidden")
+        // $("#cbb-bt-search").addClass("is-loading")
+        // $(this.el).removeClass("idle")
+        // $("#query-form").addClass("hidden")
         // $(this.el).find(".throbber").removeClass("hidden")
         // if (typeof altelstring == 'undefined' || altelstring == false || altelstring == null) {
         //     // var altel = $("#activity-default").find(".throbber");

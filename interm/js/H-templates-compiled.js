@@ -33,9 +33,9 @@ this["CBB"]["templates"]["HowlEpisodeViewTpl"] = Handlebars.template({"compiler"
 this["CBB"]["templates"]["activityViewTpl"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper;
 
-  return "  <span class=\"activity-message pull-left\">"
+  return "<div class=\"activity-message\">"
     + ((stack1 = ((helper = (helper = helpers.message || (depth0 != null ? depth0.message : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"message","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "</span>\n  <span class=\"activity-cancel glyphicon glyphicon-remove-sign\" style=\"margin-left:10px;\"></span>";
+    + "<span class=\"activity-cancel fa fa-times-circle-o\" style=\"margin-left:10px;\"></span><span class=\"activity-throb fa fa-circle-o-notch fa-spin fa-3x fa-fw\" style=\"margin-left:10px;\"></span></div>";
 },"useData":true});
 this["CBB"]["templates"]["baseLayerMnu"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var alias1=container.lambda, alias2=container.escapeExpression;
@@ -153,7 +153,13 @@ this["CBB"]["templates"]["bitsView"] = Handlebars.template({"1":function(contain
     + alias2(alias1(((stack1 = (depth0 != null ? depth0._source : depth0)) != null ? stack1.tstart : stack1), depth0))
     + ")</div>\n</div>\n</li>\n";
 },"2":function(container,depth0,helpers,partials,data) {
-    return "<i class=\"fa fa-map-marker\"/>";
+    var stack1, alias1=container.lambda, alias2=container.escapeExpression;
+
+  return "<i data-id=\""
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0._source : depth0)) != null ? stack1.location_type : stack1), depth0))
+    + ":"
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0._source : depth0)) != null ? stack1.location_id : stack1), depth0))
+    + "\" style=\"font-size:1.3em;\" class=\"fa fa-map-marker\"/>";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 

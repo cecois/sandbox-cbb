@@ -2,7 +2,7 @@
 var CONFIG = {
 	verbose:true
     ,dev:true
-    ,mode:"T"
+    ,mode:"33"
     ,proxy:null
     ,query:"*:*"
     ,basemap:"pencil"
@@ -20,12 +20,14 @@ window.map = new L.Map('map',
     center: [51.505, -0.09],
     zoom:7
     ,attributionControl:false
-}).on('moveend',function(e){
+})
+.on('moveend',function(e){
     // hey not great but Route's .listenTo method wz causing a deep undefined in leafletjs
     if(typeof appRoute !== 'undefined'){
         appRoute.up()
     }
-})
+}
+)
 
 // if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 //     window.agent = "mobile";
@@ -367,9 +369,11 @@ if(CONFIG.mode=='T'){
 }); //ready
 
     $(document).keydown(function(e) {
-        if (e.keyCode == 17) {
+// ctrl
+if (e.keyCode == 17) {
 
-            appStateView.swap();
+            // appStateView.swap();
+            appStateViewDownMenu.setm()
 
 
         }

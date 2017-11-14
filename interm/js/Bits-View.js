@@ -3,7 +3,7 @@ var BitsView = Backbone.View.extend({
     el: "#search-bits",
     template: CBB['templates']['bitsView'],
     events: {
-      // "click .instance": "addfac",
+      "click i.fa-map-marker": "zoomto",
     },
     // className : "mnuThumbnails",
     initialize: function() {
@@ -11,6 +11,21 @@ var BitsView = Backbone.View.extend({
       this.collection.bind("sync", this.render, this);
       return this
       .proxyfetch()
+    }
+    ,zoomto: function(e){
+
+      e.preventDefault()
+      var keys = $(e.currentTarget).attr("data-id")
+      var key=keys.split(":")
+
+      console.log(keys)
+
+      var a = _.find(BitGroup.getLayers(),function(l){return (l.options.location_id==key[1] && l.options.location_type.indexOf(key[0])>=0)});
+
+      console.log('found a:',a);
+      map.fitBounds(a.getBounds());
+
+      return this
     }
     ,proxyfetch: function(){
 

@@ -6,11 +6,16 @@ var QueryFacets = Backbone.Collection.extend({
 	}
 	,facet:function(F){
 
+		console.log('testing aQF for ',F)
+		console.log('where aQF.models is currnetly',this.models)
 		if(typeof appQueryFacets.findWhere(F) == 'undefined'){
+			console.log('wasnt there, adding...')
 			this.add(F);} else {
+				console.log('extant, removing...')
 				this.remove(appQueryFacets.findWhere(F))
 			}
 
+			console.log('now is:',this.models)
 
 			return this
 

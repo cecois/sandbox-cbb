@@ -1,6 +1,6 @@
 {{#each rows}}
 <li class="bit">
-	{{#equal _source.bit 'Location'}}<i class="fa fa-map-marker"/>{{/equal}}
+	{{#equal _source.bit 'Location'}}<i data-id="{{_source.location_type}}:{{_source.location_id}}" style="font-size:1.3em;" class="fa fa-map-marker"/>{{/equal}}
 <span class="bit-instance">{{_source.instance}}</span>
 <div class="columns">
 	<div style="" class='column bit-data'>(<span class='tooltip is-tooltip-left' data-tooltip="{{_source.elucidation}}">{{_source.bit}}</span> | ep.<a target="_blank" href="http://www.earwolf.com/episode/{{_source.slug_earwolf}}">{{_source.episode}}</a> | ~{{_source.tstart}})</div>

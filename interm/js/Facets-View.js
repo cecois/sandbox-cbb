@@ -16,11 +16,14 @@ var FacetsView = Backbone.View.extend({
     var bs = $(e.currentTarget).attr('data-id')
 
     var tkey = bt
-    console.log('tkey',tkey);
+    // console.log('tkey',tkey);
     // var fa = {[tkey]:bs}
-    var fa = {'bit':bs}
+    var fa = bt+':"'+bs+'"'
+    console.log('well add this to aqf:',fa)
+    // var fa = {'bit':bs}
 
-    appQueryFacets.facet(fa)
+    // appQueryFacets.facet(fa)
+    appQueryFacets.add(fa)
 
     return this;
   }

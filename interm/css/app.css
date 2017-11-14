@@ -81,6 +81,29 @@ a {
 #search-bits .bit .bit-data span {
   cursor: default;
 }
+#activity-wrapper {
+  min-height: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  font-size: .7em;
+  text-align: center;
+  opacity: .9;
+  margin: 0;
+  padding: 0;
+}
+#activity-wrapper .column {
+  padding: 0;
+  margin: 0;
+}
+#activity-wrapper #activityContainer {
+  text-align: inherit;
+}
+#activity-wrapper #activityContainer .activity-throb {
+  font-size: .9em;
+  color: rgba(191, 191, 191, 0.9);
+}
+#activity-wrapper #activityContainer .activity-cancel {
+  display: none;
+}
 #cbb-menus {
   z-index: 4;
   background-color: rgba(255, 255, 255, 0.9);
@@ -107,7 +130,7 @@ a {
   position: absolute;
 }
 #cbb-main .cbb-main-pane {
-  padding: 5% 5%;
+  padding: 3% 5%;
   z-index: 2;
   position: relative;
 }

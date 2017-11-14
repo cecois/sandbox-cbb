@@ -50,13 +50,34 @@ var Bits = Backbone.Collection.extend({
 	}
 	,parse: function(data) {
 
-		var fat_locs = _.map(data.hits.hits,function(v,k){
+		var locations = _.map(_.filter(data.hits.hits,function(d){
+			return d._source.bit=="Location"}),function(d){
 
-			return v._source.bit=="Location"
+			return d._source.location_type+":"+d._source.location_id
+		})
 
-		})//.Map
-		appLocations.reset(fat_locs)
+		appState.set({locations:locations.join(",")})
+		if(appLocations.length>0){
+			appLocations.fetch()}
+		
 
+		// console.log('fetching w a data param...')
+		// console.log(locations.join(","))
+// 		collection.fetch({data: {filter:'abc', page:1}});
+// $.getJSON( 'http://localhost:3030/geoms/cbbs?'+locations.join(","), {
+//     // tags: "mount rainier",
+//     // tagmode: "any",
+//     // format: "json"
+//     format:"jsonp",
+//     callback:'cwmccallback'
+// })
+// .done(function( data ) {
+// 	console.log('data in done');
+// 	console.log(data)
+// });
+// collection.fetch({data: $.param({filter:'abc', page:1})});
+		// appLocations.fetch({ data: $.param({ q: locations.join(",")}) });
+		// appLocations.fetch({ data: { q: locations.join(",")} });
 
 		var fat_bits = _.map(data.aggregations.all_bits.bits.filtered_bits.buckets,function(v,k){
 

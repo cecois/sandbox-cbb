@@ -4,7 +4,7 @@ var Route = Backbone.Router.extend({
     },
     initialize: function(options) {
         options || (options={});
-        this.listenTo(map,'moveend',this.up)
+        // this.listenTo(map,'moveend',this.up)
         this.listenTo(appBaseLayers,'change:active',this.up)
         this.listenTo(appSlugs,'reset',this.up)
         // this.listenTo(appState,'change:slugs',this.up)
@@ -43,9 +43,13 @@ var Route = Backbone.Router.extend({
             return Number(Math.round(c+'e5')+'e-5');
             // return Number(Math.round(c).toFixed(4));
         })
+        ,ufac=(typeof appQuery.get("facetstring") == 'undefined')?'nil':appQuery.get("facetstring")
         // ,ufac = _.map(appState.get("facets").split(","),function(f){return encodeURI(f);}).join(",")
         // ,ufac=null
-        ,ufac = _.map(appQueryFacets.models,function(f){return encodeURI(JSON.stringify(f));}).join(",")
+        // ,ufac = _.map(appQueryFacets.models,function(f){return encodeURI(JSON.stringify(f));}).join(",")
+        // ,ufac = _.map(appQueryFacets.models,function(f){console.log(f);return encodeURI(JSON.stringify(f))})
+        // ,ufac = "bitfacet:50"
+        // ,ufac = "bit:Location"
         ;
         // ,ubbox=map.getBounds().toBBoxString()
         // ,ubbox=bndsjor
@@ -73,7 +77,8 @@ var Route = Backbone.Router.extend({
         ,downout = (typeof d == 'undefined' || d==null)?"out":d
         ,basemap = (typeof b == 'undefined' || b==null)?"pencil":b
         ,bbox = (typeof x == 'undefined' || x==null)?"-112.851,22.105998,37.4414,57.610107":x
-        ,facets = (typeof f == 'undefined' || f==null)?null:_.map(f.split(","),function(f){ return decodeURI(JSON.parse(f));}).join(",")
+        // ,facets = (typeof f == 'undefined' || f==null)?null:_.map(f.split(","),function(f){ console.log('f.78',f); return decodeURI(f);})
+        ,facetstring = (typeof f == 'undefined' || f==null)?"":f
         ;
 
         if(x!==null && (typeof x!=='undfined')){
@@ -82,19 +87,24 @@ var Route = Backbone.Router.extend({
 
         if(appBaseLayers.findWhere({active:true}).get("name")!==b && b!==null){appBaseLayers.switch(b)}
 
-            appQuery.set({
-                raw:query
-                ,page:page
-            })
+            console.log('facets before appQuery.set:',facetstring)
+
+        appQuery.set({
+            raw:query
+            ,page:page
+            ,facetstring:facetstring
+        })
 
 
         appSlugs.switch(slug)
-        if(facets!==null){appQueryFacets.reset(facets)}
-            appState.set({
-                downout:downout
-                ,active:active
 
-            })
+
+        // if(facets!==null){appQueryFacets.reset(facets)}
+        appState.set({
+            downout:downout
+            ,active:active
+
+        })
 
 
         return this

@@ -27,7 +27,17 @@ var Query = Backbone.Model.extend({
 	}
 	,query_facetadd:function(){
 
-		var A = appQueryFacets.facetArray();
+		// var A = appQueryFacets.facetArray();
+		var A = []
+
+		_.each(this.get("facetstring").join(","),function(m){
+			for ( var prop in m.attributes ) {
+				if ( m.attributes.hasOwnProperty(prop) ) {
+					var bt = prop;
+				}
+			}
+			A.push(bt+":"+m.get(bt))
+		})
 
 
 		var AA = _.map(A,function(f){

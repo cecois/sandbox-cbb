@@ -130,6 +130,21 @@ a{
   }
 }
 }
+#activity-wrapper{
+  .column{padding:0;margin:0;}
+  min-height:1.5rem;
+  background-color:@cbb-white;
+  font-size:.7em;
+  text-align:center;
+  opacity:.9;
+  margin:0;
+  padding:0;
+  #activityContainer{
+    text-align:inherit;
+    .activity-throb{font-size:.9em;color:@cbb-white-gray;}
+    .activity-cancel{display:none;}
+  }
+}
 #cbb-menus{
   // height:10vh;
   z-index:4;
@@ -170,7 +185,7 @@ overflow:auto;
 .cbb-main-panes{
   z-index:1;position:absolute;}
 .cbb-main-pane{
-  padding:5% 5%;
+  padding:3% 5%;
   z-index:2;
   position:relative;
   &.hidden{
