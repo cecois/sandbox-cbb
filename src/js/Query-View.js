@@ -4,6 +4,7 @@ var QueryView = Backbone.View.extend({
 	,events: {
         // "click .activity-cancel": "stfu",
         "click #cbb-bt-search": 'set'
+        ,"click #cbb-bt-random": 'rando'
     }
     ,bindings: {
     	'input': 'raw'
@@ -12,7 +13,16 @@ var QueryView = Backbone.View.extend({
     	return this
     	.render()
     },
-    set: function(e){
+    rando: function(){
+
+        var c = String.fromCharCode(Math.floor(Math.random() * 26) + 97)+'*'
+        var d = String.fromCharCode(Math.floor(Math.random() * 26) + 97)+'*'
+
+        appQuery.set({raw:c+d})
+
+        return this
+    }
+    ,set: function(e){
 
         console.log(e);
 

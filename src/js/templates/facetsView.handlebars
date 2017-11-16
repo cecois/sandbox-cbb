@@ -2,7 +2,7 @@
 <ul>
 {{#each facets}}
 <li class="pick">
-<span data-type="{{../this.type}}" data-id="{{facet}}" class="instance {{#if active}}tag is-light{{/if}} {{active}}">{{facet}} ({{count}})
+<span data-type="{{../this.type}}" data-id="{{facet}}" class="instance {{#if active}}tag is-light{{/if}} {{active}}">{{#episodizer facet}}{{/episodizer}} ({{count}})
 {{#if active}}<button class="delete is-small"></button>{{/if}}
 </span>
 </li>

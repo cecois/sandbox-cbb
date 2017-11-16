@@ -2,16 +2,16 @@
 var CONFIG = {
 	verbose:true
     ,dev:true
-    ,mode:"33"
+    ,mode:"T"
     ,proxy:null
-    ,query:"*:*"
+    // ,query:"*:*"
     ,basemap:"pencil"
-    // ,index_root:"http://10.0.0.150:8983/solr/cbb_bits/select?"
-    ,index_root:"http://milleria.org:9200/cbb/_search?"
-    ,geom_root:"http://10.0.0.150:8983/solr/cbb_carto/select?"
-    ,pliers:{line:999,poly:9999,point:1}
+    // ,index_root:"http://milleria.org:9200/cbb/_search?"
+    ,index_root:"http://localhost:9200/cbb/_search?"
+    // ,geom_root:"http://10.0.0.150:8983/solr/cbb_carto/select?"
+    // ,pliers:{line:999,poly:9999,point:1}
     // ,default_query:"(episode:350 OR episode:351)"
-    ,default_query:"island"
+    ,default_query:"watch"
 }
 
 window.map = new L.Map('map',
@@ -34,10 +34,6 @@ window.map = new L.Map('map',
 // } else {
 //     window.agent = "desktop";
 // }
-
-// NProgress.configure({
-//     parent: 'html body.layout-documentation.page-columns section#cbb-header.columns div#query-form.column.is-half div.field.has-addons.level div.control.level-item input.input.is-large'
-// });
 
 /* -------------------------------------------------- HANDLEBARS START
 
@@ -72,11 +68,15 @@ Handlebars.registerHelper('debug', function(thing) {
     return new Handlebars.SafeString(this.instance);
 });
 
-/*
-Handlebars.registerHelper('timeize', function(options) {
-    return new Handlebars.SafeString(moment(options.fn(this)).format('YYYY.MMM.D'));
+Handlebars.registerHelper('episodizer', function(v,options) {
+
+    var vep = v.split("/")
+    var slug = vep[vep.length-1];
+
+    return new Handlebars.SafeString(slug);
 });
 
+/*
 Handlebars.registerHelper('indev', function(id,type, options) {
     if(dev == true){
 
@@ -242,11 +242,11 @@ var appSlugs = new Slugs(
     [
     {name:"Home",slug:"home",active:false}
     ,{name:"Huh?",slug:"huh",active:false}
-    ,{name:"Search",slug:"search",active:'is-active'}
-        // ,{name:"Browse",slug:"browse",active:false}
-        ,{name:"Updates",slug:"updates",active:false}
-        ,{name:"Help",slug:"help",active:false}
-        ]
+    ,{name:"Search",slug:"search",active:false}
+    ,{name:"Browse",slug:"browse",active:false}
+    ,{name:"Updates",slug:"updates",active:false}
+    ,{name:"Help",slug:"help",active:'is-active'}
+    ]
         ); //new Slugs
 
 var appQueryFacets = new QueryFacets();
@@ -269,6 +269,20 @@ var appFacetsGuests = new Facets();
 var appLocations = new Locations();
 var appBits = new Bits();
 var appBitsView = new BitsView({collection:appBits});
+
+var appBrowseBits = new Browse();
+var appBrowseTags = new Browse();
+var appBrowseEpisodes = new Browse();
+var appBrowseGuests = new Browse();
+var appBrowseMaster = new Browse();
+
+
+// var appBrowseView = new BrowseView({collection:appBrowse});
+var appBrowseBitsView = new BrowseView({el:"#browse-bits",collection:appBrowseBits,type:'bit'});
+var appBrowseTagsView = new BrowseView({el:"#browse-tags",collection:appBrowseTags,type:'tag'});
+var appBrowseEpisodesView = new BrowseView({el:"#browse-episodes",collection:appBrowseEpisodes,type:'episode'});
+var appBrowseGuestsView = new BrowseView({el:"#browse-guests",collection:appBrowseGuests,type:'episode'});
+
 var appLocationsView = new LocationsView({collection:appLocations});
 
 var appSlugsViewPanes = new SlugsViewPanes({
@@ -282,21 +296,6 @@ var appFacetsBitsView = new FacetsView({el:"#search-facets-bits",collection:appF
 var appFacetsEpisodesView = new FacetsView({el:"#search-facets-episodes",collection:appFacetsEpisodes,type:'episode'});
 var appFacetsTagsView = new FacetsView({el:"#search-facets-tags",collection:appFacetsTags,type:'tags'});
 var appFacetsGuestsView = new FacetsView({el:"#search-facets-guests",collection:appFacetsGuests,type:'guests'});
-
-
-
-
-var shares = [
-
-{"id":"social-twitter",
-"href":"https://twitter.com/share",
-"page.title":null,
-"page.url":null,
-"tip":"share on Twitter",
-"hashtags":null,
-"copy":null
-}
-]
 
 var UTIL = new Util();
 
@@ -369,12 +368,13 @@ if(CONFIG.mode=='T'){
 }); //ready
 
     $(document).keydown(function(e) {
-// ctrl
+
+        console.log('keycode',e.keyCode)
+// ctrl on mac anyway
 if (e.keyCode == 17) {
 
-            // appStateView.swap();
-            appStateViewDownMenu.setm()
+    appStateViewDownMenu.setm()
 
 
-        }
-    });
+}
+});

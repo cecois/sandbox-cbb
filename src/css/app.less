@@ -45,7 +45,7 @@
 // @quaternarycolor-trans: rgba(44,175,245,.4);
 
 // @cinqernarycolor: #ff8000; // orange
-// 
+//
 
 .copy-shadow{text-shadow: 0px 0px 2px @cbb-white-gray;}
 
@@ -185,6 +185,7 @@ overflow:auto;
 .cbb-main-panes{
   z-index:1;position:absolute;}
 .cbb-main-pane{
+  overflow-x: hidden;
   padding:3% 5%;
   z-index:2;
   position:relative;
@@ -195,33 +196,46 @@ overflow:auto;
 
 }
 
-.cbb-bt{
-  // color:@cbb-white-off;
+.cbb-bt-wrapper{
+  /*color:@cbb-white-off;*/
   color:@cbb-white-gray;
   z-index:5;
   font-size:3em;
 
-  .cbb-bt-copy{
+  .cbb-bt{
   cursor:pointer;
-
     &:hover{
       color:darken(@cbb-white-off,20%);
+    }
+    #cbb-bt-map-toggle{
+      text-align:left;
+      padding-left:2%;
+      i.down{
+        color:darken(@cbb-white-off,60%);
+        &:hover{
+          color:darken(@cbb-white-off,30%);
+        }
+      }
+    }
+    #cbb-bt-share{
+      text-align:right;
+      padding-right:2%;
     }
   }
 
 }
 
-  #cbb-map-toggle{
-    padding-left:2%;
-    #cbb-bt-copy-map{
+/*  #cbb-map-toggle{
+    padding-left:2%;*/
+/*    #cbb-bt-copy-map{
       &.down{
         color:darken(@cbb-white-off,25%);
             &:hover{
       color:lighten(@cbb-white-off,25%);
     }
       }
-    }
-}
+    }*/
+/*}*/
 
 .earwolf-img{
   -webkit-filter: grayscale(1);
@@ -421,7 +435,7 @@ text-shadow:
   .pick{
     line-height:1;
     .instance{
-  
+
       font-size:.7em;
       &:hover{
         cursor:pointer;
@@ -430,25 +444,14 @@ text-shadow:
     }
     .instance.is-active{
         color:@tertiarycolor;
-        
+
       }
     }
 }
 
-// .bang:before {
-//     content: "\e601";
-//     font-family: 'icomoon';
-//     // width: 100%;
-//     // height: 100%;
-//     font-size: 35.0em;
-//     text-align: center;
-//     display: block;
-//     // line-height: 100px;
-//     color:white;
-//     position:relative;
-//     left:6%;
-//     top:-15%;
-// }​
+#pane-browse{
+  font-size:.7em;
+}
 
 /* --------------------------------------- MAP -------------- */
 #map {

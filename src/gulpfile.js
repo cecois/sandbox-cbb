@@ -97,8 +97,10 @@ var copyjs=  ()=>{
 ,paths.site.src+"/js/Locations-Collection.js"
 ,paths.site.src+"/js/Locations-View.js"
 ,paths.site.src+"/js/Bits-Collection.js"
+,paths.site.src+"/js/Browse-Collection.js"
 ,paths.site.src+"/js/Bit-View.js"
 ,paths.site.src+"/js/Bits-View.js"
+,paths.site.src+"/js/Browse-View.js"
 ,paths.site.src+"/js/Facets-View.js"
 ,paths.site.src+"/js/BaseLayer-Model.js"
 ,paths.site.src+"/js/BaseLayers-Collection.js"
@@ -185,7 +187,7 @@ var copycss=  ()=>{
       // ,paths.site.src+"/css/devmarkers.css"
       paths.site.src+"/css/googlefont.mandali.css"
       ,paths.site.src+"/node_modules/leaflet/dist/leaflet.css"
-      ,paths.site.src+"/node_modules/nprogress/nprogress.css"
+      // ,paths.site.src+"/node_modules/nprogress/nprogress.css"
       ,paths.site.src+"/css/fonts/fonts-offline.css"
       ,paths.site.src+"/node_modules/font-awesome/css/font-awesome.min.css"
       // ,paths.site.src+"/lib/components/off-canvas-menu/vendor/normalize.css"
@@ -193,7 +195,7 @@ var copycss=  ()=>{
       // ,paths.site.src+"/lib/components/off-canvas-menu/header.css"
       // ,paths.site.src+"/lib/components/off-canvas-menu/general.css"
       // ,paths.site.src+"/lib/components/bootstrap/docs/dist/css/bootstrap.min.css"
-      ,paths.site.src+"/node_modules/bulma/css/bulma.css"
+      ,paths.site.src+"/lib/bulma/css/bulma.css"
       ,paths.site.src+"/lib/icomoon/style.css"
       ]
       )
@@ -232,6 +234,15 @@ var handlez = ()=>{
 
 /* ------------------------- WATCHES ------------- */
 
+var watch_handlez = ()=>{
+  return GULP
+  .watch([
+    paths.site.src+'js/templates/*.handlebars'
+    ], GULP.parallel(
+      handlez
+      ))
+}
+
 var watch_js = ()=>{
   return GULP
   .watch([
@@ -251,12 +262,21 @@ var watch_style = ()=>{
       ))
 }
 
+var watch_html = ()=>{
+  return GULP
+  .watch([
+    ,paths.site.src+"index.html"
+    ], GULP.parallel(
+      htmlmin
+      ))
+}
+
 var watch_og = ()=>{
   return GULP
   .watch([
     paths.site.src+"js/*.js"
     ,paths.site.src+"js/templates/*.handlebars"
-    ,paths.site.src+"*.html"
+    ,paths.site.src+"index.html"
     ,paths.site.src+"css/*.less"
     ], GULP.parallel(
       handlez
@@ -295,6 +315,8 @@ var develop = GULP.series(
     browsersync
     ,watch_js
     ,watch_style
+    ,watch_handlez
+    ,watch_html
     )
   );//develop
 

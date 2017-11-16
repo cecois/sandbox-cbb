@@ -4,12 +4,8 @@ var Route = Backbone.Router.extend({
     },
     initialize: function(options) {
         options || (options={});
-        // this.listenTo(map,'moveend',this.up)
         this.listenTo(appBaseLayers,'change:active',this.up)
         this.listenTo(appSlugs,'reset',this.up)
-        // this.listenTo(appState,'change:slugs',this.up)
-        // this.listenTo(appQuery,'change:raw',this.up)
-        // this.listenTo(appState,'change:facets',this.up)
         this.listenTo(appQueryFacets,'add remove',this.up)
         this.listenTo(appQuery,'change:raw',this.up)
         return this
@@ -37,23 +33,14 @@ var Route = Backbone.Router.extend({
         ,upage=(typeof appQuery.get("page")=='undefined')?1:appQuery.get("page")
         ,uquer=(typeof appQuery.get("raw") == 'undefined')?'nil':appQuery.get("raw")
         ,ublay=appBaseLayers.findWhere({active:true}).get("name")
-        ,udown=(typeof appState.get("downout") == 'undefined')?'nil':appState.get("downout")
+        ,udown=(typeof appState.get("downout") == 'undefined')?'out':appState.get("downout")
         ,uacti=(typeof appState.get("active") == 'undefined')?'nil':appState.get("active")
         ,ubbox = _.map(map.getBounds().toBBoxString().split(","),function(c){
             return Number(Math.round(c+'e5')+'e-5');
-            // return Number(Math.round(c).toFixed(4));
         })
-        // ,ufac=(typeof appQuery.get("facetstring") == 'undefined')?'nil':appQuery.get("facetstring")
-        // ,ufac = _.map(appState.get("facets").split(","),function(f){return encodeURI(f);}).join(",")
-        // ,ufac=null
-        ,ufac = _.map(appQueryFacets.models,function(f){return encodeURI(JSON.stringify(f));}).join(",")
-        // ,ufac = _.map(appQueryFacets.models,function(f){console.log(f);return encodeURI(JSON.stringify(f))})
-        // ,ufac = "bitfacet:50"
-        // ,ufac = "bit:Location"
+        ,ufac = _.map(appQueryFacets.models,function(f){return encodeURI(JSON.stringify(f));}).join("::")
         ;
-        // ,ubbox=map.getBounds().toBBoxString()
-        // ,ubbox=bndsjor
-        
+
         vz.push(uslug)
         vz.push(upage)
         vz.push(uquer)
@@ -71,20 +58,30 @@ var Route = Backbone.Router.extend({
 
 
         var slug = (typeof s == 'undefined' || s==null)?appSlugs.active().get("slug"):s
-        ,query = (typeof q == 'undefined' || q==null)?CONFIG.default_query:q
         ,page = (typeof p == 'undefined' || p==null)?1:p
-        ,active = (typeof a == 'undefined' || a==null)?"nil":a
-        ,downout = (typeof d == 'undefined' || d==null)?"out":d
+        ,query = (typeof q == 'undefined' || q==null)?CONFIG.default_query:q
         ,basemap = (typeof b == 'undefined' || b==null)?"pencil":b
+        ,downout = (typeof d == 'undefined' || d==null)?"out":d
+        ,active = (typeof a == 'undefined' || a==null)?"nil":a
         ,bbox = (typeof x == 'undefined' || x==null)?"-112.851,22.105998,37.4414,57.610107":x
-        // ,facets = (typeof f == 'undefined' || f==null)?null:_.map(f.split(","),function(f){ console.log('f.78',f); return decodeURI(f);})
-        // ,facetstring = (typeof f == 'undefined' || f==null)?"":f
         ;
 
-        var facets =null
         if(typeof f !== 'undefined' && f!==null){
-            console.log(f.split(","))
-        }
+// presume we having incoming stringified JSON facet objects, e.g. {bit:"Oh Boy"}
+// first we split em...
+_.each(f.split("::"),function(f){
+    // parse em back as obj
+
+    var J = $.parseJSON(decodeURI(f))
+    // if the're already in appQueryFacets (e.g. they were just added and the route is updating) we do nothing
+    // if they're not (e.g. we're coming in hot w a url that contains em); we add em
+    if(typeof appQueryFacets.findWhere(J) == 'undefined'){
+        console.log("adding...");
+        appQueryFacets.add(J);
+    }
+})
+
+        }//if.f
 
         if(x!==null && (typeof x!=='undfined')){
             map.fitBounds(UTIL.bounds_ob_from_bbox_string(x))
@@ -92,27 +89,29 @@ var Route = Backbone.Router.extend({
 
         if(appBaseLayers.findWhere({active:true}).get("name")!==b && b!==null){appBaseLayers.switch(b)}
 
-            // console.log('facets before appQuery.set:',facetstringan
-
-        appQuery.set({
-            raw:query
-            ,page:page
-            // ,facetstring:facetstring
-        })
+            appQuery.set({
+                raw:query
+                ,page:page
+            })
 
 
         appSlugs.switch(slug)
 
 
-        if(facets!==null){appQueryFacets.reset(facets)}
-            appState.set({
-                downout:downout
-                ,active:active
+        appState.set({
+            downout:downout
+            ,active:active
 
-            })
+        })
 
+// we do it here cuz any change that matters will alter url, meaning we'll always always end up here
+// w the added benefit that it picks up last-minute (e.g. routed) facetquery adds/removes
+// console.log('aqchanged',appQuery.changed)
+// console.log('afqchanged',appQueryFacets.changed)
+// if(!_.isEmpty(appQuery.changed) || (typeof appQueryFacets.changed !== 'undefined')){
+//     appBits.fetch();}
 
-        return this
+return this
         } // default
     });
 var appRoute = new Route();

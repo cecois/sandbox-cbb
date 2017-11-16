@@ -4,6 +4,7 @@ var BitsView = Backbone.View.extend({
     template: CBB['templates']['bitsView'],
     events: {
       "click i.fa-map-marker": "zoomto",
+      "click .cbb-trigger": "trigger",
     },
     // className : "mnuThumbnails",
     initialize: function() {
@@ -12,27 +13,41 @@ var BitsView = Backbone.View.extend({
       return this
       .proxyfetch()
     }
-    ,zoomto: function(e){
-
+    ,trigger: function(e){
+      console.log(e)
       e.preventDefault()
-      var keys = $(e.currentTarget).attr("data-id")
-      var key=keys.split(":")
+//data-type="episode" data-id="{{_source.episode}}"
+var q = $(e.currentTarget).attr("data-type")+':"'+$(e.currentTarget).attr("data-target")+'"'
 
-      console.log(keys)
+console.log("q",q)
 
-      var a = _.find(BitGroup.getLayers(),function(l){return (l.options.location_id==key[1] && l.options.location_type.indexOf(key[0])>=0)});
+appQuery.set({"raw":q})
 
-      console.log('found a:',a);
-      map.fitBounds(a.getBounds());
+return this
 
-      return this
-    }
-    ,proxyfetch: function(){
 
-      this.collection.fetch()
-      return this
-    }
-    ,render: function(){
+}
+,zoomto: function(e){
+
+  e.preventDefault()
+  var keys = $(e.currentTarget).attr("data-id")
+  var key=keys.split(":")
+
+  console.log(keys)
+
+  var a = _.find(BitGroup.getLayers(),function(l){return (l.options.location_id==key[1] && l.options.location_type.indexOf(key[0])>=0)});
+
+  console.log('found a:',a);
+  map.fitBounds(a.getBounds());
+
+  return this
+}
+,proxyfetch: function(){
+
+  this.collection.fetch()
+  return this
+}
+,render: function(){
 
 
         // $(this.el).html(this.template({
@@ -51,14 +66,16 @@ var BitsView = Backbone.View.extend({
 // $("#cbb-pane-menu > li[data-id='search'] a span").attr('data-badge',this.collection.length)
 if(this.collection.length<1){
 
+  var qu = (appQuery.get("raw")==null || appQuery.get("raw")=='')?"null query":appQuery.get("raw")+appQuery.query_facetadd();
+
   $(this.el).html(
-    "no bits for "+appQuery.get("raw")+appQuery.query_facetadd()
+    "no bits for "+qu
     );
 } else {
   $(this.el).html(this.template({rows:this.collection.toJSON()}));}
         // $(this.el).html(this.template({baselayers:this.collection.models}));
         // $(this.el).html("loolaknlkan");
-
+        appActivityView.stfu();
         return this
       }
     });

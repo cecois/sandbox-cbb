@@ -50,6 +50,8 @@ var Bits = Backbone.Collection.extend({
 	}
 	,parse: function(data) {
 
+
+		appActivity.set({message:"extracting locations..."})
 		var locations = _.map(_.filter(data.hits.hits,function(d){
 			return d._source.bit=="Location"}),function(d){
 
@@ -59,7 +61,7 @@ var Bits = Backbone.Collection.extend({
 		appState.set({locations:locations.join(",")})
 		if(appLocations.length>0){
 			appLocations.fetch()}
-		
+
 
 		// console.log('fetching w a data param...')
 		// console.log(locations.join(","))
@@ -79,6 +81,7 @@ var Bits = Backbone.Collection.extend({
 		// appLocations.fetch({ data: $.param({ q: locations.join(",")}) });
 		// appLocations.fetch({ data: { q: locations.join(",")} });
 
+		appActivity.set({message:"setting facets..."})
 		var fat_bits = _.map(data.aggregations.all_bits.bits.filtered_bits.buckets,function(v,k){
 
 			var b = {bit:v.key}
@@ -134,7 +137,7 @@ var Bits = Backbone.Collection.extend({
 
 	appState.set({search_results_count:data.hits.hits.length})
 
-
+	appActivity.set({message:"done!",hang:10})
 	return data.hits.hits
 }
 

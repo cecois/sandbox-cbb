@@ -1,0 +1,1 @@
+var Share = Backbone.Model.extend({});
