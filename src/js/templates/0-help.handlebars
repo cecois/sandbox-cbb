@@ -20,14 +20,14 @@
     <div class="tile">
       <div class="tile is-parent is-vertical">
         <article class="tile is-child box">
-        <h4 class="title is-4">Timestamps: <img class="" src="https://a-v2.sndcdn.com/assets/images/header/cloud@2x-e5fba46.png" style="height:20px;filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.9));"> <small>v.</small> <img class="" src="http://v.fastcdn.co/t/fbd61fb6/9f77a6cf/1506364214-1020996-166x62-HOWLLogoHorizontalTeal.png" style="height:20px;"></h4>
-      <p>Each record has <em>tstart</em> and <em>tend</em> timestamps - ostensibly these frame the specific instance within the episode. However, when CBB audio files were moved behind the Howl paywall, it rendered many of the timestamps incorrect - as paywalled episodes pass the edit points where commercials used to be, they're offset by however long the excised commercials were.</p><p>Timestamps can still be used to get close to the instance when listening, but they are no longer accurate enough be used for, say, supercutting or something.</p>
+        <h4 class="title is-4">Timestamps: <img class="" src="https://a-v2.sndcdn.com/assets/images/header/cloud@2x-e5fba46.png" style="height:20px;filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.9));"> <small>v.</small> <img class="" src="http://v.fastcdn.co/t/fbd61fb6/9f77a6cf/1506364214-1020996-166x62-HOWLLogoHorizontalTeal.png" style="height:20px;filter:grayscale(1);"></h4>
+      <p>Each record has <strong>tstart</strong> and <strong>tend</strong> timestamps - ostensibly these frame the specific instance within the episode. However, when CBB audio files were moved behind the Howl paywall, it rendered many of the timestamps incorrect - as paywalled episodes pass the edit points where commercials used to be, they're offset by however long the excised commercials were.</p><p>Timestamps can still be used to get close to the instance when listening, but they are no longer accurate enough be used for, say, supercutting or something.</p>
         </article>
 
       </div>
       <div class="tile is-parent">
         <article class="tile is-child box">
-          <h4 class="title is-4">The Map</h4>
+          <h4 class="title is-4">The Map <i class="fa fa-map-o"></i></h4>
           <p>There's a Leaflet instance under here that will display the geometries associated with any bits of type="location." Look for the <i class="fa fa-map-marker"></i> and click it to zoom the map to that location. More on that over here ----></p>
           <p>But a note or two about how to use said map: in an effort to reduce clutter, there are no map controls as you might find in other web maps. A zoom bar, +/-, maybe a panning control, too. None of that here - just grab the map to move it and trackpad|scroll to zoom in and out. Optionally you can shift-click+hold-drag-release in order to "select" an area of the map to which you'll immediately pan/scroll.</p>
         </article>
@@ -35,8 +35,8 @@
     </div>
     <div class="tile is-parent">
       <article class="tile is-child box">
-        <h4 class="title is-4">Searching</h4>
-      <p>Basically you can just type into the box like a monkey might do it - "huell" or "fourvel" and so forth.</p>
+        <h4 class="title is-4">Searching <i class="fa fa-search"></i></h4>
+      <p>Basically you can just type into the box like a monkey might do it - "huell" or "fourvel" and so forth. Strictly speaking you never even have to press the search button - <a href="https://www.elastic.co/products/elasticsearch">ElasticSearch</a> is fast enough to update pretty much with every character typed.</p>
       <p>But also know that whatever you type into the box gets POSTed as-is, and since Search hits against an <a href="https://www.elastic.co/products/elasticsearch">ElasticSearch</a> (v5.6) index, (as with most search engines) there is <a href="https://www.elastic.co/guide/en/elasticsearch/reference/5.6/query-dsl-query-string-query.html">some pretty advanced stuff</a> you can do if you like. To wit:</p>
 
 <!-- ******************************************** -->
@@ -77,10 +77,10 @@
   <div class="tile is-parent">
     <article class="tile is-child box">
 
-           <h4 class="title is-4">Locations</h4>
-      <p>One of the bits is special (and in fact the original impetus of this entire effort). For bits="Location" the results will appear in the search results (indicated by a map pin icon) <em>and</em> on the map under what you're reading now (hidden behind the main content area by default).</p><p>Clicking the ctrl key will toggle the map's visibility (as will the <i class="fa fa-map-o"></i> button); clicking the <i data-id="poly:247" style="font-size:1.3em;" class="fa fa-map-marker"></i> in the search results will zoom to that instance's referenced location. <a href="#" class='cbb-trigger' data-type="" data-target='bit:Location +tags:"huell howser"'>Huell Howser</a>, <a href="#" class='cbb-trigger' data-type="" data-target='bit:Location +tags:"gino lambardo"'>Gino Lambardo</a>, <a href="#" class='cbb-trigger' data-type="" data-target='bit:Location +tags:"merrill shindler"'>Merrill Shindler</a>, and <a href="#" class='cbb-trigger' data-type="" data-target='bit:Location +tags:"shelly driftwood"'>Shelly Driftwood</a> are all good for at least a few.</p>
+           <h4 class="title is-4">Locations <i class="fa fa-map-marker"></i></h4>
+      <p>One of the bits is special (and in fact the original impetus of this entire effort). For bits="Location" the results will appear in the search results (indicated by a map pin icon) <em>and</em> on the map under what you're reading now (hidden behind the main content area by default).</p><p>Clicking the ctrl key will toggle the map's visibility (as will the <i class="fa fa-map-o"></i> button); clicking the <i style="font-size:1.3em;" class="fa fa-map-marker"></i> in the search results will zoom to that instance's referenced location. <a href="#" class='cbb-trigger' data-type="" data-target='bit:Location +tags:"huell howser"'>Huell Howser</a>, <a href="#" class='cbb-trigger' data-type="" data-target='bit:Location +tags:"gino lambardo"'>Gino Lambardo</a>, <a href="#" class='cbb-trigger' data-type="" data-target='bit:Location +tags:"merrill shindler"'>Merrill Shindler</a>, and <a href="#" class='cbb-trigger' data-type="" data-target='bit:Location +tags:"shelly driftwood"'>Shelly Driftwood</a> are all good for at least a few.</p>
 
-      <p>Another thing to note about locations is that unless there's a clamor for it we do NOT spatially-index the geometries for retrieval. So while of course you can query for <em>bits</em> that reference locations (and those referenced geometries will appear on the map with minimal interaction), we're not bothering to offer the ability to, say, zoom/pan the map and query for locations <em>in that area</em>. Like, who cares?</p><p>If somebody really wants that (or the tangential ability to query for bits that reference, say, the Boston area or Marina del Rey, maybe say something. But tbt if you're <em>that interested</em> you could just query for everything (<a href="#" class="cbb-trigger" data-type="" data-target="bit:location">"all Location bits"</a>) and zoom to the spot about which you're curious.</p>
+      <p>Another thing to note about locations is that unless there's a clamor for it we do NOT spatially-index the geometries for retrieval. So while of course you can query for <em>bits</em> that reference locations (and those referenced geometries will appear on the map with minimal interaction), we're not bothering to offer the ability to, say, zoom/pan the map and query for locations <em>in that area</em>. Like, who cares?</p><p>If somebody really wants that (or the tangential ability to query for bits that reference, say, the Boston area or Marina del Rey, maybe <a class="twitter-share-button" href="https://twitter.com/share" data-size="large" data-text="custom share text" data-url="https://dev.twitter.com/web/tweet-button" data-hashtags="comedybangbang,zapstraighttoit" data-via="twitterdev"><i class="fa fa-twitter"></i> say something</a>. But really if you're <em>that interested</em> you could just query for everything (<a href="#" class="cbb-trigger" data-type="" data-target="bit:location">"all Location bits"</a>) and zoom to the spot about which you're curious.</p>
 
     </article>
   </div>

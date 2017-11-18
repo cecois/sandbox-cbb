@@ -242,10 +242,10 @@ var appSlugs = new Slugs(
     [
     {name:"Home",slug:"home",active:false}
     ,{name:"Huh?",slug:"huh",active:false}
-    ,{name:"Search",slug:"search",active:false}
+    ,{name:"Search",slug:"search",active:'is-active'}
     ,{name:"Browse",slug:"browse",active:false}
     ,{name:"Updates",slug:"updates",active:false}
-    ,{name:"Help",slug:"help",active:'is-active'}
+    ,{name:"Help",slug:"help",active:false}
     ]
         ); //new Slugs
 

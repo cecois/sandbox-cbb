@@ -5,6 +5,7 @@ var BitsView = Backbone.View.extend({
     events: {
       "click i.fa-map-marker": "zoomto",
       "click .cbb-trigger": "trigger",
+      "click .cbb-bit-meta-bt": "meta"
     },
     // className : "mnuThumbnails",
     initialize: function() {
@@ -13,13 +14,24 @@ var BitsView = Backbone.View.extend({
       return this
       .proxyfetch()
     }
+    ,meta: function(e){
+
+      console.log(this)
+
+      e.preventDefault()
+
+      var metel = $(e.currentTarget).parents('.bit-data').find('.bit-data-meta')
+
+      $(e.currentTarget).toggleClass('active')
+      metel.toggleClass('active')
+
+      return this
+    }
     ,trigger: function(e){
-      console.log(e)
       e.preventDefault()
 //data-type="episode" data-id="{{_source.episode}}"
 var q = $(e.currentTarget).attr("data-type")+':"'+$(e.currentTarget).attr("data-target")+'"'
 
-console.log("q",q)
 
 appQuery.set({"raw":q})
 

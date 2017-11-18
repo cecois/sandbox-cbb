@@ -84,6 +84,7 @@ var copyjs=  ()=>{
     ,paths.site.src+"/node_modules/nprogress/nprogress.js"
     ,paths.site.src+"/node_modules/underscore/underscore-min.js"
     ,paths.site.src+"/node_modules/backbone.stickit/backbone.stickit.js"
+    ,paths.site.src+"/node_modules/moment/min/moment.min.js"
     ,paths.site.src+"/node_modules/backbone/backbone-min.js"
 //
 ,paths.site.src+"/js/Query-Model.js"

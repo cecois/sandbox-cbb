@@ -81,6 +81,17 @@ a {
 #search-bits .bit .bit-data span {
   cursor: default;
 }
+#search-bits .bit-data-meta {
+  display: none;
+  padding-left: 10%;
+}
+#search-bits .bit-data-meta.active {
+  display: block;
+}
+#search-bits .cbb-bit-meta-bt.active i {
+  transform: rotate(45deg);
+  color: gray;
+}
 #activity-wrapper {
   min-height: 1.5rem;
   background-color: rgba(255, 255, 255, 0.9);

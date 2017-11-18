@@ -1,9 +1,19 @@
 {{#each rows}}
-<li class="bit">
-	{{#equal _source.bit 'Location'}}<i data-id="{{_source.location_type}}:{{_source.location_id}}" style="font-size:1.3em;" class="fa fa-map-marker"/>{{/equal}}
-<span class="bit-instance">{{_source.instance}}</span>
+<li class="bit" data-id="{{_id}}">
+	{{#equal bit 'Location'}}<i data-id="{{location_type}}:{{location_id}}" style="font-size:1.3em;" class="fa fa-map-marker"/>{{/equal}}
+<span class="bit-instance">{{instance}}</span>
 <div class="columns">
-	<div style="" class='column bit-data'>(<span class='tooltip is-tooltip-left' data-tooltip="{{_source.elucidation}}"><a href="#" class="cbb-trigger" data-type="bit" data-target="{{_source.bit}}">{{_source.bit}}</a></span> | ep.<a class="cbb-trigger" data-type="episode" data-target="{{_source.episode}}" href="#">{{#episodizer _source.episode}}{{/episodizer}}</a> | ~{{_source.tstart}})</div>
+	<div style="" class='column bit-data'>
+		<span class='tooltip is-tooltip-left' data-tooltip="{{elucidation}}"><a href="#" class="cbb-trigger" data-type="bit" data-target="{{bit}}">{{bit}}</a></span> | <a class="tooltip is-tooltip-right cbb-trigger" data-tooltip="ep.{{episode}}" data-type="episode" data-target="{{episode}}" href="#">{{meta.episode_string}}</a> ~{{tstart}} | <span class="cbb-bit-meta-bt icon"><i id="" class="fa fa-caret-right is-size-7"></i></span>
+
+	<div style="" class='bit-data-meta'>
+( added: {{meta.created}} {{#if meta.updated}}[updated {{meta.updated}}]{{/if}} | tagged: {{#each meta.tags}}<a href="#" class="cbb-trigger" data-type="tags" data-target="{{this}}">{{this}}</a>{{#unless @last}}, {{/unless}}{{/each}} )
+	</div><!-- /.bit-data-meta -->
+
+	</div><!-- /.bit-data -->
+
+
+
 </div>
 </li>
 {{/each}}

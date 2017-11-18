@@ -93,15 +93,15 @@ var Bits = Backbone.Collection.extend({
 		appFacetsBits.reset(fat_bits)
 
 
-		var fat_bits = _.map(data.aggregations.all_bits.bits.filtered_bits.buckets,function(v,k){
+		// var fat_bits = _.map(data.aggregations.all_bits.bits.filtered_bits.buckets,function(v,k){
 
-			var b = {bit:v.key}
+		// 	var b = {bit:v.key}
 
-			var active = (appQueryFacets.findWhere(b))?'is-active':'';
-			return {type:'bits',facet:v.key,count:v.doc_count,active:active}
+		// 	var active = (appQueryFacets.findWhere(b))?'is-active':'';
+		// 	return {type:'bits',facet:v.key,count:v.doc_count,active:active}
 
-		})//.Map
-		appFacetsBits.reset(fat_bits)
+		// })//.Map
+		// appFacetsBits.reset(fat_bits)
 
 		if(typeof data.aggregations.all_bits.tags !== 'undefined'){
 			var fat_tags = _.map(data.aggregations.all_bits.tags.filtered_tags.buckets,function(v,k){
@@ -138,7 +138,25 @@ var Bits = Backbone.Collection.extend({
 	appState.set({search_results_count:data.hits.hits.length})
 
 	appActivity.set({message:"done!",hang:10})
-	return data.hits.hits
+
+	var mock = _.map(data.hits.hits,function(b){
+		var o = b._source;
+		var upd = (b._source.created_at==b._source.updated_at)?null:moment(b._source.updated_at).format("YYYY.MMM.DD")
+
+
+		var eti = (b._source.episode_title==null ||b._source.episode_title=='')?b._source.episode.split("/")[b._source.episode.split("/").length-1]:b._source.episode_title;
+
+		o.meta={
+			created:moment(b._source.created_at).format("YYYY.MMM.DD")
+			,updated:upd
+			,episode_string:eti
+			,tags:b._source.tags.split(",")
+		}
+		return o
+	})
+
+	// return data.hits.hits
+	return mock
 }
 
 })//extend
