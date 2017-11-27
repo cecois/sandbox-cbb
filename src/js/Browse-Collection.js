@@ -6,18 +6,11 @@ var Browse = Backbone.Collection.extend({
 
 		switch(CONFIG.mode) {
 			case 'T':
-			// u = 'http://localhost:8983/solr/cbb_bits/select?'
 			u = CONFIG.index_root
-			// indent=off&rows='+appQuery.get("numRows")+'&json.wrf=cwmccallback&wt=json&fl=tstart,_id,episode,slug_earwolf,bit,instance,location_type,location_id,created_at,updated_at,elucidation,tags&q='
-			// +encodeURI(Q);
-			// +Q;
 			break;
 
 			default:
 			u = CONFIG.index_root
-			// +'indent=off&rows='+appQuery.get("numRows")+'&json.wrf=cwmccallback&wt=json&fl=tstart,_id,episode,slug_earwolf,bit,instance,location_type,location_id,created_at,updated_at,elucidation,tags&q='
-			// +encodeURI(Q);
-			// +Q;
 			break;
 		}
 
@@ -25,8 +18,6 @@ var Browse = Backbone.Collection.extend({
 	}
 	,initialize:function(options){
 		options||(options={})
-		// this.listenTo(appQuery,'change:raw',this.upf)
-		// this.listenTo(appQueryFacets,'add remove',this.upf)
 		return this
 	}
 	,upf:function(){
@@ -160,18 +151,6 @@ var Browse = Backbone.Collection.extend({
 			return {type:'episode',unique:v.key,unique_display:ud,count:v.doc_count}
 		})//.Map
 
-		// _.each(data.aggregations.all_bits.bits.filtered_bits.buckets,function(v,k){
-		// 	things.push({type:'bit',unique:v.key,count:v.doc_count})
-		// })//.Map
-
-		// _.each(data.aggregations.all_bits.episodes.filtered_episodes.buckets,function(v,k){
-		// 	things.push({type:'episode',unique:v.key,count:v.doc_count})
-		// })//.Map
-
-		// var ueps = _.map(data.aggregations.all_bits.episodes.filtered_episodes.buckets,function(v,k){
-		// 	return {type:'episode',unique:v.key,count:v.doc_count}
-		// })//.Map
-
 		appBrowseBits.reset(ubits);
 		appBrowseTags.reset(utagsn);
 		appBrowseEpisodes.reset(ueps);
@@ -179,13 +158,7 @@ var Browse = Backbone.Collection.extend({
 
 
 		var resp = things
-		// {
-		// 	uniqx:[ubits,ueps]
-		// }
 
-
-
-		// appActivity.set({message:"browse fetched",hang:10})
 		return resp
 	}
 

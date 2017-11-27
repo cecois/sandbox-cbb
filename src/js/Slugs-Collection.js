@@ -18,20 +18,7 @@ var Slugs = Backbone.Collection.extend({
 		})
 
 		return this.reset(newm)
-		// .activate(slug)
 	}
-	// ,activate: function(slug){
-		
-
-
-	// 	if(typeof slug !== 'undefined'){
-	// 		// var nm = this.active()
-	// 		var nm = this.findWhere({"slug":slug})
-	// 		console.log("we gonna change this one:",nm.attributes);
-	// 		nm.set({active:'is-active'},{silent:false})}
-	// 		return this
-
-	// }//activate
 	,active: function(){
 
 		var a = this.findWhere({active:'is-active'})

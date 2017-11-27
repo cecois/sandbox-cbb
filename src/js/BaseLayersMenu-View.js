@@ -3,12 +3,7 @@ var BaseLayersMenuView = Backbone.View.extend({
     el: "#basemap-menu",
     template: CBB['templates']['baseLayerMnu'],
     events: {
-        // "click .mnuThumbnail":"process",
-        // "click a":"killtt",
-        // "click a":"rewire"
-        // "change": "render"
     },
-    // className : "mnuThumbnails",
     initialize: function() {
         this.collection.bind('change:active', this.render, this);
         this.render()
@@ -21,13 +16,10 @@ var BaseLayersMenuView = Backbone.View.extend({
         }
         ));
 
-        // $(this.el).html(this.template({baselayers:this.collection.models}));
-        // $(this.el).html("loolaknlkan");
 
         return this
     }
     ,renderOG: function() {
-        // console.log("in render of BLsMV");
         $(this.el).empty();
         this.collection.each(function(baselayer) {
             var baseLayersMenuItemView = new BaseLayersMenuItemView({
@@ -38,21 +30,13 @@ var BaseLayersMenuView = Backbone.View.extend({
         return this.rewire()
     },
     rewire: function() {
-        // $("#BaseMapConsole").html(this.model.get("nom"))
-        // #returnto -- use underscore to pull this from the collx
-        // $("#mnuBaseMap").attr("title",this.title)
-        // $("#mnuBaseMap").tooltip()
         $(".mnuThumbnail").tooltip()
         $("#BaseMapConsole").html($(".mnuThumbnail.true").attr("title"))
-            //
-            this.$(".mnuThumbnail").hover(function() {
+        this.$(".mnuThumbnail").hover(function() {
                 $("#BaseMapConsole").addClass("temp")
                 $("#BaseMapConsole").html(this.title)
             }, function() {
-                /* Stuff to do when the mouse leaves the element */
-            // $("#BaseMapConsole").html(og)
-            $("#BaseMapConsole").removeClass("temp")
-                // $("#BaseMapConsole").html(_.findWhere(this.collection,model.get("active")==true));
+                $("#BaseMapConsole").removeClass("temp")
                 $("#BaseMapConsole").html($(".mnuThumbnail.true").attr("title"));
             }, this);
             return this

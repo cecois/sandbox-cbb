@@ -104,14 +104,7 @@ _.each(f.split("::"),function(f){
 
         })
 
-// we do it here cuz any change that matters will alter url, meaning we'll always always end up here
-// w the added benefit that it picks up last-minute (e.g. routed) facetquery adds/removes
-// console.log('aqchanged',appQuery.changed)
-// console.log('afqchanged',appQueryFacets.changed)
-// if(!_.isEmpty(appQuery.changed) || (typeof appQueryFacets.changed !== 'undefined')){
-//     appBits.fetch();}
-
-return this
+        return this
         } // default
     });
 var appRoute = new Route();

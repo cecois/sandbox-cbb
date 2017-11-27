@@ -4,14 +4,10 @@ var BaseLayersMenuItemView = Backbone.View.extend({
     template: CBB['templates']['baseLayerMnuItem'],
     events: {
         "click .mnuThumbnail": "setActive",
-        // "click a":"killtt",
-        // "click a":"rewire"
     },
     initialize: function() {
-        // this.model.bind("change", this.render, this);
     },
     debug: function() {
-        // console.log(this);
         return this
     },
     killtt: function() {
@@ -21,7 +17,6 @@ var BaseLayersMenuItemView = Backbone.View.extend({
     setActive: function(e) {
         e.preventDefault()
             // first a little sugar
-            // $("#BaseMapConsole").css("color","white").animate(1500)
             if (this.model.get("active") == true) {
             // it's already active, do nothing
             return this
@@ -37,9 +32,6 @@ var BaseLayersMenuItemView = Backbone.View.extend({
             this.model.set({
                 active: true
             })
-            // appConsole.set({
-            //     message: "basemap switched to " + this.model.get("nom")
-            // })
             return this
         }
         // return this
@@ -54,20 +46,16 @@ var BaseLayersMenuItemView = Backbone.View.extend({
         appBaseMap.set(newBLayer);
     },
     render: function() {
-        // this.killtt();
         $(this.el).html(this.template(this.model.toJSON()));
         return this.rewire()
     },
     rewire: function() {
         $(this.el).find(".mnuThumbnail").tooltip('destroy');
         $(this.el).find(".mnuThumbnail").tooltip({
-        // this.$(".mnuThumbnail").tooltip({
             container: "body",
             placement: 'right',
             trigger: 'hover'
         });
-        // this.$(".tooltip").css("top","-140px");
-        // this.$(" > .tooltip").css("top","-140px")
         return this
     }
 });

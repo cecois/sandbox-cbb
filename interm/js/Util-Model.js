@@ -2,7 +2,6 @@ var Util = Backbone.Model.extend({
     initialize: function(options) {
         options || (options = {});
 
-        //this.listenTo(this, "change", this.update)
         return this
     }
     ,bounds_ob_from_bbox_string:function(bboxstring){

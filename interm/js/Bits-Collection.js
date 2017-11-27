@@ -2,26 +2,7 @@ var Bits = Backbone.Collection.extend({
 	model:Bit
 	,url:function(){
 
-		var Q = appQuery.get('raw')
-
-		var u =null;
-
-		switch(CONFIG.mode) {
-			case 'T':
-			// u = 'http://localhost:8983/solr/cbb_bits/select?'
-			u = CONFIG.index_root
-			// indent=off&rows='+appQuery.get("numRows")+'&json.wrf=cwmccallback&wt=json&fl=tstart,_id,episode,slug_earwolf,bit,instance,location_type,location_id,created_at,updated_at,elucidation,tags&q='
-			// +encodeURI(Q);
-			// +Q;
-			break;
-
-			default:
-			u = CONFIG.index_root
-			// +'indent=off&rows='+appQuery.get("numRows")+'&json.wrf=cwmccallback&wt=json&fl=tstart,_id,episode,slug_earwolf,bit,instance,location_type,location_id,created_at,updated_at,elucidation,tags&q='
-			// +encodeURI(Q);
-			// +Q;
-			break;
-		}
+		var u =CONFIG.index_root;
 
 		return u
 	}
@@ -58,28 +39,8 @@ var Bits = Backbone.Collection.extend({
 			return d._source.location_type+":"+d._source.location_id
 		})
 
+		appActivity.set({message:"fetching geoms..."})
 		appState.set({locations:locations.join(",")})
-		if(appLocations.length>0){
-			appLocations.fetch()}
-
-
-		// console.log('fetching w a data param...')
-		// console.log(locations.join(","))
-// 		collection.fetch({data: {filter:'abc', page:1}});
-// $.getJSON( 'http://localhost:3030/geoms/cbbs?'+locations.join(","), {
-//     // tags: "mount rainier",
-//     // tagmode: "any",
-//     // format: "json"
-//     format:"jsonp",
-//     callback:'cwmccallback'
-// })
-// .done(function( data ) {
-// 	console.log('data in done');
-// 	console.log(data)
-// });
-// collection.fetch({data: $.param({filter:'abc', page:1})});
-		// appLocations.fetch({ data: $.param({ q: locations.join(",")}) });
-		// appLocations.fetch({ data: { q: locations.join(",")} });
 
 		appActivity.set({message:"setting facets..."})
 		var fat_bits = _.map(data.aggregations.all_bits.bits.filtered_bits.buckets,function(v,k){
@@ -92,16 +53,6 @@ var Bits = Backbone.Collection.extend({
 		})//.Map
 		appFacetsBits.reset(fat_bits)
 
-
-		// var fat_bits = _.map(data.aggregations.all_bits.bits.filtered_bits.buckets,function(v,k){
-
-		// 	var b = {bit:v.key}
-
-		// 	var active = (appQueryFacets.findWhere(b))?'is-active':'';
-		// 	return {type:'bits',facet:v.key,count:v.doc_count,active:active}
-
-		// })//.Map
-		// appFacetsBits.reset(fat_bits)
 
 		if(typeof data.aggregations.all_bits.tags !== 'undefined'){
 			var fat_tags = _.map(data.aggregations.all_bits.tags.filtered_tags.buckets,function(v,k){
@@ -145,17 +96,18 @@ var Bits = Backbone.Collection.extend({
 
 
 		var eti = (b._source.episode_title==null ||b._source.episode_title=='')?b._source.episode.split("/")[b._source.episode.split("/").length-1]:b._source.episode_title;
+		var elnk = (b._source.episode.indexOf("http:")>=0)?b._source.episode:"http://earwolf.com/episode/"+b._source.slug_earwolf
 
 		o.meta={
 			created:moment(b._source.created_at).format("YYYY.MMM.DD")
 			,updated:upd
 			,episode_string:eti
 			,tags:b._source.tags.split(",")
+			,link:elnk
 		}
 		return o
 	})
 
-	// return data.hits.hits
 	return mock
 }
 

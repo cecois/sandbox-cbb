@@ -157,7 +157,9 @@ this["CBB"]["templates"]["bitsView"] = Handlebars.template({"1":function(contain
     + alias3(alias4(((stack1 = (depth0 != null ? depth0.meta : depth0)) != null ? stack1.episode_string : stack1), depth0))
     + "</a> ~"
     + alias3(((helper = (helper = helpers.tstart || (depth0 != null ? depth0.tstart : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"tstart","hash":{},"data":data}) : helper)))
-    + " | <span class=\"cbb-bit-meta-bt icon\"><i id=\"\" class=\"fa fa-caret-right is-size-7\"></i></span>\n\n	<div style=\"\" class='bit-data-meta'>\n( added: "
+    + " \n		| <span class=\"icon tooltip is-tooltip-top\" data-tooltip=\"link to episode page (earwolf/howl/etc.)\"><a target=\"_blank\" href=\""
+    + alias3(alias4(((stack1 = (depth0 != null ? depth0.meta : depth0)) != null ? stack1.link : stack1), depth0))
+    + "\"><i id=\"\" class=\"fa fa-link is-size-7\"></i></a></span>\n		| <span class=\"cbb-bit-meta-bt icon\"><i id=\"\" class=\"fa fa-caret-right is-size-6\"></i></span>\n\n	<div style=\"\" class='bit-data-meta'>\n( added: "
     + alias3(alias4(((stack1 = (depth0 != null ? depth0.meta : depth0)) != null ? stack1.created : stack1), depth0))
     + " "
     + ((stack1 = helpers["if"].call(depth0,((stack1 = (depth0 != null ? depth0.meta : depth0)) != null ? stack1.updated : stack1),{"name":"if","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")

@@ -6,7 +6,6 @@ var BaseLayersCollection = Backbone.Collection.extend({
 		this.listenTo(appState,'change:baselayer',this.switch)
 	}
 	,switch: function(nn){
-		// var nl = (nn)?nn:appState.get("baselayer")
 		this.invoke('set',{"active":false},{silent:true})
 		return this
 		.activate(nn)

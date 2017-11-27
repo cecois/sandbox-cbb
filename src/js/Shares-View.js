@@ -2,14 +2,10 @@ var SharesView = Backbone.View.extend({
     el: $("#cbb-bt-share"),
     template: CBB['templates']['sharesViewTpl'],
     initialize: function() {
-        // this.collection.bind("change", this.render, this);
     },
     events: {
-        // "click": "render"
         "click": "test"
         ,"click body > .modal-close": "close"
-        // "click": "shorten"
-        // "click": "shortenDEBUG"
     },
     shortenDEBUG0: function(){
 
@@ -48,14 +44,11 @@ var SharesView = Backbone.View.extend({
     },
     shorten: function(){
 
-        // var longurl = captureState()
-// var longurl = encodeURIComponent(captureState())
 
 
 appActivity.set({
     message: "shortening url for sharing..."
 })
-// shorten it w goo.gl
 
 var self = this;
 
@@ -70,7 +63,6 @@ $.ajax({
         appActivityView.stfu()
 
         return self.render(shawty)
-// return shawty.id
 
 },
 error: function(data){
@@ -85,12 +77,6 @@ error: function(data){
 }
 });
 
-// return this.render($.parseJSON(shawted))
-// return this.render(shawted)
-// if(shawty.error !== 'undefined'){
-// return this.render(shawty)} else {
-//     return this.errorout(shawty)}
-
 },
 shortenDEBUG: function(){
 
@@ -100,7 +86,6 @@ shortenDEBUG: function(){
     appActivity.set({
         message: "shortening url for sharing..."
     })
-// shorten it w goo.gl
 
 var self = this;
 
@@ -119,7 +104,6 @@ $.ajax({
         appActivityView.stfu()
 
         return self.render(shawty)
-// return shawty.id
 
 },
 error: function(data){
@@ -134,12 +118,6 @@ error: function(data){
 }
 });
 
-// return this.render($.parseJSON(shawted))
-// return this.render(shawted)
-// if(shawty.error !== 'undefined'){
-// return this.render(shawty)} else {
-//     return this.errorout(shawty)}
-
 },
 errorout: function(data){
 
@@ -151,11 +129,6 @@ render: function(shaw) {
 
     var shawty = shaw
 
-
-        // kill stragglers
-        // $(this.el).find('[data-toggle="tooltip"]').tooltip('destroy');
-
-        // $("#share-container-modal").html(this.template(this.collection.toJSON()))
 
         var tagstring = "comedybangbang,"+appCartoQuery.get("facetarray").join(",")
         var tagstringfinal = tagstring.replace(/,\s*$/, "").replace(/\s+/g, '').replace(/tags\:/g,'').replace(/\"/g,'')
@@ -169,15 +142,8 @@ render: function(shaw) {
         }));
 
         return this
-        // .show()
     },
-    // show: function() {
-    //     // $("#share-container-modal").removeClass('hidden')
-    //     $('#cbb-modal').modal()
-    //     // $('#share-container-modal').modal()
 
-    //     return this
-    // },
     reset: function() {
         return this.render()
     }

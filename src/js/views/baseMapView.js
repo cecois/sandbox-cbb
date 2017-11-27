@@ -1,14 +1,8 @@
 var BaseMapView = Backbone.View.extend({
     id: "map",
     initialize: function() {
-        // this.updateBaseMap();
         this.listenTo(this.collection, 'reset', this.render);
-        // this.model.bind("change", this.updateBaseMap, this);
-        // this.listenTo(this.model, "change", this.debug);
-        // this.model.bind("change:bbox_west change:bbox_south change:bbox_east change:bbox_north", this.render, this);
-        // this.render();
         return this.wireup()
-            // .updateBaseMap()
     },
     debug: function() {
         console.log("debug bmv 338:");
@@ -17,9 +11,7 @@ var BaseMapView = Backbone.View.extend({
     },
     render: function() {
         var mapBounds = this.model.getBounds();
-        // map.fitBounds(mapBounds);
         return this
-            // .zoomCheck()
     },
     zoomCheck: function() {
         var def = this.model.get("definition");
@@ -55,6 +47,5 @@ var BaseMapView = Backbone.View.extend({
         map.addLayer(baseLayer);
         baseLayer.bringToBack();
         return this
-            // .zoomCheck()
     }
 });

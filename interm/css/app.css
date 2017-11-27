@@ -368,3 +368,7 @@ a {
   left: 0;
   z-index: 0;
 }
+#cbb-icon-copy {
+  font-size: .3em;
+  font-family: 'Oswald';
+}

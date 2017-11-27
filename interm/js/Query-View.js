@@ -2,7 +2,6 @@ var QueryView = Backbone.View.extend({
 	el: $("#query-form")
 	,template: CBB['templates']['queryViewTpl']
 	,events: {
-        // "click .activity-cancel": "stfu",
         "click #cbb-bt-search": 'set'
         ,"click #cbb-bt-random": 'rando'
     }

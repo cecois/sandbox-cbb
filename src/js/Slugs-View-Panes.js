@@ -1,10 +1,8 @@
 var SlugsViewPanes = Backbone.View.extend({
   el: $("#cbb-main-panes")
   ,events: {
-      // "click i.fa-map-marker": "zoomto",
-      "click .cbb-trigger": "trigger",
+    "click .cbb-trigger": "trigger",
     }
-    // ,template_home: CBB['templates']['0-home']
     ,initialize: function() {
 
 
@@ -39,8 +37,7 @@ var SlugsViewPanes = Backbone.View.extend({
     }
     ,render: function(){
 
-        // var s = _.findWhere(this.model.get("slugs"),{active:"is-active"}).slug
-        var s = this.collection.active().get("slug")
+      var s = this.collection.active().get("slug")
 
         var tpl = null;
         tpl=CBB['templates']['0-'+s]
@@ -52,12 +49,10 @@ var SlugsViewPanes = Backbone.View.extend({
           }
 
         })
-// $(this.el).find(".cbb-main-pane").
-var subel = $( ".cbb-main-pane[id='pane-"+s+"']" )
+        var subel = $( ".cbb-main-pane[id='pane-"+s+"']" )
 
 if(s!=='search' && s!=='browse'){
-    // $(subel).html("this yo subel-->"+s)
-    $(subel).html(tpl(this.collection.toJSON()))
+  $(subel).html(tpl(this.collection.toJSON()))
   }
   if($(subel).hasClass('hidden')){$(subel).removeClass('hidden')}
 

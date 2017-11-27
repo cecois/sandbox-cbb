@@ -5,8 +5,12 @@ var State = Backbone.Model.extend({
     ,initialize: function(options) {
         options || (options = {});
 
-        // this.listenTo(this,'change:facets',this.proxy)
+        this.listenTo(this,'change:locations',this.proxy)
 
+        return this
+    }
+    ,proxy: function(){
+        appLocations.fetch()
         return this
     }
     ,slugify: function(ss){
